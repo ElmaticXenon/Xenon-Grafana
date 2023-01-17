@@ -20,7 +20,7 @@ build-docker:
   stage: build
   script:
     - docker build -t $HUB_ADDRESS:$CI_PIPELINE_ID .
-    - docker images
+    - docker images | grep $HUB_ADDRESS
 
 push-image:
   tags:
@@ -28,6 +28,18 @@ push-image:
   stage: deploy
   script:
     - docker push $HUB_ADDRESS:$CI_PIPELINE_ID
+
+push-tag:
+  only:
+    - tags
+  tags:
+    - docker
+  stage: deploy
+  script:
+    - docker image tag $HUB_ADDRESS:$CI_PIPELINE_ID $HUB_ADDRESS:$CI_COMMIT_TAG
+    - docker push $HUB_ADDRESS:$CI_COMMIT_TAG
+    - docker images | grep $HUB_ADDRESS
+    - docker rmi $HUB_ADDRESS:$CI_COMMIT_TAG
 
 cleanup:
   tags:
