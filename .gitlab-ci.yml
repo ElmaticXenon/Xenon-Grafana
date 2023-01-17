@@ -1,14 +1,26 @@
 image: docker:20.10.16
 
+stages:
+  - build
+  - deploy
+
 services:
-  - docker:20.10.16-dind
+  - docker:20.10.16-dind 
 
 before_script:
   - docker info
 
-build:
+build-docker:
   tags: 
     - docker
   stage: build
   script:
-    - docker build .
+    - docker build -t elmdockerhub:5000/grafana:$CI_PIPELINE_ID .
+    - docker images
+
+push-image:
+  tags:
+    - docker
+  stage: deploy
+  script:
+    - docker push elmdockerhub:5000/grafana:$CI_PIPELINE_ID
