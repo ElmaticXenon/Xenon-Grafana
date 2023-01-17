@@ -3,6 +3,7 @@ image: docker:20.10.16
 stages:
   - build
   - deploy
+  - cleanup
 
 services:
   - docker:20.10.16-dind 
@@ -24,3 +25,11 @@ push-image:
   stage: deploy
   script:
     - docker push elmdockerhub:5000/grafana:$CI_PIPELINE_ID
+
+cleanup:
+  tags:
+    - docker
+  stage: cleanup
+  script:
+    - docker rmi elmdockerhub:5000/grafana:$CI_PIPELINE_ID
+  when: always
