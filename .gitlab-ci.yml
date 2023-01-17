@@ -1,3 +1,6 @@
+variables:
+  HUB_ADDRESS: elmdockerhub:5000/grafana
+
 image: docker:20.10.16
 
 stages:
@@ -16,7 +19,7 @@ build-docker:
     - docker
   stage: build
   script:
-    - docker build -t elmdockerhub:5000/grafana:$CI_PIPELINE_ID .
+    - docker build -t $HUB_ADDRESS:$CI_PIPELINE_ID .
     - docker images
 
 push-image:
@@ -24,12 +27,12 @@ push-image:
     - docker
   stage: deploy
   script:
-    - docker push elmdockerhub:5000/grafana:$CI_PIPELINE_ID
+    - docker push $HUB_ADDRESS:$CI_PIPELINE_ID
 
 cleanup:
   tags:
     - docker
   stage: cleanup
   script:
-    - docker rmi elmdockerhub:5000/grafana:$CI_PIPELINE_ID
+    - docker rmi $HUB_ADDRESS:$CI_PIPELINE_ID
   when: always
