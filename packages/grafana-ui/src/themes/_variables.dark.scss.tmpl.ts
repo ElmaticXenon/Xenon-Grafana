@@ -111,8 +111,8 @@ $text-shadow-faint: 1px 1px 4px rgb(45, 45, 45);
 $textShadow: none;
 
 // gradients
-$brand-gradient-horizontal: linear-gradient(to right, #1f60c4 30%, #08a592 99%);
-$brand-gradient-vertical: linear-gradient(#1f60c4 30%, #08a592 99%);
+$brand-gradient-horizontal: ${theme.colors.gradients.brandHorizontal};
+$brand-gradient-vertical: ${theme.colors.gradients.brandVertical};
 
 // Links
 // -------------------------
@@ -131,10 +131,10 @@ $hr-border-color: $dark-9;
 
 // Panel
 // -------------------------
-$panel-bg: rgba(0,204,255,0.1);
+$panel-bg: ${theme.components.panel.background};
 $panel-border: 1px solid ${theme.components.panel.borderColor};
 $panel-header-hover-bg: ${theme.colors.action.hover};
-$panel-box-shadow: 0px 0px 4px 0px #00ccff;
+$panel-box-shadow: ${theme.components.panel.boxShadow};
 $panel-corner: $panel-bg;
 
 // page header
@@ -254,8 +254,8 @@ $navbarBorder: 1px solid $dark-6;
 
 // Sidemenu
 // -------------------------
-$side-menu-bg: ${theme.components.panel.background};
-$side-menu-bg-mobile: ${theme.components.panel.background};
+$side-menu-bg: $panel-bg;
+$side-menu-bg-mobile: $panel-bg;
 $side-menu-border: none;
 $side-menu-item-hover-bg: ${theme.colors.background.secondary};
 $side-menu-shadow: 0 0 30px #111;

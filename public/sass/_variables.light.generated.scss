@@ -131,7 +131,7 @@ $hr-border-color: $gray-4 !default;
 $panel-bg: #FFFFFF;
 $panel-border: 1px solid rgba(36, 41, 46, 0.12);
 $panel-header-hover-bg: rgba(36, 41, 46, 0.12);
-$panel-box-shadow: none;
+$panel-box-shadow: 0px 0px 4px 0px #00ccff;
 $panel-corner: $panel-bg;
 
 // Page header
