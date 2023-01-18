@@ -119,7 +119,7 @@ const getTabStyles = stylesFactory((theme: GrafanaTheme2) => {
         height: 4px;
         border-radius: 2px;
         bottom: 0px;
-        background-image: linear-gradient(to right, #1f60c4 30%, #08a592 99%);
+        background-image: ${theme.colors.gradients.brandHorizontal} !important;
       }
     `,
     suffix: css`
