@@ -107,8 +107,8 @@ $text-blue: #1F62E0;
 $text-shadow-faint: none;
 
 // gradients
-$brand-gradient-horizontal: linear-gradient(90deg, #FF8833 0%, #F53E4C 100%);
-$brand-gradient-vertical: linear-gradient(0.01deg, #F53E4C -31.2%, #FF8833 113.07%);
+$brand-gradient-horizontal: linear-gradient(to right, #1f60c4 30%, #08a592 99%);
+$brand-gradient-vertical: linear-gradient(#1f60c4 30%, #08a592 99%);
 
 // Links
 // -------------------------
@@ -130,7 +130,7 @@ $hr-border-color: $gray-4 !default;
 $panel-bg: #FFFFFF;
 $panel-border: 1px solid rgba(36, 41, 46, 0.12);
 $panel-header-hover-bg: rgba(36, 41, 46, 0.12);
-$panel-box-shadow: none;
+$panel-box-shadow: 0px 0px 4px 0px #00ccff;
 $panel-corner: $panel-bg;
 
 // Page header
