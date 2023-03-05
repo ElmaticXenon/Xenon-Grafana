@@ -56,11 +56,11 @@ export interface ThemeComponents {
 
 export function createComponents(colors: ThemeColors, shadows: ThemeShadows): ThemeComponents {
   const panel = {
-    padding: 1,
+    padding: 4,
     headerHeight: 4,
     background: colors.background.primary,
     borderColor: colors.border.weak,
-    boxShadow: '0px 0px 4px 0px #00ccff',
+    boxShadow: colors.border.shadow,
   };
 
   const input = {

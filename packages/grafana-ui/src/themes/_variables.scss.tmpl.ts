@@ -177,7 +177,7 @@ $btn-padding-y: 0 !default;
 $btn-line-height: $line-height-base;
 $btn-font-weight: ${theme.typography.fontWeightMedium} !default;
 
-$btn-padding-x-sm: 7px !default;
+$btn-padding-x-sm: 70px ;
 $btn-padding-y-sm: 4px !default;
 
 $btn-padding-x-lg: 21px !default;
