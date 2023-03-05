@@ -101,11 +101,11 @@ const getStyles = (theme: GrafanaTheme2) => ({
   content: css({
     display: 'flex',
     flexDirection: 'column',
-    padding: theme.spacing(0, 2, 2, 2),
+    padding: theme.spacing(0, 32, 4, 32),
     flexBasis: '100%',
     flexGrow: 1,
   }),
   contentWithoutToolbar: css({
-    padding: theme.spacing(2),
+    padding: theme.spacing(32),
   }),
 });

@@ -100,7 +100,7 @@ const getStyles = (theme: GrafanaTheme2) => {
       background-color: ${background};
       border: 1px solid ${borderColor};
       position: relative;
-      border-radius: 3px;
+      border-radius: 8px;
       height: 100%;
       display: flex;
       flex-direction: column;
