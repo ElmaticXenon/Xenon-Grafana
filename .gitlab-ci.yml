@@ -1,5 +1,5 @@
 variables:
-  HUB_ADDRESS: elmdockerhub:5000/grafana
+  HUB_ADDRESS: dockerhub.elmatic-xenon.de/grafana
 
 image: docker:20.10.16
 
