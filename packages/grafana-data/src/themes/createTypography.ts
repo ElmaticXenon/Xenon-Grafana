@@ -53,7 +53,7 @@ export interface ThemeTypographyInput {
   htmlFontSize?: number;
 }
 
-const defaultFontFamily = '"Roboto", "Public Sans", "Helvetica", "Arial", sans-serif';
+const defaultFontFamily = ' "Public Sans", "Roboto", "Helvetica", "Arial", sans-serif';
 const defaultFontFamilyMonospace = "'Roboto Mono', monospace";
 
 export function createTypography(colors: ThemeColors, typographyInput: ThemeTypographyInput = {}): ThemeTypography {
