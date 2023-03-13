@@ -115,7 +115,7 @@ const getStyles = (theme: GrafanaTheme2) => {
     }),
     pageInner: css({
       label: 'page-inner',
-      padding: theme.spacing(0, 32, 4, 32),
+      padding: '0px 10vw 32px 10vw',
       borderBottom: 'none',
       background: theme.colors.background.primary,
       display: 'flex',
