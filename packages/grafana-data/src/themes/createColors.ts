@@ -231,7 +231,7 @@ class LightColors implements ThemeColorsBase<Partial<ThemeRichColor>> {
     canvas: palette.gray90,
     primary: palette.white,
     secondary: palette.gray100,
-    sidemenu: '#223344',
+    sidemenu: palette.white,
   };
 
   action = {
