@@ -58,25 +58,10 @@ export function toFixed(value: number, decimals?: DecimalCount): string {
     decimals = getDecimalsForValue(value);
   }
 
-  if (value === 0) {
-    return value.toFixed(decimals);
-  }
+  const language = 'de-DE'; // use the current language if available, otherwise use "de-DE"
+  const options = { minimumFractionDigits: decimals, maximumFractionDigits: decimals };
 
-  const factor = decimals ? Math.pow(10, Math.max(0, decimals)) : 1;
-  const formatted = String(Math.round(value * factor) / factor);
-
-  // if exponent return directly
-  if (formatted.indexOf('e') !== -1 || value === 0) {
-    return formatted;
-  }
-
-  const decimalPos = formatted.indexOf('.');
-  const precision = decimalPos === -1 ? 0 : formatted.length - decimalPos - 1;
-  if (precision < decimals) {
-    return (precision ? formatted : formatted + '.') + String(factor).slice(1, decimals - precision + 1);
-  }
-
-  return formatted;
+  return value.toLocaleString(language, options);
 }
 
 function getDecimalsForValue(value: number): number {
