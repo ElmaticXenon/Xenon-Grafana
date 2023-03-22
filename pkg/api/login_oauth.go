@@ -262,8 +262,6 @@ func (hs *HTTPServer) buildExternalUserInfo(token *oauth2.Token, userInfo *socia
 		IsGrafanaAdmin: userInfo.IsGrafanaAdmin,
 	}
 
-	plog.Debug("CHECK:", "role", userInfo.Role, "hs.Cfg.OAuthSkipOrgRoleUpdateSync", hs.Cfg.OAuthSkipOrgRoleUpdateSync)
-	plog.Debug("cfg: ", hs.Cfg)
 	if userInfo.Role != "" && !hs.Cfg.OAuthSkipOrgRoleUpdateSync {
 		rt := userInfo.Role
 		if rt.IsValid() {
