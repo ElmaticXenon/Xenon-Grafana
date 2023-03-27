@@ -38,13 +38,13 @@ const timeFormats: KeyValue<boolean> = {
 };
 
 export function getDisplayProcessor(options?: DisplayProcessorOptions): DisplayProcessor {
-  console.log(options);
+  //console.log(options);
   if (!options || isEmpty(options) || !options.field) {
     return toStringProcessor;
   }
 
   const field = options.field as Field;
-  console.log(field);
+  //console.log(field);
   const config = field.config ?? {};
 
   let unit = config.unit;
@@ -65,7 +65,7 @@ export function getDisplayProcessor(options?: DisplayProcessorOptions): DisplayP
         end /= 1e3;
       }
       showMs = Math.abs(end - start) < 60; //show ms when minute or less
-      console.log(showMs);
+      //console.log(showMs);
     }
   } else if (field.type === FieldType.boolean) {
     if (!isBooleanUnit(unit)) {
@@ -83,28 +83,28 @@ export function getDisplayProcessor(options?: DisplayProcessorOptions): DisplayP
     !hasDateUnit && !hasCurrencyUnit && !hasBoolUnit && !isLocaleFormat && isNumType && config.decimals == null;
 
   const formatFunc = getValueFormat(unit || 'none');
-  console.log(formatFunc);
+  //console.log(formatFunc);
   const scaleFunc = getScaleCalculator(field, options.theme);
-  console.log(scaleFunc);
+  //console.log(scaleFunc);
 
   return (value: any, adjacentDecimals?: DecimalCount) => {
-    console.log(value);
-    console.log(adjacentDecimals);
+    //console.log(value);
+    //console.log(adjacentDecimals);
     const { mappings } = config;
-    console.log(config);
+    //console.log(config);
     const isStringUnit = unit === 'string';
 
     if (hasDateUnit && typeof value === 'string') {
       value = toUtc(value).valueOf();
-      console.log(value);
+      //console.log(value);
     }
 
     let numeric = isStringUnit ? NaN : anyToNumber(value);
-    console.log(numeric);
+    //console.log(numeric);
     let text: string | undefined;
-    console.log(text);
+    //console.log(text);
     let prefix: string | undefined;
-    console.log(prefix);
+    //console.log(prefix);
     let suffix: string | undefined;
     let color: string | undefined;
     let icon: string | undefined;
@@ -112,8 +112,8 @@ export function getDisplayProcessor(options?: DisplayProcessorOptions): DisplayP
 
     if (mappings && mappings.length > 0) {
       const mappingResult = getValueMappingResult(mappings, value);
-      console.log(mappings);
-      console.log(value);
+      //console.log(mappings);
+      //console.log(value);
 
       if (mappingResult) {
         if (mappingResult.text != null) {
@@ -131,45 +131,37 @@ export function getDisplayProcessor(options?: DisplayProcessorOptions): DisplayP
     }
 
     if (!Number.isNaN(numeric)) {
-      console.log(numeric);
+      //console.log(numeric);
       if (text == null && !isBoolean(value)) {
-        console.log(text);
-        console.log(value);
+        //console.log(text);
+        //console.log(value);
         let v: FormattedValue;
-        //console.log(v);
-        console.log(numeric);
-        //console.log(FormattedValue);
+        ////console.log(v);
+        //console.log(numeric);
+        ////console.log(FormattedValue);
 
         if (canTrimTrailingDecimalZeros && adjacentDecimals != null) {
           v = formatFunc(numeric, adjacentDecimals, null, options.timeZone, showMs);
-          console.log(v);
-          console.log(canTrimTrailingDecimalZeros);
-          console.log(numeric);
-          console.log(adjacentDecimals);
-          console.log(options.timeZone);
-          console.log(showMs);
           // if no explicit decimals config, we strip trailing zeros e.g. 60.00 -> 60
           // this is needed because we may have determined the minimum determined `adjacentDecimals` for y tick increments based on
           // e.g. 'seconds' field unit (0.15s, 0.20s, 0.25s), but then formatFunc decided to return milli or nanos (150, 200, 250)
           // so we end up with excess precision: 150.00, 200.00, 250.00
           if (v.text.indexOf(',') !== -1) {
-            // If they have a comma in the StringWenn der String ein Komma enthält
-            // hier Code ausführen oder Fehlerbehandlung durchführen
+            // If they have a comma in the String, the code do nothing
           } else {
-            // Wenn der String kein Komma enthält, wie in deinem ursprünglichen Code,
-            // Konvertierung durchführen
+            // If a Comma exist in the String, we change the String in a Number back
             v.text = +v.text + '';
           }
           //if (v.text === ''+','+'') {} else {v.text = +v.text + '';}
           //o.text = v.text.replace(',','.');
-          //console.log(o.text);
+          ////console.log(o.text);
           //v.text = +v.text + '';
           //if (v.text == 'NaN') {v.text = 'Hallo'} else {v.text};
-          //console.log(v.text);
-          //console.log(text);
+          ////console.log(v.text);
+          ////console.log(text);
         } else {
           v = formatFunc(numeric, config.decimals, null, options.timeZone, showMs);
-          console.log(v);
+          //console.log(v);
         }
 
         text = v.text;
