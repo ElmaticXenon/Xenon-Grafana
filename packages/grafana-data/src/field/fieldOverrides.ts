@@ -372,11 +372,14 @@ export const getLinksSupplier =
 
       // We are not displaying reduction result
       if (config.valueRowIndex !== undefined && !isNaN(config.valueRowIndex)) {
+        //console.log(config.valueRowIndex);
         const fieldsProxy = getFieldDisplayValuesProxy({
           frame,
           rowIndex: config.valueRowIndex,
           timeZone: timeZone,
         });
+
+        //console.log(fieldsProxy);
 
         valueVars = {
           raw: field.values.get(config.valueRowIndex),
@@ -402,7 +405,11 @@ export const getLinksSupplier =
             numeric: config.calculatedValue.numeric,
             text: formattedValueToString(config.calculatedValue),
           };
+
+          //console.log(valueVars);
+          //console.log(config.calculatedValue);
         }
+        //console.log(dataFrameVars);
       }
 
       const variables = {

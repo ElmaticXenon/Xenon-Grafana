@@ -51,11 +51,34 @@ export function toFixed(value: number, decimals?: DecimalCount): string {
   }
 
   if (value === Number.NEGATIVE_INFINITY || value === Number.POSITIVE_INFINITY) {
-    return value.toLocaleString();
+    return value.toLocaleString('de-DE');
   }
 
   if (decimals === null || decimals === undefined) {
     decimals = getDecimalsForValue(value);
+  }
+
+  if (value === 0) {
+    return value.toFixed(decimals).replace('.', ',');
+  }
+
+  const factor = decimals ? Math.pow(10, Math.max(0, decimals)) : 1;
+  const formatted = String(Math.round(value * factor) / factor).replace('.', ',');
+
+  // if exponent return directly
+  if (formatted.indexOf('e') !== -1 || value === 0) {
+    return value.toLocaleString('de-DE');
+  }
+
+  const decimalPos = formatted.indexOf(',');
+  const precision = decimalPos === -1 ? 0 : formatted.length - decimalPos - 1;
+  if (precision < decimals) {
+    return (
+      (precision ? formatted : formatted + ',') +
+      String(factor)
+        .slice(1, decimals - precision + 1)
+        .replace('.', ',')
+    );
   }
 
   const language = 'de-DE'; // use the current language if available, otherwise use "de-DE"
@@ -81,6 +104,7 @@ function getDecimalsForValue(value: number): number {
   }
 
   const decimals = Math.max(0, dec);
+
   return decimals;
 }
 
@@ -112,7 +136,7 @@ export function isBooleanUnit(unit?: string) {
 }
 
 export function booleanValueFormatter(t: string, f: string): ValueFormatter {
-  return (value: any) => {
+  return (value) => {
     return { text: value ? t : f };
   };
 }
@@ -121,12 +145,12 @@ const logb = (b: number, x: number) => Math.log10(x) / Math.log10(b);
 
 export function scaledUnits(factor: number, extArray: string[], offset = 0): ValueFormatter {
   return (size: number, decimals?: DecimalCount) => {
-    if (size === null) {
+    if (size === null || size === undefined) {
       return { text: '' };
     }
 
     if (size === Number.NEGATIVE_INFINITY || size === Number.POSITIVE_INFINITY || isNaN(size)) {
-      return { text: size.toLocaleString() };
+      return { text: size.toLocaleString('de-DE') };
     }
 
     const siIndex = size === 0 ? 0 : Math.floor(logb(factor, Math.abs(size)));
@@ -144,7 +168,7 @@ export function locale(value: number, decimals: DecimalCount): FormattedValue {
     return { text: '' };
   }
   return {
-    text: value.toLocaleString(undefined, { maximumFractionDigits: decimals as number }),
+    text: value.toLocaleString(undefined, { maximumFractionDigits: decimals ?? undefined }),
   };
 }
 
