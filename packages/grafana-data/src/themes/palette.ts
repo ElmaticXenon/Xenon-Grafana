@@ -3,7 +3,7 @@ export const palette = {
   black: '#000000',
 
   gray25: '#2c3235',
-  gray15: '#32353B', //'#29303c', background color table header, 10 perc lighter than #1D2025
+  gray15: '#3b3c58', //'#29303c', background color table header, 10 perc lighter than #1D2025
   gray10: '#2b2c40', // old '#181b1f' ,05.03 panel background color, also sidemenu and timepicker menu depends on that
   gray05: '#232333', // old '111217', background color dashboard
 
@@ -25,7 +25,7 @@ export const palette = {
   lightBorder1: '#E4E7E7',
 
   blueDarkMain: '#3D71D9', // '#4165F5',
-  blueDarkText: '#6E9FFF', // '#6E9FFF', //'#33a2e5', // '#5790FF', Color of Table Header Text
+  blueDarkText: '#cccccc', // '#007fff' 01.04 // '#6E9FFF', //'#33a2e5', // '#5790FF', Color of Table Header Text
   redDarkMain: '#D10E5C',
   redDarkText: '#FF5286',
   greenDarkMain: '#1A7F4B',
