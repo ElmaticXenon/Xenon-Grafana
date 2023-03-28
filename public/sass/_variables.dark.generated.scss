@@ -19,7 +19,7 @@ $colors-action-selected: rgba(203, 203, 226, 0.12);
 
 // New Colors
 // -------------------------
-$blue-light: #6E9FFF;
+$blue-light: #007fff;
 $blue-base: #3D71D9;
 $blue-shade: rgb(90, 134, 222);
 $red-base: #D10E5C;
@@ -50,7 +50,7 @@ $dark-5: #222426;
 $dark-6: #262628;
 $dark-7: #292a2d;
 $dark-8: #2f2f32;
-$dark-9: #343436;
+$dark-9: #3b3c58;
 $dark-10: #424345;
 $gray-1: #555555;
 $gray-2: #8e8e8e;
@@ -63,7 +63,7 @@ $white: #ffffff;
 
 $layer0: #232333;
 $layer1: #2b2c40;
-$layer2: #32353B;
+$layer2: #3b3c58;
 
 $divider: #2b2c40;
 
@@ -77,7 +77,7 @@ $red: $red-base;
 $yellow: #ecbb13;
 $orange: #eb7b18;
 $purple: #9933cc;
-$variable: #6E9FFF;
+$variable: #007fff;
 
 $brand-primary: #eb7b18;
 $brand-success: #1A7F4B;
@@ -107,7 +107,7 @@ $text-color-semi-weak: rgba(203, 203, 226, 0.65);
 $text-color-weak: rgba(203, 203, 226, 0.65);
 $text-color-faint: rgba(203, 203, 226, 0.6);
 $text-color-emphasis: #FFFFFF;
-$text-blue: #6E9FFF;
+$text-blue: #007fff;
 
 $text-shadow-faint: 1px 1px 4px rgb(45, 45, 45);
 $textShadow: none;
@@ -121,7 +121,7 @@ $brand-gradient-vertical: linear-gradient(#1f60c4 30%, #08a592 99%);
 $link-color: rgb(203, 203, 226);
 $link-color-disabled: rgba(203, 203, 226, 0.6);
 $link-hover-color: #FFFFFF;
-$external-link-color: #6E9FFF;
+$external-link-color: #007fff;
 
 // Typography
 // -------------------------
@@ -147,16 +147,16 @@ $page-header-border-color: #232333;
 $divider-border-color: $gray-1;
 
 // Graphite Target Editor
-$tight-form-func-bg: #32353B;
-$tight-form-func-highlight-bg: rgb(56, 59, 64);
+$tight-form-func-bg: #3b3c58;
+$tight-form-func-highlight-bg: rgb(64, 65, 93);
 
 $modal-backdrop-bg: rgba(203, 203, 226, 0.16);
 $code-tag-bg: $dark-1;
 $code-tag-border: $dark-9;
 
 // cards
-$card-background: #32353B;
-$card-background-hover: rgb(56, 59, 64);
+$card-background: #3b3c58;
+$card-background-hover: rgb(64, 65, 93);
 $card-shadow: none;
 
 // Lists
@@ -164,7 +164,7 @@ $list-item-bg: $card-background;
 $list-item-hover-bg: $card-background-hover;
 $list-item-shadow: $card-shadow;
 
-$empty-list-cta-bg: #32353B;
+$empty-list-cta-bg: #3b3c58;
 
 // Scrollbars
 $scrollbarBackground: #404357;
@@ -173,7 +173,7 @@ $scrollbarBorder: black;
 
 // Tables
 // -------------------------
-$table-bg-accent: #32353B;
+$table-bg-accent: #3b3c58;
 $table-border: rgba(203, 203, 226, 0.15);
 $table-bg-odd: rgb(47, 48, 67);
 $table-bg-hover: rgb(53, 54, 73);
@@ -218,10 +218,10 @@ $input-bg-disabled: rgba(203, 203, 226, 0.04);
 $input-color: rgb(203, 203, 226);
 $input-border-color: rgba(203, 203, 226, 0.15);
 $input-box-shadow: none;
-$input-border-focus: #6E9FFF;
-$input-box-shadow-focus: #6E9FFF !default;
+$input-border-focus: #007fff;
+$input-box-shadow-focus: #007fff !default;
 $input-color-placeholder: rgba(203, 203, 226, 0.6);
-$input-label-bg: #32353B;
+$input-label-bg: #3b3c58;
 $input-color-select-arrow: $white;
 
 // Search
@@ -259,7 +259,7 @@ $navbarBorder: 1px solid $dark-6;
 $side-menu-bg: $panel-bg;
 $side-menu-bg-mobile: $panel-bg;
 $side-menu-border: none;
-$side-menu-item-hover-bg: #32353B;
+$side-menu-item-hover-bg: #3b3c58;
 $side-menu-shadow: 0 0 30px #111;
 $side-menu-icon-color: #9fa7b3;
 $side-menu-header-color: rgb(203, 203, 226);
@@ -292,16 +292,16 @@ $tooltipLinkColor: $link-color;
 $tooltipExternalLinkColor: $external-link-color;
 $graph-tooltip-bg: $dark-1;
 
-$tooltipBackground: #32353B;
+$tooltipBackground: #3b3c58;
 $tooltipColor: rgb(203, 203, 226);
-$tooltipArrowColor: #32353B;
+$tooltipArrowColor: #3b3c58;
 $tooltipBackgroundError: #D10E5C;
 $tooltipShadow: 0px 4px 8px rgba(1, 4, 9, 0.75);
 
 $popover-bg: #2b2c40;
 $popover-color: rgb(203, 203, 226);
 $popover-border-color: #2b2c40;
-$popover-header-bg: #32353B;
+$popover-header-bg: #3b3c58;
 $popover-shadow: 0px 8px 24px rgb(1, 4, 9);
 
 $popover-help-bg: $tooltipBackground;
@@ -340,10 +340,10 @@ $json-explorer-url-color: #027bff;
 $diff-label-bg: rgba(203, 203, 226, 0.16);
 $diff-label-fg: $white;
 
-$diff-group-bg: #32353B;
+$diff-group-bg: #3b3c58;
 $diff-arrow-color: $white;
 
-$diff-json-bg: #32353B;
+$diff-json-bg: #3b3c58;
 $diff-json-fg: rgb(203, 203, 226);
 
 $diff-json-added: $blue-shade;
