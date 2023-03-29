@@ -10,6 +10,8 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
+	"strconv"
+	"strings"
 
 	"golang.org/x/oauth2"
 
@@ -301,6 +303,20 @@ func (hs *HTTPServer) buildExternalUserInfo(token *oauth2.Token, userInfo *socia
 					"role", userInfo.Role, "orgId", orgID)
 			}
 			extUser.OrgRoles[orgID] = rt
+		}
+	} else {
+		// The structure of the group attribute is supposted to be as follows:
+		// <OrgId>:<RoleType> -> 1:admin 2:viewer [...]
+		for _, orgGroup := range userInfo.Groups {
+			// split the pairs apart
+			orgGroupSplit := strings.Fields(strings.ReplaceAll(orgGroup, ":", " "))
+			if len(orgGroupSplit) == 0 {
+				plog.Debug("Some went wrong reading groups/orgs from userInfo! GO on", "orgGroupSplit", orgGroupSplit)
+				continue
+			}
+			orgId, _ := strconv.Atoi(orgGroupSplit[0])
+			// Transfer gathered info into OrgRoles map
+			extUser.OrgRoles[int64(orgId)] = org.RoleType(orgGroupSplit[1])
 		}
 	}
 
