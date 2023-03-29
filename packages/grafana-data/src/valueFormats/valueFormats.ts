@@ -150,7 +150,7 @@ export function scaledUnits(factor: number, extArray: string[], offset = 0): Val
     }
 
     if (size === Number.NEGATIVE_INFINITY || size === Number.POSITIVE_INFINITY || isNaN(size)) {
-      return { text: size.toLocaleString('de-DE') };
+      return { text: size.toLocaleString() };
     }
 
     const siIndex = size === 0 ? 0 : Math.floor(logb(factor, Math.abs(size)));
