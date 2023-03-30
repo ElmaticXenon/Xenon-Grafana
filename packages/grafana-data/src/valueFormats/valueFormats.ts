@@ -7,6 +7,7 @@ import { getCategories } from './categories';
 import { toDateTimeValueFormatter } from './dateTimeFormatters';
 import { getOffsetFromSIPrefix, SIPrefix, currency } from './symbolFormatters';
 
+import i18n, { BackendModule } from 'i18next';
 export interface FormattedValue {
   text: string;
   prefix?: string;
@@ -51,6 +52,7 @@ export function toFixed(value: number, decimals?: DecimalCount): string {
   }
 
   if (value === Number.NEGATIVE_INFINITY || value === Number.POSITIVE_INFINITY) {
+    console.log("I18N***************" + i18n.options.lng)
     return value.toLocaleString();
   }
 
