@@ -67,7 +67,7 @@ export function toFixed(value: number, decimals?: DecimalCount): string {
 
   // if exponent return directly
   if (formatted.indexOf('e') !== -1 || value === 0) {
-    return value.toLocaleString();
+    return value.toLocaleString('de-DE');
   }
 
   const decimalPos = formatted.indexOf(',');
