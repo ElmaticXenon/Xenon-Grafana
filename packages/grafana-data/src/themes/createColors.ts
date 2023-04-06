@@ -34,12 +34,15 @@ export interface ThemeColorsBase<TColor> {
     primary: string;
     /** Cards and elements that need to stand out on the primary background */
     secondary: string;
+    /** Sidemenu Background */
+    sidemenu: string;
   };
 
   border: {
     weak: string;
     medium: string;
     strong: string;
+    shadow: string;
   };
 
   gradients: {
@@ -86,12 +89,13 @@ class DarkColors implements ThemeColorsBase<Partial<ThemeRichColor>> {
   mode: ThemeColorsMode = 'dark';
 
   // Used to get more white opacity colors
-  whiteBase = '204, 204, 220';
+  whiteBase = '203, 203, 226';
 
   border = {
-    weak: `rgba(${this.whiteBase}, 0.07)`,
+    weak: '#2b2c40' /** 05.03  */,
     medium: `rgba(${this.whiteBase}, 0.15)`,
     strong: `rgba(${this.whiteBase}, 0.25)`,
+    shadow: '0 0.125rem 0.5rem rgba(0,0,0,16%);',
   };
 
   text = {
@@ -135,8 +139,9 @@ class DarkColors implements ThemeColorsBase<Partial<ThemeRichColor>> {
 
   background = {
     canvas: palette.gray05,
-    primary: 'rgba(0,204,255,0.1)',
+    primary: palette.gray10,
     secondary: palette.gray15,
+    sidemenu: palette.gray10,
   };
 
   action = {
@@ -182,6 +187,7 @@ class LightColors implements ThemeColorsBase<Partial<ThemeRichColor>> {
     weak: `rgba(${this.blackBase}, 0.12)`,
     medium: `rgba(${this.blackBase}, 0.30)`,
     strong: `rgba(${this.blackBase}, 0.40)`,
+    shadow: '0 2px 6px 0 rgba(67, 89, 113, 0.12);',
   };
 
   secondary = {
@@ -217,6 +223,7 @@ class LightColors implements ThemeColorsBase<Partial<ThemeRichColor>> {
     canvas: palette.gray90,
     primary: palette.white,
     secondary: palette.gray100,
+    sidemenu: palette.white,
   };
 
   action = {
