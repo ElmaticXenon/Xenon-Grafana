@@ -22,6 +22,10 @@ RUN yarn build
 
 FROM golang:1.19.3-alpine3.15 as go-builder
 
+# Pass CI pipeline ID from GitLab runner as environment variable into builder container
+ARG CI_PIPELINE_ID=0
+ENV CI_PIPELINE_ID=$CI_PIPELINE_ID
+
 RUN apk add --no-cache gcc g++ make
 
 WORKDIR /grafana

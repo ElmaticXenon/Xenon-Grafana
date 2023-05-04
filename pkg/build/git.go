@@ -15,7 +15,7 @@ func getGitBranch() string {
 func getGitSha() string {
 	// If there is a pipeline ID set, use this
 	idstr, present := os.LookupEnv("CI_PIPELINE_ID")
-	if present {
+	if present && idstr != "0" {
 		return idstr
 	}
 
