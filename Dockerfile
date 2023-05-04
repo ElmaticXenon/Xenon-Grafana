@@ -34,6 +34,10 @@ RUN yarn build
 
 FROM ${GO_IMAGE} as go-builder
 
+# Pass CI pipeline ID from GitLab runner as environment variable into builder container
+ARG CI_PIPELINE_ID=0
+ENV CI_PIPELINE_ID=$CI_PIPELINE_ID
+
 ARG COMMIT_SHA=""
 ARG BUILD_BRANCH=""
 ARG GO_BUILD_TAGS="oss"
