@@ -52,16 +52,6 @@ export function getVersionMeta(version: string) {
 export function getVersionLinks(hideEdition?: boolean): FooterLink[] {
   const { buildInfo, licenseInfo } = config;
   const links: FooterLink[] = [];
-  const stateInfo = licenseInfo.stateInfo ? ` (${licenseInfo.stateInfo})` : '';
-
-  if (!hideEdition) {
-    links.push({
-      target: '_blank',
-      id: 'license',
-      text: `${buildInfo.edition}${stateInfo}`,
-      url: licenseInfo.licenseUrl,
-    });
-  }
 
   if (buildInfo.hideVersion) {
     return links;
