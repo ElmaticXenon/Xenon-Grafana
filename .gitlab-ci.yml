@@ -19,7 +19,7 @@ build-docker:
     - docker
   stage: build
   script:
-    - docker build -t $HUB_ADDRESS:$CI_PIPELINE_ID .
+    - ./xenon-build.sh
     - docker images | grep $HUB_ADDRESS
 
 push-image:

@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  grafana:
+    build: .
+    environment:
+      GF_FEATURE_TOGGLES_ENABLE: internationalization
+      GF_INSTALL_PLUGINS: "grafana-clock-panel,grafana-simple-json-datasource,marcuscalidus-svg-panel,marcusolsson-csv-datasource, cloudspout-button-panel, agenty-flowcharting-panel"
+      GF_SERVER_DOMAIN: staging.elmatic-xenon.de
+      GF_SERVER_ROOT_URL: "%(protocol)s://%(domain)s/"
+      # date formats
+      GF_DATE_FORMATS_FULL_DATE: "DD.MM.YYYY HH:mm:ss"
+      GF_DATE_FORMATS_INTERVALL_DAY: "DD.MM"
+      GF_DATE_FORMATS_INTERVAL_HOUR: "DD.MM HH:mm"
+      GF_DATE_FORMATS_INTERVAL_MINUTE: "HH:mm"
+      GF_DATE_FORMATS_INTERVAL_MONTHS: "YYYY:MM"
+      GF_DATE_FORMATS_INTERVAL_SECOND: "HH:mm:ss"
+      GF_DATE_FORMATS_INTERVAL_YEAR: "YYYY"
+      # EMail settings
+      GF_EMAILS_WELCOME_EMAIL_ON_SIGN_UP: "false"
+      GF_EMAILS_TEMPLATES_PATTERN: "emails/*.html, emails/*.txt"
+      GF_EMAILS_CONTENT_TYPES: "text/html"
+      # debugging / logging
+      GF_LOG_LEVEL: "debug"
+      GF_LOG.CONSOLE_LEVEL: "debug"
+    ports:
+      - 3000:3000
+    volumes:
+      - grafana_data:/var/lib/grafana
+
+volumes:
+  grafana_data:
