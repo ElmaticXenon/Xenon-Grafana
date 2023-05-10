@@ -55,7 +55,7 @@ export let getVersionLinks = (): FooterLink[] => {
     target: '_blank',
     id: 'version',
     text: `v${buildInfo.version} (${buildInfo.commit})`,
-    url: hasReleaseNotes ? `https://github.com/grafana/grafana/blob/main/CHANGELOG.md` : undefined,
+    url: undefined,
   });
 
   return links;
