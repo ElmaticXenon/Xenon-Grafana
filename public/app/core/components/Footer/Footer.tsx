@@ -18,24 +18,17 @@ export let getFooterLinks = (): FooterLink[] => {
   return [
     {
       target: '_blank',
-      id: 'documentation',
-      text: t('nav.help/documentation', 'Documentation'),
-      icon: 'document-info',
-      url: 'https://doc.elmatic-align.de',
-    },
-    {
-      target: '_blank',
-      id: 'support',
-      text: t('nav.help/support', 'Support'),
-      icon: 'question-circle',
-      url: 'https://support.elmatic-align.de',
-    },
-    {
-      target: '_blank',
       id: 'community',
-      text: t('nav.help/company', 'Elmatic'),
+      text: t('nav.help/company', 'ELMATIC GmbH'),
       icon: 'comments-alt',
       url: 'https://www.elmatic.de',
+    },
+    {
+      target: '_blank',
+      id: 'license',
+      text: t('nav.help/license', 'License'),
+      icon: 'document-info',
+      url: './static/license/',
     },
   ];
 };
