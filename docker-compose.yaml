@@ -2,6 +2,8 @@ version: '3.8'
 services:
   grafana:
     build: .
+    #image: dockerhub.elmatic-xenon.de/grafana:519
+    #image: local:555
     environment:
       GF_FEATURE_TOGGLES_ENABLE: internationalization
       GF_INSTALL_PLUGINS: "grafana-clock-panel,grafana-simple-json-datasource,marcuscalidus-svg-panel,marcusolsson-csv-datasource, cloudspout-button-panel, agenty-flowcharting-panel"
@@ -9,10 +11,10 @@ services:
       GF_SERVER_ROOT_URL: "%(protocol)s://%(domain)s/"
       # date formats
       GF_DATE_FORMATS_FULL_DATE: "DD.MM.YYYY HH:mm:ss"
-      GF_DATE_FORMATS_INTERVALL_DAY: "DD.MM"
+      GF_DATE_FORMATS_INTERVAL_DAY: "DD.MM"
       GF_DATE_FORMATS_INTERVAL_HOUR: "DD.MM HH:mm"
       GF_DATE_FORMATS_INTERVAL_MINUTE: "HH:mm"
-      GF_DATE_FORMATS_INTERVAL_MONTHS: "YYYY:MM"
+      GF_DATE_FORMATS_INTERVAL_MONTH: "YYYY:MM"
       GF_DATE_FORMATS_INTERVAL_SECOND: "HH:mm:ss"
       GF_DATE_FORMATS_INTERVAL_YEAR: "YYYY"
       # EMail settings
