@@ -1063,11 +1063,12 @@
     "help": {
       "title": "Hilfe"
     },
-    "help/company": "Elmatic",
     "help/community": "Community",
     "help/documentation": "Dokumentation",
     "help/keyboard-shortcuts": "Tastaturbefehle",
     "help/support": "Support",
+    "help/company": "ELMATIC GmbH",
+    "help/license": "Lizenz",
     "home": {
       "title": "Home"
     },
