@@ -5,7 +5,7 @@ fi
 
 # If a Pipeline ID exists, pass this to the build container
 if [ -n "$CI_PIPELINE_ID" ]; then
-  docker build --tag $HUB_ADDRESS:$CI_PIPELINE_ID --build-arg CI_PIPELINE_ID=$CI_PIPELINE_ID .
+  DOCKER_BUILDKIT=1 docker build --tag $HUB_ADDRESS:$CI_PIPELINE_ID --build-arg CI_PIPELINE_ID=$CI_PIPELINE_ID .
 else
-  docker build --tag xenon:dev .
+  DOCKER_BUILDKIT=1 docker build --tag xenon:dev .
 fi
