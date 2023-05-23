@@ -26,7 +26,7 @@ export let getFooterLinks = (): FooterLink[] => {
     {
       target: '_blank',
       id: 'license',
-      text: t('nav.help/license', 'License'),
+      text: t('nav.help/license', 'Licenses'),
       icon: 'document-info',
       url: './static/license/',
     },
