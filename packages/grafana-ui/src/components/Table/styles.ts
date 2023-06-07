@@ -4,7 +4,9 @@ import { GrafanaTheme2 } from '@grafana/data';
 import { TableCellHeight } from '@grafana/schema';
 
 export function useTableStyles(theme: GrafanaTheme2, cellHeightOption: TableCellHeight) {
+  const { colors } = theme;
   const borderColor = theme.colors.border.weak;
+  const headerBg = theme.colors.background.secondary;
   const resizerColor = theme.colors.primary.border;
   const cellPadding = 6;
   const cellHeight = getCellHeight(theme, cellHeightOption, cellPadding);
@@ -123,6 +125,7 @@ export function useTableStyles(theme: GrafanaTheme2, cellHeightOption: TableCell
       height: `${headerHeight}px`,
       overflowY: 'auto',
       overflowX: 'hidden',
+      background: ${headerBg},
       position: 'relative',
     }),
     tfoot: css({
@@ -142,6 +145,8 @@ export function useTableStyles(theme: GrafanaTheme2, cellHeightOption: TableCell
       padding: `0 ${cellPadding}px`,
       overflow: 'hidden',
       whiteSpace: 'nowrap',
+      color: ${colors.primary.text};
+      border-right: 1px solid ${theme.colors.border.weak};
       display: 'flex',
       alignItems: 'center',
       fontWeight: theme.typography.fontWeightMedium,
