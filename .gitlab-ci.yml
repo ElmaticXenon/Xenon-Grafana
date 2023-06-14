@@ -7,6 +7,7 @@ stages:
   - build
   - publish
   - cleanup
+  - deploy
 
 services:
   - docker:20.10.16-dind 
@@ -73,3 +74,11 @@ cleanup:
   script:
     - docker rmi $HUB_ADDRESS:$CI_PIPELINE_ID
   when: always
+
+deploy:
+  stage: deploy
+  only:
+    - tags
+    - main
+  trigger:
+    project: external/swarm/grafana-stack/grafana
