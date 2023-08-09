@@ -209,7 +209,7 @@ export const DashNav = React.memo<Props>((props) => {
       );
     }
 
-    if (canShare && contextSrv.isGrafanaAdmin) {
+    if (canShare && contextSrv.isEditor) {
       buttons.push(<ShareButton key="button-share" dashboard={dashboard} />);
     }
 

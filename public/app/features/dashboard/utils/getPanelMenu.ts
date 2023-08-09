@@ -143,7 +143,7 @@ export function getPanelMenu(
     });
   }
 
-  if (contextSrv.isGrafanaAdmin) {
+  if (contextSrv.isEditor) {
     menu.push({
       text: t('panel.header-menu.share', `Share`),
       iconClassName: 'share-alt',
@@ -182,11 +182,12 @@ export function getPanelMenu(
     }
   }
 
-  inspectMenu.push({
-    text: t('panel.header-menu.inspect-json', `Panel JSON`),
-    onClick: (e: React.MouseEvent) => onInspectPanel(InspectTab.JSON),
-  });
-
+  if (contextSrv.isEditor) {
+    inspectMenu.push({
+      text: t('panel.header-menu.inspect-json', `Panel JSON`),
+      onClick: (e: React.MouseEvent<any>) => onInspectPanel(InspectTab.JSON),
+    });
+  }
   menu.push({
     type: 'submenu',
     text: t('panel.header-menu.inspect', `Inspect`),
