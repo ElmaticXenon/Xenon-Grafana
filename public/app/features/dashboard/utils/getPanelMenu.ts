@@ -143,12 +143,14 @@ export function getPanelMenu(
     });
   }
 
-  menu.push({
-    text: t('panel.header-menu.share', `Share`),
-    iconClassName: 'share-alt',
-    onClick: onSharePanel,
-    shortcut: 'p s',
-  });
+  if (contextSrv.isGrafanaAdmin) {
+    menu.push({
+      text: t('panel.header-menu.share', `Share`),
+      iconClassName: 'share-alt',
+      onClick: onSharePanel,
+      shortcut: 'p s',
+    });
+  }
 
   if (
     contextSrv.hasAccessToExplore() &&
