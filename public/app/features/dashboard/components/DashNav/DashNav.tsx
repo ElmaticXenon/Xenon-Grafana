@@ -20,7 +20,7 @@ import { AppChromeUpdate } from 'app/core/components/AppChrome/AppChromeUpdate';
 import { NavToolbarSeparator } from 'app/core/components/AppChrome/NavToolbar/NavToolbarSeparator';
 import config from 'app/core/config';
 import { useAppNotification } from 'app/core/copy/appNotification';
-import { appEvents } from 'app/core/core';
+import { appEvents, contextSrv } from 'app/core/core';
 import { useBusEvent } from 'app/core/hooks/useBusEvent';
 import { t, Trans } from 'app/core/internationalization';
 import { ID_PREFIX, setStarred } from 'app/core/reducers/navBarTree';
@@ -207,6 +207,10 @@ export const DashNav = React.memo<Props>((props) => {
           key="button-star"
         />
       );
+    }
+
+    if (canShare && contextSrv.isGrafanaAdmin) {
+      buttons.push(<ShareButton key="button-share" dashboard={dashboard} />);
     }
 
     if (dashboard.meta.publicDashboardEnabled) {
