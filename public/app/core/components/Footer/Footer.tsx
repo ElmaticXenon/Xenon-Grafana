@@ -43,14 +43,12 @@ export function getVersionMeta(version: string) {
 }
 
 export function getVersionLinks(hideEdition?: boolean): FooterLink[] {
-  const { buildInfo, licenseInfo } = config;
+  const { buildInfo } = config;
   const links: FooterLink[] = [];
 
   if (buildInfo.hideVersion) {
     return links;
   }
-
-  const { hasReleaseNotes } = getVersionMeta(buildInfo.version);
 
   links.push({
     target: '_blank',
