@@ -128,7 +128,7 @@ const getStyles = (theme: GrafanaTheme2) => {
       },
     }),
     canvasContent: css({
-    padding: theme.spacing(32),
+      padding: theme.spacing(32),
       display: 'flex',
       flexDirection: 'column',
       flexBasis: '100%',
