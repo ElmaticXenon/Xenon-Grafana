@@ -1,16 +1,11 @@
 variables:
   HUB_ADDRESS: dockerhub.elmatic-xenon.de/grafana
 
-image: docker:20.10.16
-
 stages:
   - build
   - publish
   - cleanup
   - deploy
-
-services:
-  - docker:20.10.16-dind 
 
 before_script:
   - docker info
