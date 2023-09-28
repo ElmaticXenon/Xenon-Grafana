@@ -56,7 +56,7 @@ export interface ThemeComponents {
 
 export function createComponents(colors: ThemeColors, shadows: ThemeShadows): ThemeComponents {
   const panel = {
-    padding: 4,
+    padding: 1,
     headerHeight: 4,
     background: colors.background.primary,
     borderColor: colors.border.weak,
