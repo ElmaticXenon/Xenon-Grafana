@@ -20,6 +20,7 @@ services:
       GF_DATE_FORMATS_INTERVAL_MONTH: "YYYY:MM"
       GF_DATE_FORMATS_INTERVAL_SECOND: "HH:mm:ss"
       GF_DATE_FORMATS_INTERVAL_YEAR: "YYYY"
+      GF_DATE_FORMATS_USE_BROWSER_LOCALE: "true" # Caution: This is still an experimental feature
 
       # language settings
       GF_USERS_DEFAULT_LANGUAGE: "de-DE"
