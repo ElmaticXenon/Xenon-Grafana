@@ -26,6 +26,11 @@ services:
       GF_EMAILS_TEMPLATES_PATTERN: "emails/*.html, emails/*.txt"
       GF_EMAILS_CONTENT_TYPES: "text/html"
 
+      # analytics
+      GF_ANALYTICS_REPORTING_ENABLED: "false"
+      GF_ANALYTICS_CHECK_FOR_PLUGIN_UPDATES: "false"
+      GF_ANALYTICS_CHECK_FOR_UPDATES: "false"
+
       # image renderer
       GF_RENDERING_SERVER_URL: http://grafana-renderer:8081/render
       GF_RENDERING_CALLBACK_URL: http://grafana:3000
