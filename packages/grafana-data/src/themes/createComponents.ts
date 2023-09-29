@@ -60,7 +60,7 @@ export function createComponents(colors: ThemeColors, shadows: ThemeShadows): Th
     headerHeight: 4,
     background: colors.background.primary,
     borderColor: colors.border.weak,
-    boxShadow: 'none',
+    boxShadow: colors.border.shadow,
   };
 
   const input = {
