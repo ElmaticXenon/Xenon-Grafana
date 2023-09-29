@@ -40,6 +40,9 @@ services:
       # disable explorer
       GF_EXPLORE_ENABLED: "false"
 
+      # panels settings
+      GF_PANELS_DISABLE_SANITIZE_HTML: "true"
+
       # image renderer
       GF_RENDERING_SERVER_URL: http://grafana-renderer:8081/render
       GF_RENDERING_CALLBACK_URL: http://grafana:3000
