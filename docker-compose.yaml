@@ -21,6 +21,9 @@ services:
       GF_DATE_FORMATS_INTERVAL_SECOND: "HH:mm:ss"
       GF_DATE_FORMATS_INTERVAL_YEAR: "YYYY"
 
+      # language settings
+      GF_USERS_DEFAULT_LANGUAGE: "de-DE"
+
       # EMail settings
       GF_EMAILS_WELCOME_EMAIL_ON_SIGN_UP: "false"
       GF_EMAILS_TEMPLATES_PATTERN: "emails/*.html, emails/*.txt"
