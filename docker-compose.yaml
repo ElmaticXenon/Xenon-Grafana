@@ -4,11 +4,14 @@ services:
     build: .
     #image: dockerhub.elmatic-xenon.de/grafana:519
     #image: local:555
+    hostname: grafana
     environment:
       GF_FEATURE_TOGGLES_ENABLE: internationalization
       GF_INSTALL_PLUGINS: "grafana-clock-panel,grafana-simple-json-datasource,marcuscalidus-svg-panel,marcusolsson-csv-datasource, cloudspout-button-panel, agenty-flowcharting-panel"
-      GF_SERVER_DOMAIN: staging.elmatic-xenon.de
+      GF_SERVER_DOMAIN: localhost
+      GF_SERVER_HTTP_PORT: 3001
       GF_SERVER_ROOT_URL: "%(protocol)s://%(domain)s/"
+
       # date formats
       GF_DATE_FORMATS_FULL_DATE: "DD.MM.YYYY HH:mm:ss"
       GF_DATE_FORMATS_INTERVAL_DAY: "DD.MM"
@@ -17,17 +20,29 @@ services:
       GF_DATE_FORMATS_INTERVAL_MONTH: "YYYY:MM"
       GF_DATE_FORMATS_INTERVAL_SECOND: "HH:mm:ss"
       GF_DATE_FORMATS_INTERVAL_YEAR: "YYYY"
+
       # EMail settings
       GF_EMAILS_WELCOME_EMAIL_ON_SIGN_UP: "false"
       GF_EMAILS_TEMPLATES_PATTERN: "emails/*.html, emails/*.txt"
       GF_EMAILS_CONTENT_TYPES: "text/html"
+
+      # image renderer
+      GF_RENDERING_SERVER_URL: http://grafana-renderer:8081/render
+      GF_RENDERING_CALLBACK_URL: http://grafana:3000
+
       # debugging / logging
       GF_LOG_LEVEL: "debug"
       GF_LOG.CONSOLE_LEVEL: "debug"
     ports:
-      - 3000:3000
+      - 3000:3001
+    links:
+      - grafana-renderer
     volumes:
       - grafana_data:/var/lib/grafana
+
+  grafana-renderer:
+    image: grafana/grafana-image-renderer:3.6.4
+    hostname: grafana-renderer
 
 volumes:
   grafana_data:
