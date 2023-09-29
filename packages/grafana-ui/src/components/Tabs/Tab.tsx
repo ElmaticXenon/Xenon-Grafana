@@ -115,6 +115,7 @@ const getStyles = (theme: GrafanaTheme2) => {
 
       &::before {
         background-image: ${theme.colors.gradients.brandHorizontal};
+        background-image: ${theme.colors.gradients.brandHorizontal} !important;
       }
     `,
     suffix: css`

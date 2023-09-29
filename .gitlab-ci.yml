@@ -1,0 +1,79 @@
+variables:
+  HUB_ADDRESS: dockerhub.elmatic-xenon.de/grafana
+
+stages:
+  - build
+  - publish
+  - cleanup
+  - deploy
+
+before_script:
+  - docker info
+
+build-docker:
+  tags: 
+    - docker
+  stage: build
+  script:
+    - ./xenon-build.sh
+    - docker images | grep $HUB_ADDRESS
+
+push-image:
+  tags:
+    - docker
+  stage: publish
+  script:
+    - docker push $HUB_ADDRESS:$CI_PIPELINE_ID
+
+push-tag:
+  only:
+    - tags
+  tags:
+    - docker
+  stage: publish
+  script:
+    - docker image tag $HUB_ADDRESS:$CI_PIPELINE_ID $HUB_ADDRESS:$CI_COMMIT_TAG
+    - docker push $HUB_ADDRESS:$CI_COMMIT_TAG
+    - docker image tag $HUB_ADDRESS:$CI_PIPELINE_ID $HUB_ADDRESS:production
+    - docker push $HUB_ADDRESS:production
+
+    - docker images | grep $HUB_ADDRESS
+
+    - docker rmi $HUB_ADDRESS:$CI_COMMIT_TAG
+    - docker rmi $HUB_ADDRESS:production
+
+push-main:
+  only:
+    - main
+  tags:
+    - docker
+  stage: publish
+  script:
+    - docker image tag $HUB_ADDRESS:$CI_PIPELINE_ID $HUB_ADDRESS:$CI_COMMIT_REF_NAME
+    - docker push $HUB_ADDRESS:$CI_COMMIT_REF_NAME
+    - docker image tag $HUB_ADDRESS:$CI_PIPELINE_ID $HUB_ADDRESS:latest
+    - docker push $HUB_ADDRESS:latest
+    - docker image tag $HUB_ADDRESS:$CI_PIPELINE_ID $HUB_ADDRESS:staging
+    - docker push $HUB_ADDRESS:staging
+
+    - docker images | grep $HUB_ADDRESS
+
+    - docker rmi $HUB_ADDRESS:$CI_COMMIT_REF_NAME
+    - docker rmi $HUB_ADDRESS:latest
+    - docker rmi $HUB_ADDRESS:staging
+
+cleanup:
+  tags:
+    - docker
+  stage: cleanup
+  script:
+    - docker rmi $HUB_ADDRESS:$CI_PIPELINE_ID
+  when: always
+
+deploy:
+  stage: deploy
+  only:
+    - tags
+    - main
+  trigger:
+    project: external/swarm/grafana-stack/grafana
