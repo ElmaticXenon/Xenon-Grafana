@@ -7,5 +7,5 @@ fi
 if [ -n "$CI_PIPELINE_ID" ]; then
   DOCKER_BUILDKIT=1 docker build --cpuset-cpus "0-11" --tag $HUB_ADDRESS:$CI_PIPELINE_ID --build-arg CI_PIPELINE_ID=$CI_PIPELINE_ID .
 else
-  DOCKER_BUILDKIT=1 docker build --cpuset-cpus "0-11" --tag xenon:dev .
+  DOCKER_BUILDKIT=1 docker build --cpuset-cpus --tag xenon:dev .
 fi
