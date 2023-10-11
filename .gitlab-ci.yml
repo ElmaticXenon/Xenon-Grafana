@@ -85,6 +85,6 @@ deploy-testserver:
   variables:
     SSH_PRECONFIG: testserver
   script:
-    - ssh $SSH_PRECONFIG [[ -f /home/elmdocker/swarm/grafana.yaml ]] && echo "File already exists, no overwrite" || exit "swarm-stack-testserver.yaml is missing on testserver. Please run main project pipeline for testserver first."
+    - ssh $SSH_PRECONFIG [[ -f /home/elmdocker/swarm/grafana.yaml ]] && echo "File already exists, no overwrite" || (echo "swarm-stack-testserver.yaml is missing on testserver. Please run main project pipeline for testserver first." && exit 1)
     - "ssh $SSH_PRECONFIG \"sed -i 's/\\(.*image: dockerhub\\.elmatic-xenon\\.de\\/grafana:\\).*/\\1'${CI_PIPELINE_ID}'/g' /home/elmdocker/swarm/grafana.yaml\""
     - ssh $SSH_PRECONFIG docker stack deploy --compose-file=/home/elmdocker/swarm/grafana.yaml grafana
