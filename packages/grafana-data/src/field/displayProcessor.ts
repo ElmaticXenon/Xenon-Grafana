@@ -150,7 +150,12 @@ export function getDisplayProcessor(options?: DisplayProcessorOptions): DisplayP
           // this is needed because we may have determined the minimum determined `adjacentDecimals` for y tick increments based on
           // e.g. 'seconds' field unit (0.15s, 0.20s, 0.25s), but then formatFunc decided to return milli or nanos (150, 200, 250)
           // so we end up with excess precision: 150.00, 200.00, 250.00
-          v.text = +v.text + '';
+          if (v.text.indexOf(',') !== -1) {
+            // If they have a comma in the String, the code do nothing
+          } else {
+            // If a Comma exist in the String, we change the String in a Number back
+            v.text = +v.text + '';
+          }
         } else {
           v = formatFunc(numeric, config.decimals, null, options.timeZone, showMs);
         }
