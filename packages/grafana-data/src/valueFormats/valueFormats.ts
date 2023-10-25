@@ -104,7 +104,6 @@ function getDecimalsForValue(value: number): number {
   }
 
   const decimals = Math.max(0, dec);
-
   return decimals;
 }
 
