@@ -11,7 +11,6 @@ import { useSelector } from 'app/types';
 
 import { Branding } from '../../Branding/Branding';
 import { enrichHelpItem } from '../MegaMenu/utils';
-import { NewsContainer } from '../News/NewsContainer';
 import { OrganizationSwitcher } from '../OrganizationSwitcher/OrganizationSwitcher';
 import { QuickAdd } from '../QuickAdd/QuickAdd';
 import { TOP_BAR_LEVEL_HEIGHT } from '../types';
