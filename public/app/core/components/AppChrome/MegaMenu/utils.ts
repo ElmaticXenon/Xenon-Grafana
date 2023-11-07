@@ -112,19 +112,9 @@ export function getEditionAndUpdateLinks(): NavModelItem[] {
     target: '_blank',
     id: 'version',
     text: `${buildInfo.edition}${stateInfo}`,
-    url: licenseInfo.licenseUrl,
+    url: 'licenseInfo.licenseUrl',
     icon: 'external-link-alt',
   });
-
-  if (buildInfo.hasUpdate) {
-    links.push({
-      target: '_blank',
-      id: 'updateVersion',
-      text: `New version available!`,
-      icon: 'download-alt',
-      url: 'https://grafana.com/grafana/download?utm_source=grafana_footer',
-    });
-  }
 
   return links;
 }
