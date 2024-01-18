@@ -3,9 +3,9 @@ export const palette = {
   black: '#000000',
 
   gray25: '#2c3235',
-  gray15: '#22252b', //'#202226',
-  gray10: '#181b1f', // old '#141619',
-  gray05: '#111217', // old '#0b0c0e',
+  gray15: '#3b3c58', //'#29303c', background color table header, 10 perc lighter than #1D2025
+  gray10: '#2b2c40', // old '#181b1f' ,05.03 panel background color, also sidemenu and timepicker menu depends on that
+  gray05: '#232333', // old '111217', background color dashboard
 
   // new from figma,
   darkLayer0: '#18181A',
@@ -16,16 +16,16 @@ export const palette = {
   darkBorder2: '#64646B',
 
   // Dashboard bg / layer 0 (light theme)
-  gray90: '#F4F5F5',
+  gray90: '#f4f5fb', // 05.03 This is the Dashboard Background in White Theme
   // Card bg / layer 1
-  gray100: '#F4F5F5',
+  gray100: '#f4f5fb', // 05.03 This is for table header e. g.
   // divider line
   gray80: '#D0D1D3',
   // from figma
   lightBorder1: '#E4E7E7',
 
   blueDarkMain: '#3D71D9', // '#4165F5',
-  blueDarkText: '#6E9FFF', // '#58a6ff', //'#33a2e5', // '#5790FF',
+  blueDarkText: '#cccccc', // '#007fff' 01.04 // '#6E9FFF', //'#33a2e5', // '#5790FF', Color of Table Header Text
   redDarkMain: '#D10E5C',
   redDarkText: '#FF5286',
   greenDarkMain: '#1A7F4B',

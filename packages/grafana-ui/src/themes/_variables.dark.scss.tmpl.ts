@@ -135,7 +135,7 @@ $panel-bg: ${theme.components.panel.background};
 $panel-border: 1px solid ${theme.components.panel.borderColor};
 $panel-header-hover-bg: ${theme.colors.action.hover};
 $panel-box-shadow: ${theme.components.panel.boxShadow};
-$panel-corner: $panel-bg;
+$panel-corner: #355C8C;
 
 // page header
 $page-header-bg: ${theme.colors.background.canvas};
