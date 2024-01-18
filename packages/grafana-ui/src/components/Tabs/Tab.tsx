@@ -133,7 +133,7 @@ const getStyles = (theme: GrafanaTheme2) => {
       overflow: 'hidden',
 
       '&::before': {
-        backgroundImage: ${theme.colors.gradients.brandHorizontal} !important,
+        backgroundImage: theme.colors.gradients.brandHorizontal,
       },
     }),
     suffix: css({

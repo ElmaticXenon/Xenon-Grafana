@@ -125,7 +125,7 @@ export function useTableStyles(theme: GrafanaTheme2, cellHeightOption: TableCell
       height: `${headerHeight}px`,
       overflowY: 'auto',
       overflowX: 'hidden',
-      background: ${headerBg},
+      background: `${headerBg}`,
       position: 'relative',
     }),
     tfoot: css({
@@ -145,8 +145,8 @@ export function useTableStyles(theme: GrafanaTheme2, cellHeightOption: TableCell
       padding: `0 ${cellPadding}px`,
       overflow: 'hidden',
       whiteSpace: 'nowrap',
-      color: ${colors.primary.text};
-      border-right: 1px solid ${theme.colors.border.weak};
+      color: `${colors.primary.text}`,
+      borderRight: `1px solid ${theme.colors.border.weak}`,
       display: 'flex',
       alignItems: 'center',
       fontWeight: theme.typography.fontWeightMedium,
