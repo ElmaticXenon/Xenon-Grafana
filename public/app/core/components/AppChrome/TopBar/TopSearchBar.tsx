@@ -54,7 +54,6 @@ export const TopSearchBar = React.memo(function TopSearchBar() {
             <ToolbarButton iconOnly icon="question-circle" aria-label="Help" />
           </Dropdown>
         )}
-        {config.newsFeedEnabled && <NewsContainer />}
         {!contextSrv.user.isSignedIn && <SignInLink />}
         {profileNode && (
           <Dropdown overlay={() => <TopNavBarMenu node={profileNode} />} placement="bottom-end">

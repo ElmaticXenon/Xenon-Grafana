@@ -59,7 +59,7 @@ export const useInspectTabs = (
     if (contextSrv.isEditor) {
       tabs.push({ label: t('dashboard.inspect.json-tab', 'JSON'), value: InspectTab.JSON });
     }
-    if (error && error.message) {
+    if (hasError) {
       tabs.push({ label: t('dashboard.inspect.error-tab', 'Error'), value: InspectTab.Error });
     }
 

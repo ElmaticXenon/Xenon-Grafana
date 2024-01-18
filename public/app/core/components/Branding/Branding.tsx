@@ -61,6 +61,7 @@ export class Branding {
   static LoginBoxBackground = LoginBoxBackground;
   static AppTitle = 'Xenon';
   static LoginTitle = 'Welcome to Xenon';
+  static HideEdition = false;
   static GetLoginSubTitle = (): null | string => {
     return null;
   };
