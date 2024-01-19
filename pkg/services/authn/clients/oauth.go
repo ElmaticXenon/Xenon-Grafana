@@ -8,6 +8,8 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
+	"net/http"
+	"strconv"
 	"net/url"
 	"strings"
 
@@ -166,6 +168,31 @@ func (c *OAuth) Authenticate(ctx context.Context, r *authn.Request) (*authn.Iden
 		return nil, errOAuthEmailNotAllowed.Errorf("provided email is not allowed")
 	}
 
+	orgRoles, isGrafanaAdmin, _ := getRoles(c.cfg, func() (org.RoleType, *bool, error) {
+		if c.cfg.OAuthSkipOrgRoleUpdateSync {
+			return "", nil, nil
+		}
+		return userInfo.Role, userInfo.IsGrafanaAdmin, nil
+	})
+	// extract orgRoles from Groups in userInfo if exists
+	if len(userInfo.Groups) > 0 {
+		// The structure of the group attribute is supposed to be as follows:
+		// <OrgId>:<RoleType> -> 1:admin 2:viewer [...]
+		for _, orgGroup := range userInfo.Groups {
+			// split the pairs apart
+			orgGroupSplit := strings.Fields(strings.ReplaceAll(orgGroup, ":", " "))
+			if len(orgGroupSplit) == 0 {
+				continue
+			}
+			orgId, _ := strconv.Atoi(orgGroupSplit[0])
+			// Transfer gathered info into OrgRoles map
+			orgRoles[int64(orgId)] = org.RoleType(orgGroupSplit[1])
+		}
+	}
+	// Set Grafana Admin if present in userInfo
+	if userInfo.IsGrafanaAdmin != nil {
+		isGrafanaAdmin = userInfo.IsGrafanaAdmin
+	}
 	// This is required to implement OrgRole mapping for OAuth providers step by step
 	switch c.providerName {
 	case social.GenericOAuthProviderName, social.GitHubProviderName,

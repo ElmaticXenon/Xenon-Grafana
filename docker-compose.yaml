@@ -12,6 +12,32 @@ services:
       GF_SERVER_HTTP_PORT: 3001
       GF_SERVER_ROOT_URL: "%(protocol)s://%(domain)s/"
 
+      # OAuth
+      # OAuth authentication
+      GF_AUTH_GENERIC_OAUTH_ENABLED: "true"
+      GF_AUTH_GENERIC_OAUTH_CLIENT_ID: "Xenon"
+      GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET: "5ieHCCvqP9E8loHGWbRCaEWoL62jWXWD"
+      GF_AUTH_GENERIC_OAUTH_AUTH_URL: https://cloud.elmatic-align.de/realms/Xenon/protocol/openid-connect/auth
+      GF_AUTH_GENERIC_OAUTH_TOKEN_URL: https://cloud.elmatic-align.de/realms/Xenon/protocol/openid-connect/token
+      GF_AUTH_GENERIC_OAUTH_API_URL: https://cloud.elmatic-align.de/realms/Xenon/protocol/openid-connect/userinfo
+      GF_AUTH_DISABLE_LOGIN_FORM: "true"
+      GF_AUTH_SIGNOUT_REDIRECT_URL: https://cloud.elmatic-align.de/realms/Xenon/protocol/openid-connect/logout?post_logout_redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Flogin%2Fgeneric_oauth&client_id=Xenon
+      GF_AUTH_OAUTH_AUTO_LOGIN: "true"
+      GF_AUTH_GENERIC_OAUTH_TLS_SKIP_VERIFY_INSECURE: "true"
+      GF_AUTH_GENERIC_OAUTH_SCOPES: "email"
+      GF_AUTH_GENERIC_OAUTH_ROLE_ATTRIBUTE_PATH: "contains(roles[*], 'admin') && 'GrafanaAdmin' || contains(roles[*], 'editor') && 'Editor' || 'Viewer'"
+      # needed for orgrole sync. thats the json path to the attribute containing the orgrole list
+      GF_AUTH_GENERIC_OAUTH_GROUPS_ATTRIBUTE_PATH: "allowed_organizations"
+      GF_AUTH_GENERIC_OAUTH_ALLOW_ASSIGN_GRAFANA_ADMIN: "true"
+      # has to be true to enable role updating from keycloak!
+      GF_AUTH_OAUTH_SKIP_ORG_ROLE_UPDATE_SYNC: "true"
+      GF_AUTH_LOGIN_COOKIE_NAME: "xenon_session"
+      # fix problem with login when updating from Grafana 9.x.x to 10.x.x
+      # see https://github.com/grafana/grafana/issues/70203#issuecomment-1609850174 for details
+      # This might can be deleted once we upgraded successfuly
+      GF_AUTH_OAUTH_ALLOW_INSECURE_EMAIL_LOOKUP: "true"
+
+
       # date formats
       GF_DATE_FORMATS_FULL_DATE: "DD.MM.YYYY HH:mm:ss"
       GF_DATE_FORMATS_INTERVAL_DAY: "DD.MM"
