@@ -78,16 +78,48 @@ func ProvideOAuth(
 }
 
 type OAuth struct {
-	name         string
-	moduleName   string
-	providerName string
-	log          log.Logger
-	cfg          *setting.Cfg
+	name       string
+	moduleName string
+	log        log.Logger
+	cfg        *setting.Cfg
+	oauthCfg   *social.OAuthInfo
+	connector  social.SocialConnector
+	httpClient *http.Client
+}
 
-	settingsProviderSvc setting.Provider
-	oauthService        oauthtoken.OAuthTokenService
-	socialService       social.Service
-	features            featuremgmt.FeatureToggles
+func (c *OAuth) groupsToOrgRoles(groups []string) map[int64]org.RoleType {
+	orgRoles := make(map[int64]org.RoleType, 0)
+
+	if len(groups) > 0 {
+		// The structure of the group attribute is supposed to be as follows:
+		// <OrgId>:<RoleType> -> 1:admin 2:viewer [...]
+		for _, orgGroup := range groups {
+			// split the pairs apart
+			orgGroupSplit := strings.Fields(strings.ReplaceAll(orgGroup, ":", " "))
+			if len(orgGroupSplit) == 0 {
+				continue
+			}
+			orgId, err := strconv.Atoi(orgGroupSplit[0])
+			// Ignore if org ID is not an integer
+			if err != nil {
+				continue
+			}
+			// Ignore if no role is given
+			if len(orgGroupSplit[1]) == 0 {
+				continue
+			}
+
+			// Ignore if given role is not a valid/known role
+			if !org.RoleType(orgGroupSplit[1]).IsValid() {
+				continue
+			}
+
+			// Transfer gathered info into OrgRoles map
+			orgRoles[int64(orgId)] = org.RoleType(orgGroupSplit[1])
+		}
+	}
+
+	return orgRoles
 }
 
 func (c *OAuth) Name() string {
@@ -175,34 +207,7 @@ func (c *OAuth) Authenticate(ctx context.Context, r *authn.Request) (*authn.Iden
 		return userInfo.Role, userInfo.IsGrafanaAdmin, nil
 	})
 	// extract orgRoles from Groups in userInfo if exists
-	if len(userInfo.Groups) > 0 {
-		// The structure of the group attribute is supposed to be as follows:
-		// <OrgId>:<RoleType> -> 1:admin 2:viewer [...]
-		for _, orgGroup := range userInfo.Groups {
-			// split the pairs apart
-			orgGroupSplit := strings.Fields(strings.ReplaceAll(orgGroup, ":", " "))
-			if len(orgGroupSplit) == 0 {
-				continue
-			}
-			orgId, _ := strconv.Atoi(orgGroupSplit[0])
-			// Transfer gathered info into OrgRoles map
-			orgRoles[int64(orgId)] = org.RoleType(orgGroupSplit[1])
-		}
-	}
-	// Set Grafana Admin if present in userInfo
-	if userInfo.IsGrafanaAdmin != nil {
-		isGrafanaAdmin = userInfo.IsGrafanaAdmin
-	}
-	// This is required to implement OrgRole mapping for OAuth providers step by step
-	switch c.providerName {
-	case social.GenericOAuthProviderName, social.GitHubProviderName,
-		social.GitlabProviderName, social.OktaProviderName, social.GoogleProviderName:
-		// Do nothing, these providers already supports OrgRole mapping
-	default:
-		userInfo.OrgRoles, userInfo.IsGrafanaAdmin, _ = getRoles(c.cfg, func() (org.RoleType, *bool, error) {
-			return userInfo.Role, userInfo.IsGrafanaAdmin, nil
-		})
-	}
+	orgRoles = c.groupsToOrgRoles(userInfo.Groups)
 
 	lookupParams := login.UserLookupParams{}
 	allowInsecureEmailLookup := c.settingsProviderSvc.KeyValue("auth", "oauth_allow_insecure_email_lookup").MustBool(false)
