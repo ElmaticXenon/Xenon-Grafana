@@ -9,6 +9,7 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"strconv"
 	"strings"
 
 	"golang.org/x/oauth2"
@@ -76,6 +77,41 @@ type OAuth struct {
 	httpClient *http.Client
 }
 
+func (c *OAuth) groupsToOrgRoles(groups []string) map[int64]org.RoleType {
+	orgRoles := make(map[int64]org.RoleType, 0)
+
+	if len(groups) > 0 {
+		// The structure of the group attribute is supposed to be as follows:
+		// <OrgId>:<RoleType> -> 1:admin 2:viewer [...]
+		for _, orgGroup := range groups {
+			// split the pairs apart
+			orgGroupSplit := strings.Fields(strings.ReplaceAll(orgGroup, ":", " "))
+			if len(orgGroupSplit) == 0 {
+				continue
+			}
+			orgId, err := strconv.Atoi(orgGroupSplit[0])
+			// Ignore if org ID is not an integer
+			if err != nil {
+				continue
+			}
+			// Ignore if no role is given
+			if len(orgGroupSplit[1]) == 0 {
+				continue
+			}
+
+			// Ignore if given role is not a valid/known role
+			if !org.RoleType(orgGroupSplit[1]).IsValid() {
+				continue
+			}
+
+			// Transfer gathered info into OrgRoles map
+			orgRoles[int64(orgId)] = org.RoleType(orgGroupSplit[1])
+		}
+	}
+
+	return orgRoles
+}
+
 func (c *OAuth) Name() string {
 	return c.name
 }
@@ -140,6 +176,8 @@ func (c *OAuth) Authenticate(ctx context.Context, r *authn.Request) (*authn.Iden
 		}
 		return userInfo.Role, userInfo.IsGrafanaAdmin, nil
 	})
+	// extract orgRoles from Groups in userInfo if exists
+	orgRoles = c.groupsToOrgRoles(userInfo.Groups)
 
 	lookupParams := login.UserLookupParams{}
 	if c.cfg.OAuthAllowInsecureEmailLookup {
