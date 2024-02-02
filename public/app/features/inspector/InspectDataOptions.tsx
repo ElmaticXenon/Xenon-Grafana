@@ -38,7 +38,7 @@ export const InspectDataOptions = ({
   toggleDownloadForExcel,
 }: Props) => {
   const styles = useStyles2(getPanelInspectorStyles2);
-  const [showDataOptions] = useState(contextSrv?.isEditor || false);
+  const [showDataOptions] = useState(contextSrv?.isEditor || false); //Optional Boolean to show data toggle if editor or admin
 
   let dataSelect = dataFrames;
   if (selectedDataFrame === DataTransformerID.joinByField) {
@@ -98,7 +98,9 @@ export const InspectDataOptions = ({
         headerElement={<DetailText>{getActiveString()}</DetailText>}
         isOpen={false}
         actions={actions}
-      ></QueryOperationRow>
+      >
+        <></>
+      </QueryOperationRow>
       {showDataOptions && (
         <div className={styles.options} data-testid="dataOptions">
           <VerticalGroup spacing="none">
