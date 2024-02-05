@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { DataFrame, DataTransformerID, getFrameDisplayName, SelectableValue } from '@grafana/data';
 import { Field, HorizontalGroup, Select, Switch, VerticalGroup, useStyles2 } from '@grafana/ui';
 import { QueryOperationRow } from 'app/core/components/QueryOperationRow/QueryOperationRow';
+import { contextSrv } from 'app/core/core';
 import { t } from 'app/core/internationalization';
 import { DetailText } from 'app/features/inspector/DetailText';
 import { GetDataOptions } from 'app/features/query/state/PanelQueryRunner';
@@ -37,6 +38,7 @@ export const InspectDataOptions = ({
   toggleDownloadForExcel,
 }: Props) => {
   const styles = useStyles2(getPanelInspectorStyles2);
+  const [showDataOptions] = useState(contextSrv?.isEditor || false); //Optional Boolean to show data toggle if editor or admin
 
   let dataSelect = dataFrames;
   if (selectedDataFrame === DataTransformerID.joinByField) {
@@ -97,6 +99,9 @@ export const InspectDataOptions = ({
         isOpen={false}
         actions={actions}
       >
+        <></>
+      </QueryOperationRow>
+      {showDataOptions && (
         <div className={styles.options} data-testid="dataOptions">
           <VerticalGroup spacing="none">
             {data!.length > 1 && (
@@ -153,7 +158,7 @@ export const InspectDataOptions = ({
             </HorizontalGroup>
           </VerticalGroup>
         </div>
-      </QueryOperationRow>
+      )}
     </div>
   );
 };
