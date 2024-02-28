@@ -6,6 +6,7 @@ import { GrafanaTheme2, TimeOption } from '@grafana/data';
 
 import { useStyles2 } from '../../../themes/ThemeContext';
 import { getFocusStyles } from '../../../themes/mixins';
+import { Trans } from '../../../utils/i18n';
 
 const getStyles = (theme: GrafanaTheme2) => {
   return {
@@ -52,6 +53,8 @@ export const TimeRangeOption = memo<Props>(({ value, onSelect, selected = false,
   const styles = useStyles2(getStyles);
   // In case there are more of the same timerange in the list
   const id = uuidv4();
+  const transformedValueKey = transformString(value.display);
+  const timePickerTransKey = `time-picker.time-range.${transformedValueKey}`;
 
   return (
     <li className={cx(styles.container, selected && styles.selected)}>
@@ -66,10 +69,14 @@ export const TimeRangeOption = memo<Props>(({ value, onSelect, selected = false,
         onChange={() => onSelect(value)}
       />
       <label className={styles.label} htmlFor={id}>
-        {value.display}
+        <Trans i18nKey={timePickerTransKey}>{value.display}</Trans>
       </label>
     </li>
   );
 });
 
 TimeRangeOption.displayName = 'TimeRangeOption';
+
+const transformString = (input: string): string => {
+  return input.toLowerCase().replace(/\s+/g, '-');
+};
