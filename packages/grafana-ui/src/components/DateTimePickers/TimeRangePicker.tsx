@@ -237,6 +237,8 @@ export const TimePickerButtonLabel = memo<LabelProps>(({ hideText, value, timeZo
   return (
     <span className={styles.container} aria-live="polite" aria-atomic="true">
       <span>{formattedRange(value, timeZone)}</span>
+        <Trans i18nKey={createTransKey(value, timeZone)}>{formattedRange(value, timeZone)}</Trans>
+      </span>
       <span className={styles.utc}>{rangeUtil.describeTimeRangeAbbreviation(value, timeZone)}</span>
     </span>
   );
@@ -250,6 +252,11 @@ const formattedRange = (value: TimeRange, timeZone?: TimeZone) => {
     from: dateMath.isMathString(value.raw.from) ? value.raw.from : value.from,
   };
   return rangeUtil.describeTimeRange(adjustedTimeRange, timeZone);
+};
+
+const createTransKey = (value: TimeRange, timeZone?: TimeZone) => {
+  const range = formattedRange(value, timeZone).toLowerCase().replace(/\s+/g, '-');
+  return `time-picker.time-range.${range}`;
 };
 
 const getStyles = (theme: GrafanaTheme2) => {
