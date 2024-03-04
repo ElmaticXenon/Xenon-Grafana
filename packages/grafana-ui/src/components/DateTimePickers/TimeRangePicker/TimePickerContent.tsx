@@ -1,9 +1,11 @@
 import { css, cx } from '@emotion/css';
+import i18next from 'i18next';
 import React, { memo, useMemo, useState } from 'react';
 
 import { GrafanaTheme2, isDateTime, rangeUtil, RawTimeRange, TimeOption, TimeRange, TimeZone } from '@grafana/data';
 import { selectors } from '@grafana/e2e-selectors';
 
+import * as TransDe from '../../../../../../public/locales/de-DE/grafana.json';
 import { useStyles2, useTheme2 } from '../../../themes';
 import { getFocusStyles } from '../../../themes/mixins';
 import { t, Trans } from '../../../utils/i18n';
@@ -68,7 +70,37 @@ export const TimePickerContentWithScreenSize = (props: PropsWithScreenSize) => {
   const timeOption = useTimeOption(value.raw, quickOptions);
   const [searchTerm, setSearchQuery] = useState('');
 
-  const filteredQuickOptions = quickOptions.filter((o) => o.display.toLowerCase().includes(searchTerm.toLowerCase()));
+  interface TimeRangeOption {
+    [key: string]: string;
+  }
+
+  const filteredQuickOptions = getFilteredQuickOptions();
+
+  function getFilteredQuickOptions(): TimeOption[] {
+    const CurrLang = i18next.language;
+
+    if (CurrLang === 'en-US') {
+      return quickOptions.filter((o) => o.display.toLowerCase().includes(searchTerm.toLowerCase()));
+    } else {
+      let matchedOptions: string[] = [];
+      switch (CurrLang) {
+        case 'de-DE':
+          const json: TimeRangeOption = TransDe['time-picker']['time-range'];
+          matchedOptions = Object.keys(json)
+            .filter((key) => json[key].toLowerCase().includes(searchTerm.toLowerCase()))
+            .map((key) => {
+              let modifiedKey = key.replace(/-/g, ' ');
+              return modifiedKey.charAt(0).toUpperCase() + modifiedKey.slice(1);
+            });
+          break;
+        // Add other cases as needed being the other languages or manipulate the name of the imported json file TransDe according to the language abbreviation
+        default:
+          return quickOptions.filter((o) => o.display.toLowerCase().includes(searchTerm.toLowerCase()));
+      }
+
+      return quickOptions.filter((option) => matchedOptions.some((matchedOption) => option.display === matchedOption));
+    }
+  }
 
   const onChangeTimeOption = (timeOption: TimeOption) => {
     return onChange(mapOptionToTimeRange(timeOption));
@@ -228,8 +260,7 @@ const EmptyRecentList = memo(() => {
       <div>
         <span>{emptyRecentListText}</span>
       </div>
-      <Trans i18nKey="time-picker.content.empty-recent-list-docs">
-      </Trans>
+      <Trans i18nKey="time-picker.content.empty-recent-list-docs"></Trans>
     </div>
   );
 });
