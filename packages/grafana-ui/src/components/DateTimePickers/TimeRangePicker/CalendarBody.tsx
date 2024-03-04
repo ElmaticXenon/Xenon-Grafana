@@ -1,4 +1,5 @@
 import { css } from '@emotion/css';
+import i18next from 'i18next';
 import React, { useCallback } from 'react';
 import Calendar from 'react-calendar';
 
@@ -14,6 +15,7 @@ export function Body({ onChange, from, to, timeZone }: TimePickerCalendarProps) 
   const value = inputToValue(from, to, new Date(), timeZone);
   const onCalendarChange = useOnCalendarChange(onChange, timeZone);
   const styles = useStyles2(getBodyStyles);
+  const currLang = i18next.language.substring(0, 2);
 
   return (
     <Calendar
@@ -26,7 +28,7 @@ export function Body({ onChange, from, to, timeZone }: TimePickerCalendarProps) 
       nextLabel={<Icon name="angle-right" />}
       prevLabel={<Icon name="angle-left" />}
       onChange={onCalendarChange}
-      locale="en"
+      locale={currLang}
     />
   );
 }
