@@ -264,8 +264,11 @@ const createTransKey = (value: TimeRange, timeZone?: TimeZone) => {
 export function translateDynamicString(input: string) {
   const patterns = [
     { regex: /^Last (\d+) days$/, key: 'last-days' },
+    { regex: /^Last (\d+) weeks$/, key: 'last-weeks' },
     { regex: /^Last (\d+) months$/, key: 'last-months' },
+    { regex: /^Last (\d+) hours$/, key: 'last-hours' },
     { regex: /^Last (\d+) minutes$/, key: 'last-minutes' },
+    { regex: /^Last (\d+) seconds$/, key: 'last-seconds' },
     { regex: /^Last (\d+) years$/, key: 'last-years' },
     {
       regex: /^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\s+to\s+(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})$/,
