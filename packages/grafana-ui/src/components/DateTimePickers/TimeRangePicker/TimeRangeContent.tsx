@@ -1,4 +1,5 @@
 import { css } from '@emotion/css';
+import i18next from 'i18next';
 import React, { FormEvent, useCallback, useEffect, useId, useState } from 'react';
 
 import {
@@ -241,8 +242,18 @@ function valueToState(
   rawTo: DateTime | string,
   timeZone?: TimeZone
 ): [InputState, InputState] {
-  const fromValue = valueAsString(rawFrom, timeZone);
-  const toValue = valueAsString(rawTo, timeZone);
+  const transRawFrom = translateUserInputForSearching(rawFrom);
+  const transRawTo = translateUserInputForSearching(rawTo);
+
+  const originalFromString = valueAsString(rawFrom, timeZone);
+  console.log('original from string ' + originalFromString);
+  const originalToString = valueAsString(rawTo, timeZone);
+
+  //console.log('translated from string ' + transRawFrom);
+  const fromValue = valueAsString(transRawFrom, timeZone);
+  const toValue = valueAsString(transRawTo, timeZone);
+  //console.log('fromValue ' + fromValue);
+
   const fromInvalid = !isValid(fromValue, false, timeZone);
   const toInvalid = !isValid(toValue, true, timeZone);
   // If "To" is invalid, we should not check the range anyways
@@ -250,17 +261,35 @@ function valueToState(
 
   return [
     {
-      value: fromValue,
+      value: originalFromString,
       invalid: fromInvalid || rangeInvalid,
       errorMessage: rangeInvalid && !fromInvalid ? ERROR_MESSAGES.range() : ERROR_MESSAGES.default(),
     },
-    { value: toValue, invalid: toInvalid, errorMessage: ERROR_MESSAGES.default() },
+    { value: originalToString, invalid: toInvalid, errorMessage: ERROR_MESSAGES.default() },
   ];
 }
 
 function valueAsString(value: DateTime | string, timeZone?: TimeZone): string {
   if (isDateTime(value)) {
+    console.log(value + ' is DateTime');
     return dateTimeFormat(value, { timeZone });
+  }
+  return value;
+}
+
+function translateUserInputForSearching(value: string | DateTime) {
+  if (typeof value === 'string') {
+    if (i18next.language === 'de-DE' && value.includes('jetzt')) {
+      const trans = value
+        .replace('jetzt', 'now')
+        .replace('T', 'd')
+        .replace('J', 'y')
+        .replace('Mo', 'M')
+        .replace('Mi', 'm');
+      //console.log('trans: ' + trans);
+      return trans;
+    }
+    return value;
   }
   return value;
 }
