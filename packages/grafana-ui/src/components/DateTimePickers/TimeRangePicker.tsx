@@ -2,7 +2,6 @@ import { css, cx } from '@emotion/css';
 import { useDialog } from '@react-aria/dialog';
 import { FocusScope } from '@react-aria/focus';
 import { useOverlay } from '@react-aria/overlays';
-import i18next from 'i18next';
 import React, { memo, createRef, useState, useEffect } from 'react';
 
 import {
@@ -274,7 +273,10 @@ export function translateDynamicString(input: string) {
       regex: /^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\s+to\s+(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})$/,
       key: 'date-range',
     },
-    { regex: /^now-(\d+)(\w) to now-(\d+)(\w)$/, key: 'now-minus' },
+    {
+      regex: /^(\d{2}-\d{2}-\d{4} \d{2}:\d{2}:\d{2})\s+to\s+(\d{2}-\d{2}-\d{4} \d{2}:\d{2}:\d{2})$/,
+      key: 'date-range',
+    },
   ];
 
   const transKeyPrefix = 'time-picker.time-range.';
@@ -294,12 +296,7 @@ export function translateDynamicString(input: string) {
             placeholders.push(match[i]);
           }
         }
-        placeholders = placeholders.map((item) =>
-          item.replace('d', 'T').replace('y', 'J').replace('M', 'Mo').replace('m', 'Mi')
-        );
-        if (key === 'date-range' && i18next.language === 'de-DE') {
-          placeholders = flipDate(placeholders);
-        }
+
         const noPlaceholder = placeholders.length;
         const dictionary: { [key: string]: string } = {};
         for (let i = 0; i < noPlaceholder; i++) {
@@ -314,23 +311,6 @@ export function translateDynamicString(input: string) {
   }
   transKey = transKeyPrefix.concat(input.toLowerCase().replace(/\s+/g, '-'));
   return t(transKey, input);
-}
-
-function flipDate(array: string[]) {
-  const regexFull = /(\d{4}-\d{2}-\d{2})/;
-  const regexGroups = /(\d{4})-(\d{2})-(\d{2})/;
-  for (let i = 0; i < array.length; i++) {
-    const matchFull = array[i].match(regexFull);
-    let matchGroups = array[i].match(regexGroups);
-    if (matchFull && matchGroups) {
-      const reverseMatchGroups = matchGroups.reverse();
-      reverseMatchGroups.pop();
-      matchFull.pop();
-      const newFormat = reverseMatchGroups.join('-');
-      array[i] = array[i].replace(matchFull.toString(), newFormat);
-    }
-  }
-  return array;
 }
 
 const getStyles = (theme: GrafanaTheme2) => {
