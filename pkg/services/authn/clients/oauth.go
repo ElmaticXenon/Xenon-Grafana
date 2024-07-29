@@ -8,9 +8,8 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
-	"net/http"
-	"strconv"
 	"net/url"
+	"strconv"
 	"strings"
 
 	"golang.org/x/oauth2"
@@ -78,13 +77,16 @@ func ProvideOAuth(
 }
 
 type OAuth struct {
-	name       string
-	moduleName string
-	log        log.Logger
-	cfg        *setting.Cfg
-	oauthCfg   *social.OAuthInfo
-	connector  social.SocialConnector
-	httpClient *http.Client
+	name         string
+	moduleName   string
+	providerName string
+	log          log.Logger
+	cfg          *setting.Cfg
+
+	settingsProviderSvc setting.Provider
+	oauthService        oauthtoken.OAuthTokenService
+	socialService       social.Service
+	features            featuremgmt.FeatureToggles
 }
 
 func (c *OAuth) groupsToOrgRoles(groups []string) map[int64]org.RoleType {
@@ -200,14 +202,19 @@ func (c *OAuth) Authenticate(ctx context.Context, r *authn.Request) (*authn.Iden
 		return nil, errOAuthEmailNotAllowed.Errorf("provided email is not allowed")
 	}
 
-	orgRoles, isGrafanaAdmin, _ := getRoles(c.cfg, func() (org.RoleType, *bool, error) {
-		if c.cfg.OAuthSkipOrgRoleUpdateSync {
-			return "", nil, nil
-		}
-		return userInfo.Role, userInfo.IsGrafanaAdmin, nil
-	})
+	// This is required to implement OrgRole mapping for OAuth providers step by step
+	switch c.providerName {
+	case social.GenericOAuthProviderName, social.GitHubProviderName,
+		social.GitlabProviderName, social.OktaProviderName, social.GoogleProviderName:
+		// Do nothing, these providers already supports OrgRole mapping
+	default:
+		userInfo.OrgRoles, userInfo.IsGrafanaAdmin, _ = getRoles(c.cfg, func() (org.RoleType, *bool, error) {
+			return userInfo.Role, userInfo.IsGrafanaAdmin, nil
+		})
+	}
+
 	// extract orgRoles from Groups in userInfo if exists
-	orgRoles = c.groupsToOrgRoles(userInfo.Groups)
+	userInfo.OrgRoles = c.groupsToOrgRoles(userInfo.Groups)
 
 	lookupParams := login.UserLookupParams{}
 	allowInsecureEmailLookup := c.settingsProviderSvc.KeyValue("auth", "oauth_allow_insecure_email_lookup").MustBool(false)
