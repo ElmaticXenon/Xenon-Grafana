@@ -186,7 +186,7 @@ export const DashNav = React.memo<Props>((props) => {
 
   const renderLeftActions = () => {
     const { dashboard, kioskMode } = props;
-    const { canStar, isStarred } = dashboard.meta;
+    const { canStar, canShare, isStarred } = dashboard.meta;
     const buttons: ReactNode[] = [];
 
     if (kioskMode || isPlaylistRunning()) {
@@ -285,7 +285,7 @@ export const DashNav = React.memo<Props>((props) => {
 
   const renderRightActions = () => {
     const { dashboard, isFullscreen, kioskMode, hideTimePicker } = props;
-    const { canSave, canEdit, showSettings, canShare } = dashboard.meta;
+    const { canSave, canEdit, showSettings } = dashboard.meta;
     const { snapshot } = dashboard;
     const snapshotUrl = snapshot && snapshot.originalUrl;
     const buttons: ReactNode[] = [];
@@ -350,10 +350,6 @@ export const DashNav = React.memo<Props>((props) => {
           key="panel-add-dropdown"
         />
       );
-    }
-
-    if (canShare) {
-      buttons.push(<ShareButton key="button-share" dashboard={dashboard} />);
     }
 
     // if the timepicker is hidden, we don't need to add this separator
