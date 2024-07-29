@@ -237,8 +237,8 @@ export const TimePickerButtonLabel = memo<LabelProps>(({ hideText, value, timeZo
   return (
     <span className={styles.container} aria-live="polite" aria-atomic="true">
       <span className={styles.utc}>{rangeUtil.describeTimeRangeAbbreviation(value, timeZone)}</span>
-        <Trans i18nKey={createTransKey(value, timeZone)}>{formattedRange(value, timeZone)}</Trans>
-      </span>
+        <span>{createTransKey(value, timeZone)}</span>
+    </span>
   );
 });
 
