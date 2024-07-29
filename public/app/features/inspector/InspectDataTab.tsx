@@ -243,7 +243,7 @@ export class InspectDataTab extends PureComponent<Props, State> {
   }
 
   render() {
-    const { isLoading, options, data, formattedDataDescription, onOptionsChange, hasTransformations } = this.props;
+    const { isLoading, data, formattedDataDescription, onOptionsChange, hasTransformations } = this.props;
     const { dataFrameIndex, transformationOptions, selectedDataFrame, downloadForExcel } = this.state;
     const styles = getPanelInspectorStyles();
 
