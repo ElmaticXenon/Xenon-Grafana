@@ -8,7 +8,7 @@ stages:
   - deploy
 
 build-docker:
-  tags: 
+  tags:
     - docker
   stage: build
   script:
@@ -73,14 +73,14 @@ deploy:
     - tags
     - main
   trigger:
-    project: external/swarm/grafana-stack/grafana
+    project: emc/external/swarm/grafana-stack/grafana
 
 deploy-testserver:
   stage: deploy
   when: manual
   tags:
     - docker
-  image: 
+  image:
     dockerhub.elmatic-xenon.de/ssh-client:production
   variables:
     SSH_PRECONFIG: testserver
