@@ -1067,6 +1067,8 @@
     "help/documentation": "Documentation",
     "help/keyboard-shortcuts": "Keyboard shortcuts",
     "help/support": "Support",
+    "help/company": "ELMATIC GmbH",
+    "help/license": "Licenses",
     "home": {
       "title": "Home"
     },

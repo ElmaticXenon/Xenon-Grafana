@@ -4,6 +4,7 @@ import useAsync from 'react-use/lib/useAsync';
 import { DataSourceApi, PanelData, PanelPlugin } from '@grafana/data';
 import { getDataSourceSrv } from '@grafana/runtime';
 import { t } from 'app/core/internationalization';
+import { contextSrv } from 'app/core/services/context_srv';
 import { DashboardModel, PanelModel } from 'app/features/dashboard/state';
 import { InspectTab } from 'app/features/inspector/types';
 
@@ -55,9 +56,9 @@ export const useInspectTabs = (
     if (metaDs) {
       tabs.push({ label: t('dashboard.inspect.meta-tab', 'Meta data'), value: InspectTab.Meta });
     }
-
-    tabs.push({ label: t('dashboard.inspect.json-tab', 'JSON'), value: InspectTab.JSON });
-
+    if (contextSrv.isEditor) {
+      tabs.push({ label: t('dashboard.inspect.json-tab', 'JSON'), value: InspectTab.JSON });
+    }
     if (hasError) {
       tabs.push({ label: t('dashboard.inspect.error-tab', 'Error'), value: InspectTab.Error });
     }

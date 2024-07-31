@@ -59,24 +59,32 @@ export function toFixed(value: number, decimals?: DecimalCount): string {
   }
 
   if (value === 0) {
-    return value.toFixed(decimals);
+    return value.toFixed(decimals).replace('.', ',');
   }
 
   const factor = decimals ? Math.pow(10, Math.max(0, decimals)) : 1;
-  const formatted = String(Math.round(value * factor) / factor);
+  const formatted = String(Math.round(value * factor) / factor).replace('.', ',');
 
   // if exponent return directly
   if (formatted.indexOf('e') !== -1 || value === 0) {
-    return formatted;
+    return value.toLocaleString('de-DE');
   }
 
-  const decimalPos = formatted.indexOf('.');
+  const decimalPos = formatted.indexOf(',');
   const precision = decimalPos === -1 ? 0 : formatted.length - decimalPos - 1;
   if (precision < decimals) {
-    return (precision ? formatted : formatted + '.') + String(factor).slice(1, decimals - precision + 1);
+    return (
+      (precision ? formatted : formatted + ',') +
+      String(factor)
+        .slice(1, decimals - precision + 1)
+        .replace('.', ',')
+    );
   }
 
-  return formatted;
+  const language = 'de-DE'; // use the current language if available, otherwise use "de-DE"
+  const options = { minimumFractionDigits: decimals, maximumFractionDigits: decimals };
+
+  return value.toLocaleString(language, options);
 }
 
 function getDecimalsForValue(value: number): number {

@@ -236,8 +236,8 @@ export const TimePickerButtonLabel = memo<LabelProps>(({ hideText, value, timeZo
 
   return (
     <span className={styles.container} aria-live="polite" aria-atomic="true">
-      <span>{formattedRange(value, timeZone)}</span>
       <span className={styles.utc}>{rangeUtil.describeTimeRangeAbbreviation(value, timeZone)}</span>
+        <span>{createTransKey(value, timeZone)}</span>
     </span>
   );
 });
@@ -251,6 +251,65 @@ const formattedRange = (value: TimeRange, timeZone?: TimeZone) => {
   };
   return rangeUtil.describeTimeRange(adjustedTimeRange, timeZone);
 };
+
+const createTransKey = (value: TimeRange, timeZone?: TimeZone) => {
+  const range = formattedRange(value, timeZone);
+  const trans = translateDynamicString(range);
+  return trans;
+};
+
+export function translateDynamicString(input: string) {
+  const patterns = [
+    { regex: /^Last (\d+) days$/, key: 'last-days' },
+    { regex: /^Last (\d+) weeks$/, key: 'last-weeks' },
+    { regex: /^Last (\d+) months$/, key: 'last-months' },
+    { regex: /^Last (\d+) hours$/, key: 'last-hours' },
+    { regex: /^Last (\d+) minutes$/, key: 'last-minutes' },
+    { regex: /^Last (\d+) seconds$/, key: 'last-seconds' },
+    { regex: /^Last (\d+) years$/, key: 'last-years' },
+    {
+      regex: /^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\s+to\s+(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})$/,
+      key: 'date-range',
+    },
+    {
+      regex: /^(\d{2}-\d{2}-\d{4} \d{2}:\d{2}:\d{2})\s+to\s+(\d{2}-\d{2}-\d{4} \d{2}:\d{2}:\d{2})$/,
+      key: 'date-range',
+    },
+  ];
+
+  const transKeyPrefix = 'time-picker.time-range.';
+  let transKey: string;
+
+  for (const { regex, key } of patterns) {
+    const matchReg = input.match(regex);
+    if (matchReg) {
+      let placeholders: string[] = [];
+      let match: RegExpExecArray | null;
+
+      regex.lastIndex = 0;
+
+      while ((match = regex.exec(input)) !== null) {
+        for (let i = 1; i < match.length; i++) {
+          if (match[i]) {
+            placeholders.push(match[i]);
+          }
+        }
+
+        const noPlaceholder = placeholders.length;
+        const dictionary: { [key: string]: string } = {};
+        for (let i = 0; i < noPlaceholder; i++) {
+          const key = `input${i + 1}`;
+          dictionary[key] = placeholders[i];
+        }
+
+        transKey = transKeyPrefix.concat(key);
+        return t(transKey, input, dictionary);
+      }
+    }
+  }
+  transKey = transKeyPrefix.concat(input.toLowerCase().replace(/\s+/g, '-'));
+  return t(transKey, input);
+}
 
 const getStyles = (theme: GrafanaTheme2) => {
   return {

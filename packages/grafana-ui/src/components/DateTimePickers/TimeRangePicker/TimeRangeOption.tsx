@@ -6,6 +6,7 @@ import { GrafanaTheme2, TimeOption } from '@grafana/data';
 
 import { useStyles2 } from '../../../themes/ThemeContext';
 import { getFocusStyles } from '../../../themes/mixins';
+import { translateDynamicString } from '../TimeRangePicker';
 
 const getStyles = (theme: GrafanaTheme2) => {
   return {
@@ -66,10 +67,15 @@ export const TimeRangeOption = memo<Props>(({ value, onSelect, selected = false,
         onChange={() => onSelect(value)}
       />
       <label className={styles.label} htmlFor={id}>
-        {value.display}
+        {createTransKey(value.display)}
       </label>
     </li>
   );
 });
 
 TimeRangeOption.displayName = 'TimeRangeOption';
+
+const createTransKey = (value: string) => {
+  const trans = translateDynamicString(value);
+  return trans;
+};

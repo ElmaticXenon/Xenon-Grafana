@@ -2,7 +2,7 @@ import { useObservable } from 'react-use';
 import { BehaviorSubject } from 'rxjs';
 
 import { AppEvents, NavModel, NavModelItem, PageLayoutType, UrlQueryValue } from '@grafana/data';
-import { config, locationService, reportInteraction } from '@grafana/runtime';
+import { locationService, reportInteraction } from '@grafana/runtime';
 import appEvents from 'app/core/app_events';
 import { t } from 'app/core/internationalization';
 import store from 'app/core/store';
@@ -37,10 +37,7 @@ export class AppChromeService {
   private currentRoute?: RouteDescriptor;
   private routeChangeHandled = true;
 
-  private megaMenuDocked = Boolean(
-    window.innerWidth >= config.theme2.breakpoints.values.xl &&
-      store.getBool(DOCKED_LOCAL_STORAGE_KEY, Boolean(window.innerWidth >= config.theme2.breakpoints.values.xxl))
-  );
+  private megaMenuDocked = false;
 
   private sessionStorageData = window.sessionStorage.getItem('returnToPrevious');
   private returnToPreviousData = this.sessionStorageData ? JSON.parse(this.sessionStorageData) : undefined;

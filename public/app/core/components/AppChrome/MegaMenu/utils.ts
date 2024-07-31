@@ -18,7 +18,6 @@ export const enrichHelpItem = (helpItem: NavModelItem) => {
     helpItem.children = [
       ...menuItems,
       ...getFooterLinks(),
-      ...getEditionAndUpdateLinks(),
       {
         id: 'keyboard-shortcuts',
         text: t('nav.help/keyboard-shortcuts', 'Keyboard shortcuts'),

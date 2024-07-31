@@ -11,7 +11,6 @@ import { useSelector } from 'app/types';
 
 import { Branding } from '../../Branding/Branding';
 import { enrichHelpItem } from '../MegaMenu/utils';
-import { NewsContainer } from '../News/NewsContainer';
 import { OrganizationSwitcher } from '../OrganizationSwitcher/OrganizationSwitcher';
 import { QuickAdd } from '../QuickAdd/QuickAdd';
 import { TOP_BAR_LEVEL_HEIGHT } from '../types';
@@ -55,7 +54,6 @@ export const TopSearchBar = React.memo(function TopSearchBar() {
             <ToolbarButton iconOnly icon="question-circle" aria-label="Help" />
           </Dropdown>
         )}
-        {config.newsFeedEnabled && <NewsContainer />}
         {!contextSrv.user.isSignedIn && <SignInLink />}
         {profileNode && (
           <Dropdown overlay={() => <TopNavBarMenu node={profileNode} />} placement="bottom-end">

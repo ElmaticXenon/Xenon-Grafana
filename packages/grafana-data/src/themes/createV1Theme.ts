@@ -114,7 +114,7 @@ export function createV1Theme(theme: Omit<GrafanaTheme2, 'v1'>): GrafanaTheme {
     dark6: '#262628',
     dark7: '#292a2d',
     dark8: '#2f2f32',
-    dark9: '#343436',
+    dark9: '#3b3c58',
     dark10: '#424345',
     gray1: '#555555',
     gray2: '#8e8e8e',

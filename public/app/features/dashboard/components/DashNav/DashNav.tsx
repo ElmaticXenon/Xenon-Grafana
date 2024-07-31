@@ -20,7 +20,7 @@ import { AppChromeUpdate } from 'app/core/components/AppChrome/AppChromeUpdate';
 import { NavToolbarSeparator } from 'app/core/components/AppChrome/NavToolbar/NavToolbarSeparator';
 import config from 'app/core/config';
 import { useAppNotification } from 'app/core/copy/appNotification';
-import { appEvents } from 'app/core/core';
+import { appEvents, contextSrv } from 'app/core/core';
 import { useBusEvent } from 'app/core/hooks/useBusEvent';
 import { t, Trans } from 'app/core/internationalization';
 import { ID_PREFIX, setStarred } from 'app/core/reducers/navBarTree';
@@ -186,7 +186,7 @@ export const DashNav = React.memo<Props>((props) => {
 
   const renderLeftActions = () => {
     const { dashboard, kioskMode } = props;
-    const { canStar, isStarred } = dashboard.meta;
+    const { canStar, canShare, isStarred } = dashboard.meta;
     const buttons: ReactNode[] = [];
 
     if (kioskMode || isPlaylistRunning()) {
@@ -207,6 +207,10 @@ export const DashNav = React.memo<Props>((props) => {
           key="button-star"
         />
       );
+    }
+
+    if (canShare && contextSrv.isEditor) {
+      buttons.push(<ShareButton key="button-share" dashboard={dashboard} />);
     }
 
     if (dashboard.meta.publicDashboardEnabled) {
@@ -281,7 +285,7 @@ export const DashNav = React.memo<Props>((props) => {
 
   const renderRightActions = () => {
     const { dashboard, isFullscreen, kioskMode, hideTimePicker } = props;
-    const { canSave, canEdit, showSettings, canShare } = dashboard.meta;
+    const { canSave, canEdit, showSettings } = dashboard.meta;
     const { snapshot } = dashboard;
     const snapshotUrl = snapshot && snapshot.originalUrl;
     const buttons: ReactNode[] = [];
@@ -346,10 +350,6 @@ export const DashNav = React.memo<Props>((props) => {
           key="panel-add-dropdown"
         />
       );
-    }
-
-    if (canShare) {
-      buttons.push(<ShareButton key="button-share" dashboard={dashboard} />);
     }
 
     // if the timepicker is hidden, we don't need to add this separator

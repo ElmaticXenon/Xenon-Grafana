@@ -61,7 +61,7 @@ export class InspectDataTab extends PureComponent<Props, State> {
       transformId: DataTransformerID.noop,
       transformationOptions: buildTransformationOptions(),
       transformedData: props.data ?? [],
-      downloadForExcel: false,
+      downloadForExcel: true,
     };
   }
 
@@ -243,7 +243,7 @@ export class InspectDataTab extends PureComponent<Props, State> {
   }
 
   render() {
-    const { isLoading, options, data, formattedDataDescription, onOptionsChange, hasTransformations } = this.props;
+    const { isLoading, data, formattedDataDescription, onOptionsChange, hasTransformations } = this.props;
     const { dataFrameIndex, transformationOptions, selectedDataFrame, downloadForExcel } = this.state;
     const styles = getPanelInspectorStyles();
 
@@ -268,13 +268,18 @@ export class InspectDataTab extends PureComponent<Props, State> {
     const hasTraces = dataFrames.some((df) => df?.meta?.preferredVisualisationType === 'trace');
     const hasServiceGraph = dataFrames.some((df) => df?.meta?.preferredVisualisationType === 'nodeGraph');
 
+    const DataOptions = {
+      withTransforms: true, // Ensure this is always true
+      withFieldConfig: true, // Ensure this is always true
+    };
+
     return (
       <div className={styles.wrap} aria-label={selectors.components.PanelInspector.Data.content}>
         <div className={styles.toolbar}>
           <InspectDataOptions
             data={data}
             hasTransformations={hasTransformations}
-            options={options}
+            options={DataOptions}
             dataFrames={dataFrames}
             transformationOptions={transformationOptions}
             selectedDataFrame={selectedDataFrame}
