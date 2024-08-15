@@ -88,13 +88,8 @@ export const ANCHORS = [
   { x: -1, y: 0.875 }, // Left-bottom-center-left
 ];
 
- 
-
-
-
 export const ANCHOR_PADDING = 3;
 export const HALF_SIZE = 2.5;
-
 
 export const ConnectionAnchors = ({ setRef, setAnchorsRef, handleMouseLeave }: Props) => {
   const highlightEllipseRef = useRef<HTMLDivElement>(null);
@@ -198,7 +193,7 @@ const getStyles = (theme: GrafanaTheme2) => ({
     backgroundColor: '#00ff00',
     opacity: 0.3,
     position: 'absolute',
-    cursor: 'curoser',
+    cursor: 'cursor',
     pointerEvents: 'auto',
     width: '16px',
     height: '16px',
