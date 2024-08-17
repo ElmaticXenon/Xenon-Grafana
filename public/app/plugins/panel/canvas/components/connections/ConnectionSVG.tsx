@@ -353,15 +353,6 @@ export const ConnectionSVG = ({
             pathString += `L${x2} ${y2}`;
           }
 
-          const markerStart =
-            arrowDirection === ConnectionDirection.Reverse || arrowDirection === ConnectionDirection.Both
-              ? `url(#${CONNECTION_HEAD_ID_START})`
-              : undefined;
-
-          const markerEnd =
-            arrowDirection === ConnectionDirection.Forward || arrowDirection === ConnectionDirection.Both
-              ? `url(#${CONNECTION_HEAD_ID_END})`
-              : undefined;
 
           const getAnimationDirection = () => {
             let values = '100;0';
@@ -419,8 +410,6 @@ export const ConnectionSVG = ({
                       strokeDasharray={lineStyle}
                       strokeDashoffset={1}
                       fill={'none'}
-                      markerEnd={markerEnd}
-                      markerStart={markerStart}
                     >
                       {shouldAnimate && (
                         <animate
@@ -490,8 +479,6 @@ export const ConnectionSVG = ({
                       stroke={strokeColor}
                       pointerEvents="auto"
                       strokeWidth={strokeWidth}
-                      markerEnd={markerEnd}
-                      markerStart={markerStart}
                       strokeDasharray={lineStyle}
                       strokeDashoffset={1}
                       x1={x1}
