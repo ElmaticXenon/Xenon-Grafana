@@ -19,73 +19,22 @@ export const CONNECTION_ANCHOR_HIGHLIGHT_OFFSET = 8;
 // Unit is percentage from the middle of the element
 // 0, 0 middle; -1, -1 bottom left; 1, 1 top right
 export const ANCHORS = [
-  { x: -1, y: 1 },     // Bottom-left
-  { x: -0.875, y: 1 }, // Bottom-left-center-left
-  { x: -0.75, y: 1 },  // Bottom-left-center
-  { x: -0.625, y: 1 }, // Bottom-center-left-left
-  { x: -0.5, y: 1 },   // Bottom-center-left
-  { x: -0.375, y: 1 }, // Bottom-center-right-right
-  { x: -0.25, y: 1 },  // Bottom-center-right
-  { x: -0.125, y: 1 }, // Bottom-right-center-left
-  { x: 0, y: 1 },      // Bottom-center
-  { x: 0.125, y: 1 },  // Bottom-left-center-right
-  { x: 0.25, y: 1 },   // Bottom-center-right
-  { x: 0.375, y: 1 },  // Bottom-right-center-left
-  { x: 0.5, y: 1 },    // Bottom-center-right
-  { x: 0.625, y: 1 },  // Bottom-center-right-right
-  { x: 0.75, y: 1 },   // Bottom-right-center
-  { x: 0.875, y: 1 },  // Bottom-right-center-right
-  { x: 1, y: 1 },      // Bottom-right
-
-  { x: 1, y: 0.875 },  // Right-bottom-center-left
-  { x: 1, y: 0.75 },   // Right-bottom-center
-  { x: 1, y: 0.625 },  // Right-center-bottom-left
-  { x: 1, y: 0.5 },    // Right-center-bottom
-  { x: 1, y: 0.375 },  // Right-center-top-right
-  { x: 1, y: 0.25 },   // Right-center-top
-  { x: 1, y: 0.125 },  // Right-top-center-left
-  { x: 1, y: 0 },      // Right-center
-  { x: 1, y: -0.125 }, // Right-top-center-right
-  { x: 1, y: -0.25 },  // Right-center-top
-  { x: 1, y: -0.375 }, // Right-top-center-left
-  { x: 1, y: -0.5 },   // Right-center-top
-  { x: 1, y: -0.625 }, // Right-center-bottom-right
-  { x: 1, y: -0.75 },  // Right-bottom-center
-  { x: 1, y: -0.875 }, // Right-bottom-center-right
-  { x: 1, y: -1 },     // Right-top
-
-  { x: 0.875, y: -1 }, // Top-right-center-right
-  { x: 0.75, y: -1 },  // Top-right-center
-  { x: 0.625, y: -1 }, // Top-center-right-right
-  { x: 0.5, y: -1 },   // Top-center-right
-  { x: 0.375, y: -1 }, // Top-center-left-left
-  { x: 0.25, y: -1 },  // Top-center-left
-  { x: 0.125, y: -1 }, // Top-left-center-right
-  { x: 0, y: -1 },     // Top-center
-  { x: -0.125, y: -1 },// Top-right-center-left
-  { x: -0.25, y: -1 }, // Top-center-left
-  { x: -0.375, y: -1 },// Top-left-center-right
-  { x: -0.5, y: -1 },  // Top-center-left
-  { x: -0.625, y: -1 },// Top-left-center-left
-  { x: -0.75, y: -1 }, // Top-right-center
-  { x: -0.875, y: -1 },// Top-left-center-left
-  { x: -1, y: -1 },    // Top-left
-
-  { x: -1, y: -0.875 },// Left-top-center-right
-  { x: -1, y: -0.75 }, // Left-top-center
-  { x: -1, y: -0.625 },// Left-center-top-right
-  { x: -1, y: -0.5 },  // Left-center-top
-  { x: -1, y: -0.375 },// Left-center-bottom-left
-  { x: -1, y: -0.25 }, // Left-center-bottom
-  { x: -1, y: -0.125 },// Left-bottom-center-right
-  { x: -1, y: 0 },     // Left-center
-  { x: -1, y: 0.125 }, // Left-top-center-left
-  { x: -1, y: 0.25 },  // Left-center-bottom
-  { x: -1, y: 0.375 }, // Left-bottom-center-right
-  { x: -1, y: 0.5 },   // Left-center-bottom
-  { x: -1, y: 0.625 }, // Left-top-center-left
-  { x: -1, y: 0.75 },  // Left-bottom-center
-  { x: -1, y: 0.875 }, // Left-bottom-center-left
+  { x: -1, y: 1 },
+  { x: -0.5, y: 1 },
+  { x: 0, y: 1 },
+  { x: 0.5, y: 1 },
+  { x: 1, y: 1 },
+  { x: 1, y: 0.5 },
+  { x: 1, y: 0 },
+  { x: 1, y: -0.5 },
+  { x: 1, y: -1 },
+  { x: 0.5, y: -1 },
+  { x: 0, y: -1 },
+  { x: -0.5, y: -1 },
+  { x: -1, y: -1 },
+  { x: -1, y: -0.5 },
+  { x: -1, y: 0 },
+  { x: -1, y: 0.5 },
 ];
 
 export const ANCHOR_PADDING = 3;
