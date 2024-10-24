@@ -292,6 +292,7 @@ export function getConnections(sceneByName: Map<string, ElementState>) {
 
         const target = c.targetName ? sceneByName.get(c.targetName) : v.parent;
         if (target) {
+          console.log('gtcon:' + c.sourceOriginal);
           connections.push({
             index,
             source: v,
@@ -349,11 +350,16 @@ export const calculateCoordinates = (
     x2 = targetHorizontalCenter + (info.target.x * targetRect.width) / 2;
     y2 = targetVerticalCenter - (info.target.y * targetRect.height) / 2;
   } else {
-    const parentHorizontalCenter = parentRect.width / 2;
-    const parentVerticalCenter = parentRect.height / 2;
+    if (!info.targetOriginal) {
+      const parentHorizontalCenter = parentRect.width / 2;
+      const parentVerticalCenter = parentRect.height / 2;
 
-    x2 = parentHorizontalCenter + (info.target.x * parentRect.width) / 2;
-    y2 = parentVerticalCenter - (info.target.y * parentRect.height) / 2;
+      x2 = parentHorizontalCenter + (info.target.x * parentRect.width) / 2;
+      y2 = parentVerticalCenter - (info.target.y * parentRect.height) / 2;
+    } else {
+      x2 = info.targetOriginal?.x;
+      y2 = info.targetOriginal?.y;
+    }
   }
   x2 /= transformScale;
   y2 /= transformScale;
