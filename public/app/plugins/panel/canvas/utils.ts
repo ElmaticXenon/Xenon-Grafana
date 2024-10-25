@@ -292,7 +292,6 @@ export function getConnections(sceneByName: Map<string, ElementState>) {
 
         const target = c.targetName ? sceneByName.get(c.targetName) : v.parent;
         if (target) {
-          console.log('gtcon:' + c.sourceOriginal);
           connections.push({
             index,
             source: v,
