@@ -154,6 +154,7 @@ export const ConnectionSVG = ({
             ) {
               source.options.connections[index].sourceOriginal = { x: x1, y: y1 };
               source.options.connections[index].targetOriginal = { x: x2, y: y2 };
+              info.targetOriginal = source.options.connections[index].targetOriginal;
             }
           }
 
