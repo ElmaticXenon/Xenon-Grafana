@@ -187,6 +187,11 @@ COPY --from=js-src /tmp/grafana/LICENSE ./
 
 EXPOSE 3000
 
+COPY healthcheck.sh /healthcheck.sh
+RUN chmod +x /healthcheck.sh
+HEALTHCHECK --interval=30s --timeout=10s \
+  CMD /healthcheck.sh || exit 1
+
 ARG RUN_SH=./packaging/docker/run.sh
 
 COPY ${RUN_SH} /run.sh
