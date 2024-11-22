@@ -7,6 +7,7 @@ import { GrafanaTheme2 } from '@grafana/data';
 import { selectors } from '@grafana/e2e-selectors';
 import { CustomScrollbar, Icon, IconButton, useStyles2, Stack } from '@grafana/ui';
 import { useGrafana } from 'app/core/context/GrafanaContext';
+import { contextSrv } from 'app/core/core';
 import { t } from 'app/core/internationalization';
 import { useSelector } from 'app/types';
 
@@ -27,8 +28,13 @@ export const MegaMenu = React.memo(
     const { chrome } = useGrafana();
     const state = chrome.useState();
 
+    // only admin has the rights to see the 'administration/Verwaltung' tab in the navigation mega menu
+    let navItems = navTree;
+    if (!contextSrv.hasRole('Admin')) {
+      navItems = navItems.filter((item) => item.id !== 'cfg');
+    }
     // Remove profile + help from tree
-    const navItems = navTree
+    navItems = navItems
       .filter((item) => item.id !== 'profile' && item.id !== 'help')
       .map((item) => enrichWithInteractionTracking(item, state.megaMenuDocked));
 
