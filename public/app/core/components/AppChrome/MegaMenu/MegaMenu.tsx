@@ -38,12 +38,25 @@ export const MegaMenu = React.memo(
       );
 
       if (alertingItem !== undefined && alertingItem.children !== undefined) {
+        // get alert rules tab and make it the main tab to be seen
+        let alertingRulesItem = alertingItem.children.find((item) => item.id === 'alert-list');
+
         // Create a mutable copy of the `children` array  as the original can not be reassigned
         const childrenAlertingItem = [
-          ...alertingItem.children.filter((item) => item.id !== 'receivers' && item.id !== 'am-routes'),
+          ...alertingItem.children.filter(
+            (item) => item.id !== 'receivers' && item.id !== 'am-routes' && item.id !== 'alert-list'
+          ),
         ];
-        const updatedAlertingItem = { ...alertingItem, children: childrenAlertingItem };
-        navItems.push(updatedAlertingItem);
+
+        if (alertingRulesItem !== undefined) {
+          // Create a mutable copy of `alertingRulesItem` as the original cannot be reassigned
+          alertingRulesItem = {
+            ...alertingRulesItem,
+            children: childrenAlertingItem,
+            text: 'Alerting', // Override the `children` property
+          };
+          navItems.push(alertingRulesItem);
+        }
       }
     }
 
