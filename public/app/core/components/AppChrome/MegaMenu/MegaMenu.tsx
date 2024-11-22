@@ -28,11 +28,25 @@ export const MegaMenu = React.memo(
     const { chrome } = useGrafana();
     const state = chrome.useState();
 
-    // only admin has the rights to see the 'administration/Verwaltung' tab in the navigation mega menu
+    // only admin has the rights to see the 'administration/Verwaltung' tab in the navigation mega menu as well as the 'Connection' tab and certain 'Alerting' tabs
     let navItems = navTree;
     if (!contextSrv.hasRole('Admin')) {
-      navItems = navItems.filter((item) => item.id !== 'cfg');
+      let alertingItem = navItems.find((item) => item.id === 'alerting');
+
+      navItems = navItems.filter(
+        (item) => item.id !== 'cfg' && item.id !== 'am-routes' && item.id !== 'receivers' && item.id !== 'alerting'
+      );
+
+      if (alertingItem !== undefined && alertingItem.children !== undefined) {
+        // Create a mutable copy of the `children` array  as the original can not be reassigned
+        const childrenAlertingItem = [
+          ...alertingItem.children.filter((item) => item.id !== 'receivers' && item.id !== 'am-routes'),
+        ];
+        const updatedAlertingItem = { ...alertingItem, children: childrenAlertingItem };
+        navItems.push(updatedAlertingItem);
+      }
     }
+
     // Remove profile + help from tree
     navItems = navItems
       .filter((item) => item.id !== 'profile' && item.id !== 'help')
