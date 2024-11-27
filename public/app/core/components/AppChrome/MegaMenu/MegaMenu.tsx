@@ -33,7 +33,7 @@ export const MegaMenu = React.memo(
     if (!contextSrv.hasRole('Admin')) {
       let alertingItem = navItems.find((item) => item.id === 'alerting');
 
-      navItems = navItems.filter((item) => item.id !== 'cfg' && item.id !== 'am-routes' && item.id !== 'receivers');
+      navItems = navItems.filter((item) => item.id !== 'cfg');
 
       if (alertingItem !== undefined && alertingItem.children !== undefined) {
         // remove entire 'alerting' tab and restructure it to only show certain sub tabs of it
