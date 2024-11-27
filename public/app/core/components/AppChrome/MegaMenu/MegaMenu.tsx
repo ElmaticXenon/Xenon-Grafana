@@ -33,15 +33,16 @@ export const MegaMenu = React.memo(
     if (!contextSrv.hasRole('Admin')) {
       let alertingItem = navItems.find((item) => item.id === 'alerting');
 
-      navItems = navItems.filter(
-        (item) => item.id !== 'cfg' && item.id !== 'am-routes' && item.id !== 'receivers' && item.id !== 'alerting'
-      );
+      navItems = navItems.filter((item) => item.id !== 'cfg' && item.id !== 'am-routes' && item.id !== 'receivers');
 
       if (alertingItem !== undefined && alertingItem.children !== undefined) {
-        // get alert rules tab and make it the main tab to be seen
+        // remove entire 'alerting' tab and restructure it to only show certain sub tabs of it
+        navItems = navItems.filter((item) => item.id !== 'alerting');
+
+        // get alert rules tab to make it the main tab to be seen later on instead of the general 'alerting' tab which is already removed
         let alertingRulesItem = alertingItem.children.find((item) => item.id === 'alert-list');
 
-        // Create a mutable copy of the `children` array  as the original can not be reassigned
+        // create a mutable copy of the `children` array  as the original can not be reassigned with reduced tabs
         const childrenAlertingItem = [
           ...alertingItem.children.filter(
             (item) => item.id !== 'receivers' && item.id !== 'am-routes' && item.id !== 'alert-list'
@@ -49,11 +50,11 @@ export const MegaMenu = React.memo(
         ];
 
         if (alertingRulesItem !== undefined) {
-          // Create a mutable copy of `alertingRulesItem` as the original cannot be reassigned
+          // create a mutable copy of `alertingRulesItem` as the original cannot be reassigned with the new children and the icon of the general 'alerting' tab
           alertingRulesItem = {
             ...alertingRulesItem,
             children: childrenAlertingItem,
-            text: 'Alerting', // Override the `children` property
+            icon: 'bell',
           };
           navItems.push(alertingRulesItem);
         }
