@@ -12,6 +12,7 @@ import { getDataSourceSrv, DataSourcePickerState, DataSourcePickerProps } from '
 import { ExpressionDatasourceRef } from '@grafana/runtime/src/utils/DataSourceWithBackend';
 import { ActionMeta, Stack, PluginSignatureBadge, MultiSelect } from '@grafana/ui';
 
+import { t } from '../../../../../core/internationalization';
 import { isDataSourceManagingAlerts } from '../../utils/datasource';
 
 export interface MultipleDataSourcePickerProps extends Omit<DataSourcePickerProps, 'onChange' | 'current'> {
@@ -162,7 +163,7 @@ export const MultipleDataSourcePicker = (props: MultipleDataSourcePickerProps) =
         openMenuOnFocus={openMenuOnFocus}
         maxMenuHeight={500}
         placeholder={placeholder}
-        noOptionsMessage="No datasources found"
+        noOptionsMessage={t('alert-rules.no-datasources-found', 'No datasources found')}
         value={value ?? []}
         invalid={Boolean(state?.error) || Boolean(props.invalid)}
         getOptionLabel={(o) => {

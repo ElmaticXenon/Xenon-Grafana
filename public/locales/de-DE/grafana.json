@@ -25,6 +25,34 @@
       "user": "Nutzer"
     }
   },
+  "alert-rules": {
+    "no-rules-exist-yet": "Aktuell existieren noch keine Warnregeln.",
+    "search-by-data-source": "Suche anhand von Datenquellen",
+    "state": "Zustand",
+    "rule-type": "Regelart",
+    "health": "Status",
+    "search": "Suche",
+    "view-as": "Anzeigen als",
+    "grouped": "Gruppe",
+    "list": "Liste",
+    "recording": "Aufzeichnung",
+    "alert": "Alarm",
+    "ok": "Ok",
+    "no-data": "Keine Daten",
+    "error": "Fehler",
+    "clear-filters": "Filter löschen",
+    "all-data-sources": "Alle Datenquellen",
+    "search-syntax-allows-to-query-alert-rules-by-the-parameters-defined-below": "Die Suche ermöglicht das Abfragen von Alarmregeln anhand der unten definierten Syntax und Parameter.",
+    "datasources": "Datenquellen",
+    "rule": "Regel",
+    "labels": "Label",
+    "folder": "Ordner",
+    "filter-type": "Filterkategorie",
+    "expression": "Syntax mit möglichen Werten",
+    "no-datasources-found": "Keine Datenquellen gefunden",
+    "pending": "Ausstehend",
+    "firing": "Aktiv"
+  },
   "alert-rule-form": {
     "evaluation-behaviour": {
       "description": {
@@ -459,6 +487,9 @@
       "pro-tip": "",
       "title": ""
     }
+  },
+  "dashboard-picker": {
+    "select-dashboard": "Dashboard auswählen"
   },
   "data-source-picker": {
     "add-new-data-source": "Neue Datenquelle konfigurieren",
@@ -1175,6 +1206,7 @@
       "subtitle": "Zeige die in deiner Grafana-Konfiguration festgelegten Einstellungen an",
       "title": "Einstellungen"
     },
+    "search-shortcut": "Strg",
     "service-accounts": {
       "subtitle": "Verwende Servicekonten, um automatisierte Arbeitsabläufe in Grafana auszuführen",
       "title": "Servicekonten"

@@ -8,6 +8,8 @@ import { getDashboardAPI } from 'app/features/dashboard/api/dashboard_api';
 import { DashboardSearchItem } from 'app/features/search/types';
 import { DashboardDTO } from 'app/types';
 
+import { t } from '../../internationalization';
+
 interface Props extends Omit<AsyncSelectProps<DashboardPickerDTO>, 'value' | 'onChange' | 'loadOptions' | ''> {
   value?: DashboardPickerDTO['uid'];
   onChange?: (value?: DashboardPickerDTO) => void;
@@ -39,7 +41,7 @@ const getDashboards = debounce(findDashboards, 250, { leading: true });
 export const DashboardPicker = ({
   value,
   onChange,
-  placeholder = 'Select dashboard',
+  placeholder = t('dashboard-picker.select-dashboard', 'Select dashboard'),
   noOptionsMessage = 'No dashboards found',
   ...props
 }: Props) => {
