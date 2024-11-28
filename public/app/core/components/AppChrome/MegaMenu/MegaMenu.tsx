@@ -7,6 +7,7 @@ import { GrafanaTheme2 } from '@grafana/data';
 import { selectors } from '@grafana/e2e-selectors';
 import { CustomScrollbar, Icon, IconButton, useStyles2, Stack } from '@grafana/ui';
 import { useGrafana } from 'app/core/context/GrafanaContext';
+import { contextSrv } from 'app/core/core';
 import { t } from 'app/core/internationalization';
 import { useSelector } from 'app/types';
 
@@ -27,8 +28,41 @@ export const MegaMenu = React.memo(
     const { chrome } = useGrafana();
     const state = chrome.useState();
 
+    // only admin has the rights to see the 'administration/Verwaltung' tab in the navigation mega menu as well as the 'Connection' tab and certain 'Alerting' tabs
+    let navItems = navTree;
+    if (!contextSrv.hasRole('Admin')) {
+      let alertingItem = navItems.find((item) => item.id === 'alerting');
+
+      navItems = navItems.filter((item) => item.id !== 'cfg');
+
+      if (alertingItem !== undefined && alertingItem.children !== undefined) {
+        // remove entire 'alerting' tab and restructure it to only show certain sub tabs of it
+        navItems = navItems.filter((item) => item.id !== 'alerting');
+
+        // get alert rules tab to make it the main tab to be seen later on instead of the general 'alerting' tab which is already removed
+        let alertingRulesItem = alertingItem.children.find((item) => item.id === 'alert-list');
+
+        // create a mutable copy of the `children` array  as the original can not be reassigned with reduced tabs
+        const childrenAlertingItem = [
+          ...alertingItem.children.filter(
+            (item) => item.id !== 'receivers' && item.id !== 'am-routes' && item.id !== 'alert-list'
+          ),
+        ];
+
+        if (alertingRulesItem !== undefined) {
+          // create a mutable copy of `alertingRulesItem` as the original cannot be reassigned with the new children and the icon of the general 'alerting' tab
+          alertingRulesItem = {
+            ...alertingRulesItem,
+            children: childrenAlertingItem,
+            icon: 'bell',
+          };
+          navItems.push(alertingRulesItem);
+        }
+      }
+    }
+
     // Remove profile + help from tree
-    const navItems = navTree
+    navItems = navItems
       .filter((item) => item.id !== 'profile' && item.id !== 'help')
       .map((item) => enrichWithInteractionTracking(item, state.megaMenuDocked));
 
