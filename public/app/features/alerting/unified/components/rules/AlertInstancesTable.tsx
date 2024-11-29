@@ -32,7 +32,7 @@ interface RuleAndAlert {
 type AlertTableColumnProps = DynamicTableColumnProps<RuleAndAlert>;
 type AlertTableItemProps = DynamicTableItemProps<RuleAndAlert>;
 
-const currLang = getCurrentLanguage();
+const currLang = getCurrentLanguage().substring(0, 2);
 
 export const AlertInstancesTable = ({ rule, instances, pagination, footerRow }: Props) => {
   const commonLabels = useMemo(() => {

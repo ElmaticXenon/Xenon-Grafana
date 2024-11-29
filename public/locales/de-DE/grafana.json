@@ -530,8 +530,8 @@
   },
   "dynamic-table": {
     "state": "Status",
-    "Labels": "Label",
-    "Created": "Erstellt",
+    "labels": "Label",
+    "created": "Erstellt",
     "expand-row": "Zeile erweitern",
     "collapse-row": "Zeile einklappen"
   },
