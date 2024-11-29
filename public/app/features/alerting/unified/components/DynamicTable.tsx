@@ -129,7 +129,7 @@ export const DynamicTable = <T extends object>({
                     tooltip={
                       isItemExpanded
                         ? t('dynamic-table.collapse-row', 'Collapse row')
-                        : t('dynamoc-table.expand-row', 'Expand row')
+                        : t('dynamic-table.expand-row', 'Expand row')
                     }
                     data-testid={selectors.components.AlertRules.toggle}
                     name={isItemExpanded ? 'angle-down' : 'angle-right'}
