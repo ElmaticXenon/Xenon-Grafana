@@ -5,6 +5,7 @@ import { GrafanaTheme2 } from '@grafana/data';
 import { selectors } from '@grafana/e2e-selectors';
 import { IconButton, Pagination, useStyles2 } from '@grafana/ui';
 
+import { t } from '../../../../core/internationalization';
 import { usePagination } from '../hooks/usePagination';
 import { getPaginationStyles } from '../styles/pagination';
 
@@ -108,7 +109,7 @@ export const DynamicTable = <T extends object>({
           {isExpandable && <div className={styles.cell} />}
           {cols.map((col) => (
             <div className={styles.cell} key={col.id}>
-              {col.label}
+              {t('dynamic-table.' + col.label.toLowerCase(), col.label)}
             </div>
           ))}
         </div>
@@ -125,7 +126,11 @@ export const DynamicTable = <T extends object>({
               {isExpandable && (
                 <div className={cx(styles.cell, styles.expandCell)}>
                   <IconButton
-                    tooltip={`${isItemExpanded ? 'Collapse' : 'Expand'} row`}
+                    tooltip={
+                      isItemExpanded
+                        ? t('dynamic-table.collapse-row', 'Collapse row')
+                        : t('dynamoc-table.expand-row', 'Expand row')
+                    }
                     data-testid={selectors.components.AlertRules.toggle}
                     name={isItemExpanded ? 'angle-down' : 'angle-right'}
                     onClick={() => toggleExpanded(item)}

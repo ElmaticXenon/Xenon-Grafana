@@ -528,6 +528,13 @@
       "message": "Keine Datenquellen gefunden"
     }
   },
+  "dynamic-table": {
+    "state": "Status",
+    "Labels": "Label",
+    "Created": "Erstellt",
+    "expand-row": "Zeile erweitern",
+    "collapse-row": "Zeile einklappen"
+  },
   "explore": {
     "add-to-dashboard": "Zum Dashboard hinzufügen",
     "add-to-library-modal": {
@@ -1361,9 +1368,9 @@
       "confirm-text": "Löschen"
     },
     "empty": {
-      "button": "",
-      "pro-tip": "",
-      "title": "Es gibt noch keine Playlists erstellt"
+      "button": "Playlist erstellen",
+      "pro-tip": "Sie können Playlists verwenden, um Dashboards auf Fernsehern automatisch abwechselnd anzeigen zu lassen. ",
+      "title": "Es wurden noch keine Playlists erstellt"
     }
   },
   "playlists": {
@@ -1780,6 +1787,9 @@
       "pro-tip": "",
       "title": ""
     }
+  },
+  "text-link": {
+    "learn-more": "Mehr erfahren"
   },
   "time-picker": {
     "absolute": {
