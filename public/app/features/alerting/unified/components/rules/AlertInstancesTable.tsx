@@ -1,10 +1,10 @@
-import i18next from 'i18next';
+//import i18next from 'i18next';
 import React, { useMemo } from 'react';
 
-import { PluginExtensionPoints, dateTime, findCommonLabels } from '@grafana/data';
+import { PluginExtensionPoints, findCommonLabels } from '@grafana/data';
 import { Alert, CombinedRule, PaginationProps } from 'app/types/unified-alerting';
 
-//import { getCurrentLanguage } from '../../../../../core/internationalization';
+import { i18nDate } from '../../../../../core/internationalization';
 import { alertInstanceKey } from '../../utils/rules';
 import { AlertLabels } from '../AlertLabels';
 import { DynamicTable, DynamicTableColumnProps, DynamicTableItemProps } from '../DynamicTable';
@@ -91,10 +91,16 @@ const columns: AlertTableColumnProps[] = [
         alert: { activeAt },
       },
     }) => {
-      const CurrLang = i18next.language;
-      console.log('curr language' + CurrLang);
-      const format = CurrLang === 'de' ? 'DD.MM.YYYY HH:mm:ss' : 'YYYY-MM-DD HH:mm:ss';
-      return <>{activeAt.startsWith('0001') ? '-' : dateTime(activeAt).format(format)}</>;
+      const dateFormatOptions: Intl.DateTimeFormatOptions = {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+      };
+
+      return <>{activeAt.startsWith('0001') ? '-' : i18nDate(activeAt, dateFormatOptions)}</>;
     },
     size: '150px',
   },
