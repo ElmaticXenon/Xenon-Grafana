@@ -1,10 +1,10 @@
-//import i18next from 'i18next';
+import i18next from 'i18next';
 import React, { useMemo } from 'react';
 
 import { PluginExtensionPoints, dateTime, findCommonLabels } from '@grafana/data';
 import { Alert, CombinedRule, PaginationProps } from 'app/types/unified-alerting';
 
-import { getCurrentLanguage } from '../../../../../core/internationalization';
+//import { getCurrentLanguage } from '../../../../../core/internationalization';
 import { alertInstanceKey } from '../../utils/rules';
 import { AlertLabels } from '../AlertLabels';
 import { DynamicTable, DynamicTableColumnProps, DynamicTableItemProps } from '../DynamicTable';
@@ -31,9 +31,6 @@ interface RuleAndAlert {
 
 type AlertTableColumnProps = DynamicTableColumnProps<RuleAndAlert>;
 type AlertTableItemProps = DynamicTableItemProps<RuleAndAlert>;
-
-const currLang = getCurrentLanguage().substring(0, 2);
-console.log('language: ' + currLang);
 
 export const AlertInstancesTable = ({ rule, instances, pagination, footerRow }: Props) => {
   const commonLabels = useMemo(() => {
@@ -94,7 +91,9 @@ const columns: AlertTableColumnProps[] = [
         alert: { activeAt },
       },
     }) => {
-      const format = currLang === 'de' ? 'DD.MM.YYYY HH:mm:ss' : 'YYYY-MM-DD HH:mm:ss';
+      const CurrLang = i18next.language;
+      console.log('curr language' + CurrLang);
+      const format = CurrLang === 'de' ? 'DD.MM.YYYY HH:mm:ss' : 'YYYY-MM-DD HH:mm:ss';
       return <>{activeAt.startsWith('0001') ? '-' : dateTime(activeAt).format(format)}</>;
     },
     size: '150px',
