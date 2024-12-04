@@ -855,7 +855,8 @@
     "export": "Exportieren",
     "delete": "Löschen",
     "pause-evaluation": "Auswertung pausieren",
-    "with-modifications": "Mit Änderungen"
+    "with-modifications": "Mit Änderungen",
+    "more": "Mehr"
   },
   "migrate-to-cloud": {
     "can-i-move": {
@@ -1604,7 +1605,9 @@
     "actions": "Actions",
     "state": "Zustand",
     "export-rules": "Warnregeln exportieren",
-    "group": "Gruppe"
+    "group": "Gruppe",
+    "view": "Anzeigen",
+    "edit": "Bearbeiten"
   },
   "scopes": {
     "advancedSelector": {
@@ -1972,6 +1975,11 @@
       "select-aria-label": "Zeitzonen-Auswähler",
       "select-search-input": "Suchbegriff eingeben (Land, Stadt, Abkürzung)"
     }
+  },
+  "tooltip": {
+    "edit-rule-group": "Regelgruppe bearbeiten",
+    "reorder-rules": "Regeln neu anordnen",
+    "export-rule-group": "Regelgruppe exportieren"
   },
   "transformations": {
     "empty": {
