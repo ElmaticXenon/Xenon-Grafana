@@ -1318,7 +1318,7 @@
     },
     "empty": {
       "button": "Create playlist",
-      "pro-tip": "You can use playlists to cycle dashboards on TVs without user control. <2>Learn more</2>",
+      "pro-tip": "You can use playlists to cycle dashboards on TVs without user control.",
       "title": "There are no playlists created yet"
     }
   },

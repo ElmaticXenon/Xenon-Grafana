@@ -15,7 +15,7 @@ export const AlertStateFilter = ({ onStateFilterChange, stateFilter }: Props) =>
   const alertStateOptions: SelectableValue[] = Object.entries(AlertState)
     .sort(([labelA], [labelB]) => (labelA < labelB ? -1 : 1))
     .map(([label, state]) => ({
-      label: createTransKey(label),
+      label: t('alert-groups.' + label.toLowerCase, label),
       value: state,
     }));
 
@@ -28,9 +28,3 @@ export const AlertStateFilter = ({ onStateFilterChange, stateFilter }: Props) =>
     </div>
   );
 };
-
-function createTransKey(str: string) {
-  let transKey = str.toLowerCase();
-  transKey = 'alert-groups.' + transKey;
-  return t(transKey, str);
-}

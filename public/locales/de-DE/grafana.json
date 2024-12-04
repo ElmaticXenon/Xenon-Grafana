@@ -1373,7 +1373,7 @@
     },
     "empty": {
       "button": "Playlist erstellen",
-      "pro-tip": "Sie können Playlists verwenden, um Dashboards auf Fernsehern automatisch abwechselnd anzeigen zu lassen.  <2>Mehr erfahren</2>",
+      "pro-tip": "Sie können Playlists verwenden, um Dashboards auf Fernsehern automatisch abwechselnd anzeigen zu lassen.",
       "title": "Es wurden noch keine Playlists erstellt"
     }
   },
