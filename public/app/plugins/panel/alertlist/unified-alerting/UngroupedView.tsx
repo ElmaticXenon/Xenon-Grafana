@@ -16,6 +16,7 @@ import {
 import { createUrl } from 'app/features/alerting/unified/utils/url';
 import { PromAlertingRuleState } from 'app/types/unified-alerting-dto';
 
+import { Trans } from '../../../../core/internationalization';
 import { GRAFANA_RULES_SOURCE_NAME } from '../../../../features/alerting/unified/utils/datasource';
 import { AlertingRule, AlertInstanceTotalState, CombinedRuleWithLocation } from '../../../../types/unified-alerting';
 import { AlertInstances } from '../AlertInstances';
@@ -96,7 +97,9 @@ const UngroupedModeView = ({ rules, options, handleInstancesLimit, limitInstance
                           rel="noopener"
                           aria-label="View alert rule"
                         >
-                          <span className={cx({ [styles.hidden]: hideViewRuleLinkText })}>View alert rule</span>
+                          <span className={cx({ [styles.hidden]: hideViewRuleLinkText })}>
+                            <Trans i18nKey="dynamic-table.view-alert-rule">View alert rule</Trans>
+                          </span>
                           <Icon name={'external-link-alt'} size="sm" />
                         </a>
                       )}

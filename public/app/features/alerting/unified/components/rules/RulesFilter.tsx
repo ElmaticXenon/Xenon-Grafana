@@ -65,15 +65,9 @@ interface RulesFilerProps {
 }
 
 const RuleStateOptions = Object.entries(PromAlertingRuleState).map(([key, value]) => ({
-  label: createTransKey(alertStateToReadable(value)),
+  label: alertStateToReadable(value),
   value,
 }));
-
-function createTransKey(str: string) {
-  let transKey = str.toLowerCase();
-  transKey = 'alert-rules.' + transKey;
-  return t(transKey, str);
-}
 
 const RulesFilter = ({ onFilterCleared = () => undefined }: RulesFilerProps) => {
   const styles = useStyles2(getStyles);

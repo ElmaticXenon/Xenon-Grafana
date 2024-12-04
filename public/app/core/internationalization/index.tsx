@@ -86,7 +86,3 @@ export const i18nDate = (value: number | Date | string, format: Intl.DateTimeFor
   const dateFormatter = new Intl.DateTimeFormat(i18n.language, format);
   return dateFormatter.format(value);
 };
-
-export const getCurrentLanguage = (): string => {
-  return i18n.language || DEFAULT_LANGUAGE;
-};

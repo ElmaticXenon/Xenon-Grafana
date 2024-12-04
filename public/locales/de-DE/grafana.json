@@ -45,7 +45,6 @@
     "error": "Fehler",
     "expression": "Syntax mit möglichen Werten",
     "filter-type": "Filterkategorie",
-    "firing": "Aktiv",
     "folder": "Ordner",
     "grouped": "Gruppe",
     "health": "Status",
@@ -55,7 +54,6 @@
     "no-datasources-found": "Keine Datenquellen gefunden",
     "no-rules-exist-yet": "Aktuell existieren noch keine Warnregeln.",
     "ok": "Ok",
-    "pending": "Ausstehend",
     "recording": "Aufzeichnung",
     "rule": "Regel",
     "rule-type": "Regelart",
@@ -86,6 +84,11 @@
       "text": ""
     },
     "pause": ""
+  },
+  "alert-state": {
+    "alerting": "Alarm",
+    "firing": "Aktiv",
+    "pending": "Ausstehend"
   },
   "annotations": {
     "empty-state": {
@@ -533,7 +536,8 @@
     "labels": "Label",
     "created": "Erstellt",
     "expand-row": "Zeile erweitern",
-    "collapse-row": "Zeile einklappen"
+    "collapse-row": "Zeile einklappen",
+    "view-alert-rule": "Warnregel ansehen"
   },
   "explore": {
     "add-to-dashboard": "Zum Dashboard hinzufügen",
@@ -1369,7 +1373,7 @@
     },
     "empty": {
       "button": "Playlist erstellen",
-      "pro-tip": "Sie können Playlists verwenden, um Dashboards auf Fernsehern automatisch abwechselnd anzeigen zu lassen. ",
+      "pro-tip": "Sie können Playlists verwenden, um Dashboards auf Fernsehern automatisch abwechselnd anzeigen zu lassen.  <2>Mehr erfahren</2>",
       "title": "Es wurden noch keine Playlists erstellt"
     }
   },
