@@ -8,6 +8,7 @@ import { useQueryParams } from 'app/core/hooks/useQueryParams';
 import { CombinedRuleNamespace } from 'app/types/unified-alerting';
 
 import { DEFAULT_PER_PAGE_PAGINATION } from '../../../../../core/constants';
+import { Trans } from '../../../../../core/internationalization';
 import { AlertingAction, useAlertingAbility } from '../../hooks/useAbilities';
 import { flattenGrafanaManagedRules } from '../../hooks/useCombinedRuleNamespaces';
 import { usePagination } from '../../hooks/usePagination';
@@ -71,7 +72,7 @@ export const GrafanaRules = ({ namespaces, expandAll }: Props) => {
               onClick={toggleShowExportDrawer}
               variant="secondary"
             >
-              Export rules
+              <Trans i18nKey="rules-table.export-rules">Export rules</Trans>
             </Button>
           )}
         </div>

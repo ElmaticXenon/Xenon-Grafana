@@ -531,6 +531,18 @@
       "message": "Keine Datenquellen gefunden"
     }
   },
+  "details-fields": {
+    "evaluate": "Auswertung",
+    "pending-period": "Ausstehende Periode",
+    "last-evaluation": "Letzte Auswertung",
+    "evaluation-time": "Auswertungsdauer",
+    "value": "Wert",
+    "description": "Beschreibung",
+    "instances": "Instanzen",
+    "labels": "Label",
+    "data-source": "Datenquelle",
+    "expression": "Ausdruck"
+  },
   "dynamic-table": {
     "state": "Status",
     "labels": "Label",
@@ -835,6 +847,15 @@
       "button-label": "Registrieren",
       "new-to-question": "Neu bei Grafana?"
     }
+  },
+  "menu-item": {
+    "silence-notifications": "Benachrichtigungen stummschalten",
+    "duplicate": "Duplizieren",
+    "copy-link": "Link kopieren",
+    "export": "Exportieren",
+    "delete": "Löschen",
+    "pause-evaluation": "Auswertung pausieren",
+    "with-modifications": "Mit Änderungen"
   },
   "migrate-to-cloud": {
     "can-i-move": {
@@ -1373,7 +1394,7 @@
     },
     "empty": {
       "button": "Playlist erstellen",
-      "pro-tip": "Sie können Playlists verwenden, um Dashboards auf Fernsehern automatisch abwechselnd anzeigen zu lassen.",
+      "pro-tip": "Sie können Playlists verwenden, um Dashboards auf Bildschirmen automatisch abwechselnd anzeigen zu lassen.",
       "title": "Es wurden noch keine Playlists erstellt"
     }
   },
@@ -1568,6 +1589,22 @@
       "label": "Zurück zu {{title}}"
     },
     "dismissable-button": "Schließen"
+  },
+  "rule-details-buttons": {
+    "show-state-history": "Verlauf des Zustands anzeigen",
+    "go-to-panel": "Zum Panel springen",
+    "go-to-dashboard": "Zum Dashboard springen",
+    "view-runbook": "Runbook anzeigen",
+    "view-graph": "Graphen anzeigen"
+  },
+  "rules-table": {
+    "next-evaluation": "Nächste Auswertung",
+    "health": "Status",
+    "summary": "Zusammenfassung",
+    "actions": "Actions",
+    "state": "Zustand",
+    "export-rules": "Warnregeln exportieren",
+    "group": "Gruppe"
   },
   "scopes": {
     "advancedSelector": {

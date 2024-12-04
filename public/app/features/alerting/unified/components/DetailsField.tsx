@@ -4,6 +4,8 @@ import React from 'react';
 import { GrafanaTheme2 } from '@grafana/data';
 import { useStyles2 } from '@grafana/ui';
 
+import { t } from '../../../../core/internationalization';
+
 interface Props {
   label: React.ReactNode;
   className?: string;
@@ -22,7 +24,9 @@ export const DetailsField = ({
 
   return (
     <div className={cx(styles.field, horizontal ? styles.fieldHorizontal : styles.fieldVertical, className)}>
-      <div>{label}</div>
+      <div>
+        {typeof label === 'string' ? t(`translation-key.${label.toLowerCase().replace(/\s+/g, '-')}`, label) : label}
+      </div>
       <div className={childrenWrapperClassName}>{children}</div>
     </div>
   );

@@ -6,6 +6,7 @@ import { useStyles2, Tooltip } from '@grafana/ui';
 import { CombinedRule } from 'app/types/unified-alerting';
 
 import { DEFAULT_PER_PAGE_PAGINATION } from '../../../../../core/constants';
+import { t } from '../../../../../core/internationalization';
 import { useHasRuler } from '../../hooks/useHasRuler';
 import { PluginOriginBadge } from '../../plugins/PluginOriginBadge';
 import { Annotation } from '../../utils/constants';
@@ -112,7 +113,7 @@ function useColumns(showSummaryColumn: boolean, showGroupColumn: boolean, showNe
     const columns: RuleTableColumnProps[] = [
       {
         id: 'state',
-        label: 'State',
+        label: t('rules-table.state', 'State'),
         // eslint-disable-next-line react/display-name
         renderCell: ({ data: rule }) => {
           const { namespace } = rule;
@@ -164,7 +165,7 @@ function useColumns(showSummaryColumn: boolean, showGroupColumn: boolean, showNe
       },
       {
         id: 'health',
-        label: 'Health',
+        label: t('rules-table.health', 'Health'),
         // eslint-disable-next-line react/display-name
         renderCell: ({ data: { promRule, group } }) => (promRule ? <RuleHealth rule={promRule} /> : null),
         size: '75px',
@@ -173,7 +174,7 @@ function useColumns(showSummaryColumn: boolean, showGroupColumn: boolean, showNe
     if (showSummaryColumn) {
       columns.push({
         id: 'summary',
-        label: 'Summary',
+        label: t('rules-table.summary', 'Summary'),
         // eslint-disable-next-line react/display-name
         renderCell: ({ data: rule }) => {
           return <Tokenize input={rule.annotations[Annotation.summary] ?? ''} />;
@@ -185,7 +186,7 @@ function useColumns(showSummaryColumn: boolean, showGroupColumn: boolean, showNe
     if (showNextEvaluationColumn) {
       columns.push({
         id: 'nextEvaluation',
-        label: 'Next evaluation',
+        label: t('rules-table.next-evaluation', 'Next evaluation'),
         renderCell: ({ data: rule }) => {
           const nextEvalInfo = calculateNextEvaluationEstimate(rule.promRule?.lastEvaluation, rule.group.interval);
 
@@ -204,7 +205,7 @@ function useColumns(showSummaryColumn: boolean, showGroupColumn: boolean, showNe
     if (showGroupColumn) {
       columns.push({
         id: 'group',
-        label: 'Group',
+        label: t('rules-table.group', 'Group'),
         // eslint-disable-next-line react/display-name
         renderCell: ({ data: rule }) => {
           const { namespace, group } = rule;
@@ -223,7 +224,7 @@ function useColumns(showSummaryColumn: boolean, showGroupColumn: boolean, showNe
     }
     columns.push({
       id: 'actions',
-      label: 'Actions',
+      label: t('rules-table.actions', 'Actions'),
       // eslint-disable-next-line react/display-name
       renderCell: ({ data: rule }) => {
         return <RuleActionsButtons compact showViewButton rule={rule} rulesSource={rule.namespace.rulesSource} />;

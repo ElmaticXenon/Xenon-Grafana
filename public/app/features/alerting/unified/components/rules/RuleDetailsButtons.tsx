@@ -5,6 +5,7 @@ import { useReturnToPrevious } from '@grafana/runtime';
 import { Button, LinkButton, Stack } from '@grafana/ui';
 import { CombinedRule, RulesSource } from 'app/types/unified-alerting';
 
+import { Trans } from '../../../../../core/internationalization';
 import { AlertRuleAction, useAlertRuleAbility } from '../../hooks/useAbilities';
 import { useStateHistoryModal } from '../../hooks/useStateHistoryModal';
 import { Annotation } from '../../utils/constants';
@@ -48,7 +49,7 @@ const RuleDetailsButtons = ({ rule, rulesSource }: Props) => {
         target="_blank"
         href={createExploreLink(rulesSource, rule.query)}
       >
-        See graph
+        <Trans i18nKey="rule-details-buttons.view-graph">See graph</Trans>
       </LinkButton>
     );
   }
@@ -62,7 +63,7 @@ const RuleDetailsButtons = ({ rule, rulesSource }: Props) => {
         target="_blank"
         href={textUtil.sanitizeUrl(rule.annotations[Annotation.runbookURL])}
       >
-        View runbook
+        <Trans i18nKey="rule-details-buttons.view-runbook">View runbook</Trans>
       </LinkButton>
     );
   }
@@ -80,7 +81,7 @@ const RuleDetailsButtons = ({ rule, rulesSource }: Props) => {
             setReturnToPrevious(rule.name);
           }}
         >
-          Go to dashboard
+          <Trans i18nKey="rule-details-buttons.go-to-dashboard">Go to dashboard</Trans>
         </LinkButton>
       );
       const panelId = rule.annotations[Annotation.panelID];
@@ -96,7 +97,7 @@ const RuleDetailsButtons = ({ rule, rulesSource }: Props) => {
               setReturnToPrevious(rule.name);
             }}
           >
-            Go to panel
+            <Trans i18nKey="rule-details-buttons.go-to-panel">Go to panel</Trans>
           </LinkButton>
         );
       }
@@ -111,7 +112,7 @@ const RuleDetailsButtons = ({ rule, rulesSource }: Props) => {
           icon="history"
           onClick={() => isGrafanaRulerRule(rule.rulerRule) && showStateHistoryModal(rule.rulerRule)}
         >
-          Show state history
+          <Trans i18nKey="rule-details-buttons.show-state-history">Show state history</Trans>
         </Button>
         {StateHistoryModal}
       </Fragment>
