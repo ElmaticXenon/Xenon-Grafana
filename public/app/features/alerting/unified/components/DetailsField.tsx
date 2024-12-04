@@ -25,7 +25,7 @@ export const DetailsField = ({
   return (
     <div className={cx(styles.field, horizontal ? styles.fieldHorizontal : styles.fieldVertical, className)}>
       <div>
-        {typeof label === 'string' ? t(`translation-key.${label.toLowerCase().replace(/\s+/g, '-')}`, label) : label}
+        {typeof label === 'string' ? t(`details-fields.${label.toLowerCase().replace(/\s+/g, '-')}`, label) : label}
       </div>
       <div className={childrenWrapperClassName}>{children}</div>
     </div>

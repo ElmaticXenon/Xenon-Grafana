@@ -541,7 +541,8 @@
     "instances": "Instanzen",
     "labels": "Label",
     "data-source": "Datenquelle",
-    "expression": "Ausdruck"
+    "expression": "Ausdruck",
+    "Every": "Alle"
   },
   "dynamic-table": {
     "state": "Status",

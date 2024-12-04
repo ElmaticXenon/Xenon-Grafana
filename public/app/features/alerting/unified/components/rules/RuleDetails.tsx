@@ -1,11 +1,12 @@
 import { css } from '@emotion/css';
 import React from 'react';
 
-import { GrafanaTheme2, dateTime, dateTimeFormat } from '@grafana/data';
+import { GrafanaTheme2, dateTime } from '@grafana/data';
 import { useStyles2, Tooltip } from '@grafana/ui';
 import { Time } from 'app/features/explore/Time';
 import { CombinedRule } from 'app/types/unified-alerting';
 
+import { i18nDate, t } from '../../../../../core/internationalization';
 import { useCleanAnnotations } from '../../utils/annotations';
 import { isRecordingRulerRule } from '../../utils/rules';
 import { isNullDate } from '../../utils/time';
@@ -79,7 +80,7 @@ const EvaluationBehaviorSummary = ({ rule }: EvaluationBehaviorSummaryProps) => 
     <>
       {every && (
         <DetailsField label="Evaluate" horizontal={true}>
-          Every {every}
+          {t('details-field.every', 'Every')} {every}
         </DetailsField>
       )}
 
@@ -91,7 +92,14 @@ const EvaluationBehaviorSummary = ({ rule }: EvaluationBehaviorSummaryProps) => 
         <DetailsField label="Last evaluation" horizontal={true}>
           <Tooltip
             placement="top"
-            content={`${dateTimeFormat(lastEvaluation, { format: 'YYYY-MM-DD HH:mm:ss' })}`}
+            content={i18nDate(lastEvaluation, {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+              second: '2-digit',
+            })}
             theme="info"
           >
             <span>{`${dateTime(lastEvaluation).locale('en').fromNow(true)} ago`}</span>

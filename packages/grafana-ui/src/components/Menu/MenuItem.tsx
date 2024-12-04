@@ -11,6 +11,7 @@ import React, {
 
 import { GrafanaTheme2, LinkTarget } from '@grafana/data';
 
+import { Trans } from '../../../../../public/app/core/internationalization';
 import { useStyles2 } from '../../themes';
 import { getFocusStyles } from '../../themes/mixins';
 import { IconName } from '../../types/icon';
@@ -177,7 +178,9 @@ export const MenuItem = React.memo(
       >
         <Stack direction="row" justifyContent="flex-start" alignItems="center">
           {icon && <Icon name={icon} className={styles.icon} aria-hidden />}
-          <span className={styles.ellipsis}>{label}</span>
+          <span className={styles.ellipsis}>
+            <Trans i18nKey={`menu-item.${label.toLowerCase().replace(/\s+/g, '-')}`}>{label}</Trans>
+          </span>
           <div className={cx(styles.rightWrapper, { [styles.withShortcut]: hasShortcut })}>
             {hasShortcut && (
               <div className={styles.shortcut}>
