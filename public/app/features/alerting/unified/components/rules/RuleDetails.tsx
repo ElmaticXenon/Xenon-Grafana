@@ -1,4 +1,5 @@
 import { css } from '@emotion/css';
+import i18next from 'i18next';
 import React from 'react';
 
 import { GrafanaTheme2, dateTime } from '@grafana/data';
@@ -80,7 +81,7 @@ const EvaluationBehaviorSummary = ({ rule }: EvaluationBehaviorSummaryProps) => 
     <>
       {every && (
         <DetailsField label="Evaluate" horizontal={true}>
-          {t('details-field.every', 'Every')} {every}
+          {t('details-fields.every', 'Every')} {every}
         </DetailsField>
       )}
 
@@ -102,7 +103,14 @@ const EvaluationBehaviorSummary = ({ rule }: EvaluationBehaviorSummaryProps) => 
             })}
             theme="info"
           >
-            <span>{`${dateTime(lastEvaluation).locale('en').fromNow(true)} ago`}</span>
+            <span>
+              {(() => {
+                const currLang = i18next.language.substring(0, 2);
+                return currLang === 'de'
+                  ? `vor ${dateTime(lastEvaluation).locale('de').fromNow(true)}`
+                  : `${dateTime(lastEvaluation).locale('en').fromNow(true)} ago`;
+              })()}
+            </span>
           </Tooltip>
         </DetailsField>
       )}

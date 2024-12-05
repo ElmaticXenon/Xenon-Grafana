@@ -42,6 +42,7 @@
     "all-data-sources": "Alle Datenquellen",
     "clear-filters": "Filter löschen",
     "datasources": "Datenquellen",
+    "err": "Fehler",
     "error": "Fehler",
     "expression": "Syntax mit möglichen Werten",
     "filter-type": "Filterkategorie",
@@ -50,6 +51,7 @@
     "health": "Status",
     "labels": "Label",
     "list": "Liste",
+    "nodata": "Keine Daten",
     "no-data": "Keine Daten",
     "no-datasources-found": "Keine Datenquellen gefunden",
     "no-rules-exist-yet": "Aktuell existieren noch keine Warnregeln.",
@@ -88,7 +90,8 @@
   "alert-state": {
     "alerting": "Alarm",
     "firing": "Aktiv",
-    "pending": "Ausstehend"
+    "pending": "Ausstehend",
+    "error": "Fehler"
   },
   "annotations": {
     "empty-state": {
@@ -542,7 +545,7 @@
     "labels": "Label",
     "data-source": "Datenquelle",
     "expression": "Ausdruck",
-    "Every": "Alle"
+    "every": "Alle"
   },
   "dynamic-table": {
     "state": "Status",
@@ -1600,9 +1603,15 @@
     "view-graph": "Graphen anzeigen"
   },
   "rule-stats": {
-    "firing": "{{count}} firing",
-    "pending": "{{count}} pending",
-    "errors": "{{count}} errors"
+    "firing": "{{count}} Aktiv",
+    "pending": "{{count}} Ausstehend",
+    "errors": "{{count}} Fehler",
+    "no-data": "{{count}} keine Daten",
+    "normal-paused": "{{normalCount}} Normal ({{pausedCount}} Pausiert)",
+    "recording": "{{count}} Aufzeichnung",
+    "normal": "{{count}} Normal",
+    "rule-single": "Regel",
+    "rule-plural": "Regeln"
   },
   "rules-table": {
     "next-evaluation": "Nächste Auswertung",
@@ -1985,7 +1994,9 @@
   "tooltip": {
     "edit-rule-group": "Regelgruppe bearbeiten",
     "reorder-rules": "Regeln neu anordnen",
-    "export-rule-group": "Regelgruppe exportieren"
+    "export-rule-group": "Regelgruppe exportieren",
+    "view": "Anzeigen",
+    "edit": "Bearbeiten"
   },
   "transformations": {
     "empty": {

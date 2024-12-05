@@ -13,7 +13,6 @@ import { AlertmanagerProvider } from 'app/features/alerting/unified/state/Alertm
 import { useDispatch } from 'app/types';
 import { CombinedRule, RuleIdentifier, RulesSource } from 'app/types/unified-alerting';
 
-import { t } from '../../../../../core/internationalization';
 import { AlertRuleAction, useAlertRuleAbility } from '../../hooks/useAbilities';
 import { fetchPromAndRulerRulesAction } from '../../state/actions';
 import { GRAFANA_RULES_SOURCE_NAME, getRulesSourceName } from '../../utils/datasource';
@@ -86,7 +85,7 @@ export const RuleActionsButtons = ({ compact, showViewButton, showCopyLinkButton
         icon="eye"
         href={createViewLink(rulesSource, rule, returnTo)}
       >
-        {!compact && t('rules-table.view', 'View')}
+        {!compact && 'View'}
       </LinkButton>
     );
   }
@@ -110,7 +109,7 @@ export const RuleActionsButtons = ({ compact, showViewButton, showCopyLinkButton
         icon="pen"
         href={editURL}
       >
-        {!compact && t('rules-table.edit', 'Edit')}
+        {!compact && 'Edit'}
       </LinkButton>
     );
   }

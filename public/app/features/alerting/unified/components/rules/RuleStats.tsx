@@ -1,5 +1,4 @@
 import { isUndefined, omitBy, sum } from 'lodash';
-import pluralize from 'pluralize';
 import React, { Fragment } from 'react';
 
 import { Badge, Stack } from '@grafana/ui';
@@ -49,7 +48,7 @@ export const RuleStats = ({ namespaces }: Props) => {
 
   statsComponents.unshift(
     <Fragment key="total">
-      {total} {pluralize('rule', total)}
+      {total} {t(total === 1 ? 'rule-stats.rule-single' : 'rule-stats.rule-plural', total === 1 ? 'rule' : 'rules')}
     </Fragment>
   );
 
@@ -114,7 +113,9 @@ export function getComponentsFromStats(
   }
 
   if (stats.nodata) {
-    statsComponents.push(<Badge color="blue" key="nodata" text={`${stats.nodata} no data`} />);
+    statsComponents.push(
+      <Badge color="blue" key="nodata" text={t('rule-stats.no-data', '{{count}} no data', { count: stats.nodata })} />
+    );
   }
 
   if (stats[AlertInstanceTotalState.Pending]) {
@@ -132,19 +133,32 @@ export function getComponentsFromStats(
       <Badge
         color="green"
         key="paused"
-        text={`${stats[AlertInstanceTotalState.Normal]} normal (${stats.paused} paused)`}
+        text={t('rules-stats.normal-paused', '{{normalCount}} normal ({{pausedCount}} paused)', {
+          normalCount: stats[AlertInstanceTotalState.Normal],
+          pausedCount: stats.paused,
+        })}
       />
     );
   }
 
   if (stats[AlertInstanceTotalState.Normal] && !stats.paused) {
     statsComponents.push(
-      <Badge color="green" key="inactive" text={`${stats[AlertInstanceTotalState.Normal]} normal`} />
+      <Badge
+        color="green"
+        key="inactive"
+        text={t('rule-stats.normal', '{{count}} normal', { count: stats[AlertInstanceTotalState.Normal] })}
+      />
     );
   }
 
   if (stats.recording) {
-    statsComponents.push(<Badge color="purple" key="recording" text={`${stats.recording} recording`} />);
+    statsComponents.push(
+      <Badge
+        color="purple"
+        key="recording"
+        text={t('rule-stats.recording', '{{count}} recording', { count: stats.recording })}
+      />
+    );
   }
 
   return statsComponents;

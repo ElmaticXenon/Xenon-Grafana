@@ -1,4 +1,5 @@
 import { addMilliseconds, formatDistanceToNowStrict, isBefore } from 'date-fns';
+import i18next from 'i18next';
 
 import { dateTime, dateTimeFormat, isValidDate } from '@grafana/data';
 
@@ -52,10 +53,19 @@ export function calculateNextEvaluationEstimate(
     };
   }
 
-  return {
-    humanized: `in ${dateTime(nextEvaluationDate).locale('en').fromNow(true)}`,
-    fullDate: dateTimeFormat(nextEvaluationDate, { format: 'YYYY-MM-DD HH:mm:ss' }),
-  };
+  return (() => {
+    const currLang = i18next.language.substring(0, 2);
+
+    return {
+      humanized:
+        currLang === 'de'
+          ? `in ${dateTime(nextEvaluationDate).locale('de').fromNow(true)}`
+          : `in ${dateTime(nextEvaluationDate).locale('en').fromNow(true)}`,
+      fullDate: dateTimeFormat(nextEvaluationDate, {
+        format: currLang === 'de' ? 'DD.MM.YYYY HH:mm:ss' : 'YYYY-MM-DD HH:mm:ss',
+      }),
+    };
+  })();
 }
 
 export function getRelativeEvaluationInterval(lastEvaluation?: string) {
