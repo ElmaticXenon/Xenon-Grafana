@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { GrafanaTheme2 } from '@grafana/data';
 import { selectors } from '@grafana/e2e-selectors';
 import { Badge, ConfirmModal, Icon, Spinner, Stack, Tooltip, useStyles2 } from '@grafana/ui';
+import { contextSrv } from 'app/core/core';
 import { useDispatch } from 'app/types';
 import { CombinedRuleGroup, CombinedRuleNamespace } from 'app/types/unified-alerting';
 
@@ -47,6 +48,8 @@ export const RulesGroup = React.memo(({ group, namespace, expandAll, viewMode }:
   const [isReorderingGroup, setIsReorderingGroup] = useState(false);
   const [isExporting, setIsExporting] = useState<'group' | 'folder' | undefined>(undefined);
   const [isCollapsed, setIsCollapsed] = useState(!expandAll);
+
+  const isViewer = contextSrv.hasRole('Viewer');
 
   const { canEditRules } = useRulesAccess();
 
@@ -152,7 +155,7 @@ export const RulesGroup = React.memo(({ group, namespace, expandAll, viewMode }:
               onClick={() => setIsExporting('folder')}
             />
           );
-        } else if (isGroupView) {
+        } else if (isGroupView && !isViewer) {
           actionIcons.push(
             <ActionIcon
               aria-label="export rule group"

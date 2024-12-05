@@ -4,6 +4,7 @@ import React, { useMemo } from 'react';
 import { GrafanaTheme2 } from '@grafana/data';
 import { getDataSourceSrv } from '@grafana/runtime';
 import { useStyles2 } from '@grafana/ui';
+import { contextSrv } from 'app/core/core';
 import { ExpressionDatasourceUID } from 'app/features/expressions/types';
 import { CombinedRule, RulesSource } from 'app/types/unified-alerting';
 
@@ -45,6 +46,10 @@ export function RuleDetailsDataSources(props: Props): JSX.Element | null {
   }, [rule, rulesSource]);
 
   if (dataSources.length === 0) {
+    return null;
+  }
+
+  if (contextSrv.hasRole('Viewer')) {
     return null;
   }
 
