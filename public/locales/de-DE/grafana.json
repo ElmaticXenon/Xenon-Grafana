@@ -1599,6 +1599,11 @@
     "view-runbook": "Runbook anzeigen",
     "view-graph": "Graphen anzeigen"
   },
+  "rule-stats": {
+    "firing": "{{count}} firing",
+    "pending": "{{count}} pending",
+    "errors": "{{count}} errors"
+  },
   "rules-table": {
     "next-evaluation": "Nächste Auswertung",
     "health": "Status",

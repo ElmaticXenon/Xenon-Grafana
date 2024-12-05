@@ -11,6 +11,8 @@ import {
 } from 'app/types/unified-alerting';
 import { PromAlertingRuleState } from 'app/types/unified-alerting-dto';
 
+import { t } from '../../../../../core/internationalization';
+
 interface Props {
   namespaces: CombinedRuleNamespace[];
 }
@@ -96,11 +98,19 @@ export function getComponentsFromStats(
   const statsComponents: React.ReactNode[] = [];
 
   if (stats[AlertInstanceTotalState.Alerting]) {
-    statsComponents.push(<Badge color="red" key="firing" text={`${stats[AlertInstanceTotalState.Alerting]} firing`} />);
+    statsComponents.push(
+      <Badge
+        color="red"
+        key="firing"
+        text={t('rule-stats.firing', '{{count}} firing', { count: stats[AlertInstanceTotalState.Alerting] })}
+      />
+    );
   }
 
   if (stats.error) {
-    statsComponents.push(<Badge color="red" key="errors" text={`${stats.error} errors`} />);
+    statsComponents.push(
+      <Badge color="red" key="errors" text={t('rule-stats.errors', '{{count}} errors', { count: stats.error })} />
+    );
   }
 
   if (stats.nodata) {
@@ -109,7 +119,11 @@ export function getComponentsFromStats(
 
   if (stats[AlertInstanceTotalState.Pending]) {
     statsComponents.push(
-      <Badge color={'orange'} key="pending" text={`${stats[AlertInstanceTotalState.Pending]} pending`} />
+      <Badge
+        color={'orange'}
+        key="pending"
+        text={t('rule-stats.pending', '{{count}} pending', { count: stats[AlertInstanceTotalState.Pending] })}
+      />
     );
   }
 
