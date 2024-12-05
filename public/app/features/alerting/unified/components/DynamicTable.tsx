@@ -5,7 +5,7 @@ import { GrafanaTheme2 } from '@grafana/data';
 import { selectors } from '@grafana/e2e-selectors';
 import { IconButton, Pagination, useStyles2 } from '@grafana/ui';
 
-import { t } from '../../../../core/internationalization';
+import { t, Trans } from '../../../../core/internationalization';
 import { usePagination } from '../hooks/usePagination';
 import { getPaginationStyles } from '../styles/pagination';
 
@@ -107,11 +107,19 @@ export const DynamicTable = <T extends object>({
         <div className={styles.row} data-testid="header">
           {renderPrefixHeader && renderPrefixHeader()}
           {isExpandable && <div className={styles.cell} />}
-          {cols.map((col) => (
-            <div className={styles.cell} key={col.id}>
-              {t('dynamic-table.' + col.label.toLowerCase(), col.label)}
-            </div>
-          ))}
+          {cols.map((col) => {
+            // check whether col.label is a non.empty string; if the string was empty, the key would become 'dynamic-table.' which is considered incomplete because of the '.' and leads to i18next to render the key itself which is obviously not wanted
+            const labelKey =
+              col.label && typeof col.label === 'string' && col.label.trim() !== ''
+                ? `dynamic-table.${col.label.toLowerCase().replace(/\s+/g, '-')}`
+                : null;
+
+            return (
+              <div className={styles.cell} key={col.id}>
+                {labelKey ? <Trans i18nKey={labelKey}>{col.label}</Trans> : <>{col.label}</>}
+              </div>
+            );
+          })}
         </div>
 
         {pageItems.map((item, index) => {
