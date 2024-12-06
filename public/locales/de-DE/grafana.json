@@ -89,9 +89,9 @@
   },
   "alert-state": {
     "alerting": "Alarm",
+    "error": "Fehler",
     "firing": "Aktiv",
-    "pending": "Ausstehend",
-    "error": "Fehler"
+    "pending": "Ausstehend"
   },
   "annotations": {
     "empty-state": {
@@ -535,24 +535,24 @@
     }
   },
   "details-fields": {
-    "evaluate": "Auswertung",
-    "pending-period": "Ausstehende Periode",
-    "last-evaluation": "Letzte Auswertung",
-    "evaluation-time": "Auswertungszeit",
-    "value": "Wert",
+    "data-source": "Datenquelle",
     "description": "Beschreibung",
+    "evaluate": "Auswertung",
+    "evaluation-time": "Auswertungszeit",
+    "every": "Alle",
+    "expression": "Ausdruck",
     "instances": "Instanzen",
     "labels": "Label",
-    "data-source": "Datenquelle",
-    "expression": "Ausdruck",
-    "every": "Alle"
+    "last-evaluation": "Letzte Auswertung",
+    "pending-period": "Ausstehende Periode",
+    "value": "Wert"
   },
   "dynamic-table": {
-    "state": "Status",
-    "labels": "Label",
+    "collapse-row": "Zeile einklappen",
     "created": "Erstellt",
     "expand-row": "Zeile erweitern",
-    "collapse-row": "Zeile einklappen",
+    "labels": "Label",
+    "state": "Status",
     "view-alert-rule": "Warnregel ansehen"
   },
   "explore": {
@@ -853,14 +853,14 @@
     }
   },
   "menu-item": {
-    "silence-notifications": "Benachrichtigungen stummschalten",
-    "duplicate": "Duplizieren",
     "copy-link": "Link kopieren",
-    "export": "Exportieren",
     "delete": "Löschen",
+    "duplicate": "Duplizieren",
+    "export": "Exportieren",
+    "more": "Mehr",
     "pause-evaluation": "Auswertung pausieren",
-    "with-modifications": "Mit Änderungen",
-    "more": "Mehr"
+    "silence-notifications": "Benachrichtigungen stummschalten",
+    "with-modifications": "Mit Änderungen"
   },
   "migrate-to-cloud": {
     "can-i-move": {
@@ -1596,37 +1596,37 @@
     "dismissable-button": "Schließen"
   },
   "rule-details-buttons": {
-    "show-state-history": "Verlauf des Zustands anzeigen",
-    "go-to-panel": "Zum Panel springen",
     "go-to-dashboard": "Zum Dashboard springen",
-    "view-runbook": "Runbook anzeigen",
-    "view-graph": "Graphen anzeigen"
+    "go-to-panel": "Zum Panel springen",
+    "show-state-history": "Verlauf des Zustands anzeigen",
+    "view-graph": "Graphen anzeigen",
+    "view-runbook": "Runbook anzeigen"
   },
   "rules-list": {
-    "expand-all": "Alle ausklappen",
-    "collapse-all": "Alle einklappen"
+    "collapse-all": "Alle einklappen",
+    "expand-all": "Alle ausklappen"
   },
   "rule-stats": {
-    "firing": "{{count}} Aktiv",
-    "pending": "{{count}} Ausstehend",
     "errors": "{{count}} Fehler",
+    "firing": "{{count}} Aktiv",
     "no-data": "{{count}} keine Daten",
-    "normal-paused": "{{normalCount}} Normal ({{pausedCount}} Pausiert)",
-    "recording": "{{count}} Aufzeichnung",
     "normal": "{{count}} Normal",
-    "rule-single": "Regel",
-    "rule-plural": "Regeln"
+    "normal-paused": "{{normalCount}} Normal ({{pausedCount}} Pausiert)",
+    "pending": "{{count}} Ausstehend",
+    "recording": "{{count}} Aufzeichnung",
+    "rule-plural": "Regeln",
+    "rule-single": "Regel"
   },
   "rules-table": {
-    "next-evaluation": "Nächste Auswertung",
-    "health": "Status",
-    "summary": "Zusammenfassung",
     "actions": "Actions",
-    "state": "Zustand",
+    "edit": "Bearbeiten",
     "export-rules": "Warnregeln exportieren",
     "group": "Gruppe",
-    "view": "Anzeigen",
-    "edit": "Bearbeiten"
+    "health": "Status",
+    "next-evaluation": "Nächste Auswertung",
+    "state": "Zustand",
+    "summary": "Zusammenfassung",
+    "view": "Anzeigen"
   },
   "scopes": {
     "advancedSelector": {
@@ -1999,11 +1999,11 @@
     }
   },
   "tooltip": {
+    "edit": "Bearbeiten",
     "edit-rule-group": "Regelgruppe bearbeiten",
-    "reorder-rules": "Regeln neu anordnen",
     "export-rule-group": "Regelgruppe exportieren",
-    "view": "Anzeigen",
-    "edit": "Bearbeiten"
+    "reorder-rules": "Regeln neu anordnen",
+    "view": "Anzeigen"
   },
   "transformations": {
     "empty": {
