@@ -1602,6 +1602,10 @@
     "view-runbook": "Runbook anzeigen",
     "view-graph": "Graphen anzeigen"
   },
+  "rules-list": {
+    "expand-all": "Alle ausklappen",
+    "collapse-all": "Alle einklappen"
+  },
   "rule-stats": {
     "firing": "{{count}} Aktiv",
     "pending": "{{count}} Ausstehend",
@@ -1849,6 +1853,9 @@
   },
   "text-link": {
     "learn-more": "Mehr erfahren"
+  },
+  "time": {
+    "for": "seit"
   },
   "time-picker": {
     "absolute": {
