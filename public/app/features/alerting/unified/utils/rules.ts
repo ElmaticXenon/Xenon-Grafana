@@ -29,6 +29,7 @@ import {
   RulerRuleDTO,
 } from 'app/types/unified-alerting-dto';
 
+import { t } from '../../../../core/internationalization';
 import { CombinedRuleNamespace } from '../../../../types/unified-alerting';
 import { State } from '../components/StateTag';
 import { RuleHealth } from '../search/rulesSearchParser';
@@ -142,7 +143,7 @@ export function alertStateToReadable(state: PromAlertingRuleState | GrafanaAlert
   if (state === PromAlertingRuleState.Inactive) {
     return 'Normal';
   }
-  return capitalize(state);
+  return t('alert-state.' + state.toLowerCase(), capitalize(state));
 }
 
 export const flattenRules = (rules: RuleNamespace[]) => {

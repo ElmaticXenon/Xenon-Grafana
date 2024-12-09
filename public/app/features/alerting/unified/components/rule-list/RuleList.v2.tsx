@@ -7,6 +7,7 @@ import { GrafanaTheme2, urlUtil } from '@grafana/data';
 import { Button, LinkButton, LoadingBar, useStyles2, withErrorBoundary } from '@grafana/ui';
 import { useDispatch } from 'app/types';
 
+import { t } from '../../../../../core/internationalization';
 import { CombinedRuleNamespace } from '../../../../../types/unified-alerting';
 import { LogMessages, logInfo, trackRuleListNavigation } from '../../Analytics';
 import { AlertingAction, useAlertingAbility } from '../../hooks/useAbilities';
@@ -114,7 +115,9 @@ const RuleList = withErrorBoundary(
                     variant="secondary"
                     onClick={() => setExpandAll(!expandAll)}
                   >
-                    {expandAll ? 'Collapse all' : 'Expand all'}
+                    {expandAll
+                      ? t('rules-list.collapse-all', 'Collapse all')
+                      : t('rules-list.expand-all', 'Expand all')}
                   </Button>
                 )}
                 <RuleStats namespaces={filteredNamespaces} />

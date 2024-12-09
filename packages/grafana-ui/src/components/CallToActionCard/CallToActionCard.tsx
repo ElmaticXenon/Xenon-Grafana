@@ -3,6 +3,7 @@ import React from 'react';
 
 import { GrafanaTheme2 } from '@grafana/data';
 
+import { Trans } from '../../../../../public/app/core/internationalization';
 import { useStyles2 } from '../../themes/ThemeContext';
 
 export interface CallToActionCardProps {
@@ -17,7 +18,11 @@ export const CallToActionCard = ({ message, callToActionElement, footer, classNa
 
   return (
     <div className={cx([css.wrapper, className])}>
-      {message && <div className={css.message}>{message}</div>}
+      {message && (
+        <div className={css.message}>
+          <Trans i18nKey="alert-rules.no-rules-exist-yet">{message}</Trans>
+        </div>
+      )}
       {callToActionElement}
       {footer && <div className={css.footer}>{footer}</div>}
     </div>

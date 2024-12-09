@@ -25,6 +25,46 @@
       "user": "Nutzer"
     }
   },
+  "alert-groups": {
+    "active": "Aktiv",
+    "clear-filters": "Filter löschen",
+    "custom-group-by": "Benutzerdefinierte Gruppierung nach",
+    "group-by": "Gruppierung nach",
+    "no-results": "Keine Resultate.",
+    "search": "Suche",
+    "search-by-label": "Suche anhand von Label",
+    "state": "Zustand",
+    "suppressed": "Ausgeblendet",
+    "unprocessed": "Unbearbeitet"
+  },
+  "alert-rules": {
+    "alert": "Alarm",
+    "all-data-sources": "Alle Datenquellen",
+    "clear-filters": "Filter löschen",
+    "datasources": "Datenquellen",
+    "err": "Fehler",
+    "error": "Fehler",
+    "expression": "Syntax mit möglichen Werten",
+    "filter-type": "Filterkategorie",
+    "folder": "Ordner",
+    "grouped": "Gruppe",
+    "health": "Status",
+    "labels": "Label",
+    "list": "Liste",
+    "nodata": "Keine Daten",
+    "no-data": "Keine Daten",
+    "no-datasources-found": "Keine Datenquellen gefunden",
+    "no-rules-exist-yet": "Aktuell existieren noch keine Warnregeln.",
+    "ok": "Ok",
+    "recording": "Aufzeichnung",
+    "rule": "Regel",
+    "rule-type": "Regelart",
+    "search": "Suche",
+    "search-by-data-source": "Suche anhand von Datenquellen",
+    "search-syntax-allows-to-query-alert-rules-by-the-parameters-defined-below": "Die Suche ermöglicht das Abfragen von Alarmregeln anhand der unten definierten Syntax und Parameter.",
+    "state": "Zustand",
+    "view-as": "Anzeigen als"
+  },
   "alert-rule-form": {
     "evaluation-behaviour": {
       "description": {
@@ -46,6 +86,12 @@
       "text": ""
     },
     "pause": ""
+  },
+  "alert-state": {
+    "alerting": "Alarm",
+    "error": "Fehler",
+    "firing": "Aktiv",
+    "pending": "Ausstehend"
   },
   "annotations": {
     "empty-state": {
@@ -460,6 +506,9 @@
       "title": ""
     }
   },
+  "dashboard-picker": {
+    "select-dashboard": "Dashboard auswählen"
+  },
   "data-source-picker": {
     "add-new-data-source": "Neue Datenquelle konfigurieren",
     "built-in-list": {
@@ -484,6 +533,27 @@
     "empty-state": {
       "message": "Keine Datenquellen gefunden"
     }
+  },
+  "details-fields": {
+    "data-source": "Datenquelle",
+    "description": "Beschreibung",
+    "evaluate": "Auswertung",
+    "evaluation-time": "Auswertungszeit",
+    "every": "Alle",
+    "expression": "Ausdruck",
+    "instances": "Instanzen",
+    "labels": "Label",
+    "last-evaluation": "Letzte Auswertung",
+    "pending-period": "Ausstehende Periode",
+    "value": "Wert"
+  },
+  "dynamic-table": {
+    "collapse-row": "Zeile einklappen",
+    "created": "Erstellt",
+    "expand-row": "Zeile erweitern",
+    "labels": "Label",
+    "state": "Status",
+    "view-alert-rule": "Warnregel ansehen"
   },
   "explore": {
     "add-to-dashboard": "Zum Dashboard hinzufügen",
@@ -781,6 +851,16 @@
       "button-label": "Registrieren",
       "new-to-question": "Neu bei Grafana?"
     }
+  },
+  "menu-item": {
+    "copy-link": "Link kopieren",
+    "delete": "Löschen",
+    "duplicate": "Duplizieren",
+    "export": "Exportieren",
+    "more": "Mehr",
+    "pause-evaluation": "Auswertung pausieren",
+    "silence-notifications": "Benachrichtigungen stummschalten",
+    "with-modifications": "Mit Änderungen"
   },
   "migrate-to-cloud": {
     "can-i-move": {
@@ -1175,6 +1255,7 @@
       "subtitle": "Zeige die in deiner Grafana-Konfiguration festgelegten Einstellungen an",
       "title": "Einstellungen"
     },
+    "search-shortcut": "Strg",
     "service-accounts": {
       "subtitle": "Verwende Servicekonten, um automatisierte Arbeitsabläufe in Grafana auszuführen",
       "title": "Servicekonten"
@@ -1317,9 +1398,9 @@
       "confirm-text": "Löschen"
     },
     "empty": {
-      "button": "",
-      "pro-tip": "",
-      "title": "Es gibt noch keine Playlists erstellt"
+      "button": "Playlist erstellen",
+      "pro-tip": "Sie können Playlists verwenden, um Dashboards auf Bildschirmen automatisch abwechselnd anzeigen zu lassen.",
+      "title": "Es wurden noch keine Playlists erstellt"
     }
   },
   "playlists": {
@@ -1513,6 +1594,39 @@
       "label": "Zurück zu {{title}}"
     },
     "dismissable-button": "Schließen"
+  },
+  "rule-details-buttons": {
+    "go-to-dashboard": "Zum Dashboard springen",
+    "go-to-panel": "Zum Panel springen",
+    "show-state-history": "Verlauf des Zustands anzeigen",
+    "view-graph": "Graphen anzeigen",
+    "view-runbook": "Runbook anzeigen"
+  },
+  "rules-list": {
+    "collapse-all": "Alle einklappen",
+    "expand-all": "Alle ausklappen"
+  },
+  "rule-stats": {
+    "errors": "{{count}} Fehler",
+    "firing": "{{count}} Aktiv",
+    "no-data": "{{count}} keine Daten",
+    "normal": "{{count}} Normal",
+    "normal-paused": "{{normalCount}} Normal ({{pausedCount}} Pausiert)",
+    "pending": "{{count}} Ausstehend",
+    "recording": "{{count}} Aufzeichnung",
+    "rule-plural": "Regeln",
+    "rule-single": "Regel"
+  },
+  "rules-table": {
+    "actions": "Actions",
+    "edit": "Bearbeiten",
+    "export-rules": "Warnregeln exportieren",
+    "group": "Gruppe",
+    "health": "Status",
+    "next-evaluation": "Nächste Auswertung",
+    "state": "Zustand",
+    "summary": "Zusammenfassung",
+    "view": "Anzeigen"
   },
   "scopes": {
     "advancedSelector": {
@@ -1737,6 +1851,12 @@
       "title": ""
     }
   },
+  "text-link": {
+    "learn-more": "Mehr erfahren"
+  },
+  "time": {
+    "for": "seit"
+  },
   "time-picker": {
     "absolute": {
       "recent-title": "Kürzlich verwendete absolute Bereiche",
@@ -1877,6 +1997,13 @@
       "select-aria-label": "Zeitzonen-Auswähler",
       "select-search-input": "Suchbegriff eingeben (Land, Stadt, Abkürzung)"
     }
+  },
+  "tooltip": {
+    "edit": "Bearbeiten",
+    "edit-rule-group": "Regelgruppe bearbeiten",
+    "export-rule-group": "Regelgruppe exportieren",
+    "reorder-rules": "Regeln neu anordnen",
+    "view": "Anzeigen"
   },
   "transformations": {
     "empty": {

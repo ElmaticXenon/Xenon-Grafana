@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { useAsync } from 'react-use';
 
-import { ConfirmModal, EmptyState, LinkButton, TextLink } from '@grafana/ui';
+import { ConfirmModal, EmptyState, LinkButton } from '@grafana/ui';
 import { Page } from 'app/core/components/Page/Page';
 import PageActionBar from 'app/core/components/PageActionBar/PageActionBar';
 import { Trans, t } from 'app/core/internationalization';
@@ -74,10 +74,10 @@ export const PlaylistPage = () => {
                 message={t('playlist-page.empty.title', 'There are no playlists created yet')}
               >
                 <Trans i18nKey="playlist-page.empty.pro-tip">
-                  You can use playlists to cycle dashboards on TVs without user control.{' '}
-                  <TextLink external href="https://docs.grafana.org/reference/playlist/">
+                  You can use playlists to cycle dashboards on TVs without user control.
+                  {/*                   <TextLink external href="https://docs.grafana.org/reference/playlist/">
                     Learn more
-                  </TextLink>
+                  </TextLink> */}
                 </Trans>
               </EmptyState>
             )}

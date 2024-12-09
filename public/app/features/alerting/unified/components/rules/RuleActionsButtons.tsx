@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 
 import { GrafanaTheme2 } from '@grafana/data';
 import { LinkButton, useStyles2, Stack } from '@grafana/ui';
+import { contextSrv } from 'app/core/core';
 import AlertRuleMenu from 'app/features/alerting/unified/components/rule-viewer/AlertRuleMenu';
 import { useDeleteModal } from 'app/features/alerting/unified/components/rule-viewer/DeleteModal';
 import { INSTANCES_DISPLAY_LIMIT } from 'app/features/alerting/unified/components/rules/RuleDetails';
@@ -72,7 +73,7 @@ export const RuleActionsButtons = ({ compact, showViewButton, showCopyLinkButton
 
   const identifier = ruleId.fromCombinedRule(sourceName, rule);
 
-  if (showViewButton) {
+  if (showViewButton && !contextSrv.hasRole('Viewer')) {
     buttons.push(
       <LinkButton
         tooltip={compact ? 'View' : undefined}

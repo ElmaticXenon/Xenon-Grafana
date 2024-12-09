@@ -6,6 +6,7 @@ import { Spinner, useStyles2, Stack } from '@grafana/ui';
 import { CombinedRule } from 'app/types/unified-alerting';
 import { PromAlertingRuleState } from 'app/types/unified-alerting-dto';
 
+import { i18nDate, t } from '../../../../../core/internationalization';
 import { isAlertingRule, isRecordingRule, getFirstActiveAt } from '../../utils/rules';
 
 import { AlertStateTag } from './AlertStateTag';
@@ -30,16 +31,28 @@ export const RuleState = ({ rule, isDeleting, isCreating, isPaused }: Props) => 
       promRule.state !== PromAlertingRuleState.Inactive
     ) {
       // find earliest alert
-      const firstActiveAt = promRule.activeAt ? new Date(promRule.activeAt) : getFirstActiveAt(promRule);
+      const originalFirstActiveAt = promRule.activeAt ? new Date(promRule.activeAt) : getFirstActiveAt(promRule);
 
-      // calculate time elapsed from earliest alert
-      if (firstActiveAt) {
+      // convert it to language specific format
+      const firstActiveAtFormatted = originalFirstActiveAt
+        ? i18nDate(originalFirstActiveAt, {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+          })
+        : null;
+
+      // Calculate time elapsed from earliest alert
+      if (originalFirstActiveAt) {
         return (
-          <span title={String(firstActiveAt)} className={style.for}>
-            for{' '}
+          <span title={String(firstActiveAtFormatted)} className={style.for}>
+            {t('time.for', 'for')}{' '}
             {intervalToAbbreviatedDurationString(
               {
-                start: firstActiveAt,
+                start: originalFirstActiveAt,
                 end: new Date(),
               },
               false

@@ -5,6 +5,7 @@ import { SelectableValue } from '@grafana/data';
 import { Icon, Label, MultiSelect } from '@grafana/ui';
 import { AlertmanagerGroup } from 'app/plugins/datasource/alertmanager/types';
 
+import { Trans, t } from '../../../../../core/internationalization';
 import { isPrivateLabelKey } from '../../utils/labels';
 
 interface Props {
@@ -23,11 +24,13 @@ export const GroupBy = ({ groups, groupBy, onGroupingChange }: Props) => {
 
   return (
     <div data-testid={'group-by-container'}>
-      <Label>Custom group by</Label>
+      <Label>
+        <Trans i18nKey="alert-groups.custom-group-by">Custom group by</Trans>
+      </Label>
       <MultiSelect
         aria-label={'group by label keys'}
         value={groupBy}
-        placeholder="Group by"
+        placeholder={t('alert-groups.group-by', 'Group by')}
         prefix={<Icon name={'tag-alt'} />}
         onChange={(items) => {
           onGroupingChange(items.map(({ value }) => value as string));

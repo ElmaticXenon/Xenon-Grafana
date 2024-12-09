@@ -5,6 +5,7 @@ import { useDebounce } from 'react-use';
 import { GrafanaTheme2 } from '@grafana/data';
 import { Field, Icon, Input, Label, Stack, Tooltip, useStyles2 } from '@grafana/ui';
 
+import { Trans, t } from '../../../../../core/internationalization';
 import { logInfo, LogMessages } from '../../Analytics';
 import { parseMatchers } from '../../utils/alertmanager';
 
@@ -38,7 +39,9 @@ export const MatcherFilter = ({ onFilterChange, defaultQueryString }: Props) => 
       label={
         <Label>
           <Stack gap={0.5} alignItems="center">
-            <span>Search by label</span>
+            <span>
+              <Trans i18nKey="alert-groups.search-by-label">Search by label</Trans>
+            </span>
             <Tooltip
               content={
                 <div>
@@ -61,7 +64,7 @@ export const MatcherFilter = ({ onFilterChange, defaultQueryString }: Props) => 
       }
     >
       <Input
-        placeholder="Search"
+        placeholder={t('alert-groups.search', 'Search')}
         value={filterQuery}
         onChange={(e) => setFilterQuery(e.currentTarget.value)}
         data-testid="search-query-input"

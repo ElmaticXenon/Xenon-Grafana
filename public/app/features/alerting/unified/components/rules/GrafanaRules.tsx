@@ -4,10 +4,12 @@ import { useToggle } from 'react-use';
 
 import { GrafanaTheme2 } from '@grafana/data';
 import { Button, LoadingPlaceholder, Pagination, Spinner, useStyles2, Text } from '@grafana/ui';
+import { contextSrv } from 'app/core/core';
 import { useQueryParams } from 'app/core/hooks/useQueryParams';
 import { CombinedRuleNamespace } from 'app/types/unified-alerting';
 
 import { DEFAULT_PER_PAGE_PAGINATION } from '../../../../../core/constants';
+import { Trans } from '../../../../../core/internationalization';
 import { AlertingAction, useAlertingAbility } from '../../hooks/useAbilities';
 import { flattenGrafanaManagedRules } from '../../hooks/useCombinedRuleNamespaces';
 import { usePagination } from '../../hooks/usePagination';
@@ -54,6 +56,8 @@ export const GrafanaRules = ({ namespaces, expandAll }: Props) => {
   const [showExportDrawer, toggleShowExportDrawer] = useToggle(false);
   const hasGrafanaAlerts = namespaces.length > 0;
 
+  const isViewer = contextSrv.hasRole('Viewer');
+
   return (
     <section className={styles.wrapper}>
       <div className={styles.sectionHeader}>
@@ -62,7 +66,7 @@ export const GrafanaRules = ({ namespaces, expandAll }: Props) => {
             Grafana
           </Text>
           {loading ? <LoadingPlaceholder className={styles.loader} text="Loading..." /> : <div />}
-          {hasGrafanaAlerts && canExportRules && (
+          {hasGrafanaAlerts && canExportRules && !isViewer && (
             <Button
               aria-label="export all grafana rules"
               data-testid="export-all-grafana-rules"
@@ -71,7 +75,7 @@ export const GrafanaRules = ({ namespaces, expandAll }: Props) => {
               onClick={toggleShowExportDrawer}
               variant="secondary"
             >
-              Export rules
+              <Trans i18nKey="rules-table.export-rules">Export rules</Trans>
             </Button>
           )}
         </div>

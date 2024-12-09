@@ -16,6 +16,7 @@ import React, { useCallback, useId, useRef, useState } from 'react';
 import { GrafanaTheme2 } from '@grafana/data';
 import { selectors } from '@grafana/e2e-selectors';
 
+import { t } from '../../../../../public/app/core/internationalization';
 import { useStyles2 } from '../../themes/ThemeContext';
 import { buildTooltipTheme, getPlacement } from '../../utils/tooltipUtils';
 import { Portal } from '../Portal/Portal';
@@ -117,7 +118,7 @@ export const Tooltip = React.forwardRef<HTMLElement, TooltipProps>(
                 role="tooltip"
                 className={style.container}
               >
-                {typeof content === 'string' && content}
+                {typeof content === 'string' && t(`tooltip.${content.toLowerCase().replace(/\s+/g, '-')}`, content)}
                 {React.isValidElement(content) && React.cloneElement(content)}
                 {contentIsFunction && content({})}
               </div>

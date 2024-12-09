@@ -1,3 +1,4 @@
+import { t } from '../internationalization';
 /**
  * Check to see if browser is not supported by Grafana
  * This function is copied to index.html but is here so we can write tests
@@ -39,5 +40,5 @@ export function userAgentIsApple() {
 }
 
 export function getModKey() {
-  return userAgentIsApple() ? '⌘' : 'ctrl';
+  return userAgentIsApple() ? '⌘' : t('nav.search-shortcut', 'ctrl');
 }

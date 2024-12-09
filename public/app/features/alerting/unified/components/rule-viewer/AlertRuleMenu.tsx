@@ -3,6 +3,7 @@ import React from 'react';
 import { AppEvents } from '@grafana/data';
 import { ComponentSize, Dropdown, Menu } from '@grafana/ui';
 import appEvents from 'app/core/app_events';
+import { contextSrv } from 'app/core/core';
 import MenuItemPauseRule from 'app/features/alerting/unified/components/MenuItemPauseRule';
 import MoreButton from 'app/features/alerting/unified/components/MoreButton';
 import { useRulePluginLinkExtension } from 'app/features/alerting/unified/plugins/useRulePluginLinkExtensions';
@@ -75,6 +76,10 @@ const AlertRuleMenu = ({
   const showDivider =
     [canPause, canSilence, shouldShowDeclareIncidentButton, canDuplicate].some(Boolean) &&
     [showCopyLinkButton, canExport].some(Boolean);
+
+  if (contextSrv.hasRole('Viewer')) {
+    return null;
+  }
 
   const menuItems = (
     <>

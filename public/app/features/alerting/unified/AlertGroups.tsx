@@ -4,6 +4,7 @@ import { Alert, LoadingPlaceholder, Text, Box } from '@grafana/ui';
 import { useQueryParams } from 'app/core/hooks/useQueryParams';
 import { useDispatch } from 'app/types';
 
+import { Trans } from '../../../core/internationalization';
 import { AlertmanagerChoice } from '../../../plugins/datasource/alertmanager/types';
 
 import { alertmanagerApi } from './api/alertmanagerApi';
@@ -84,7 +85,11 @@ const AlertGroups = () => {
             </React.Fragment>
           );
         })}
-      {results && !filteredAlertGroups.length && <p>No results.</p>}
+      {results && !filteredAlertGroups.length && (
+        <p>
+          <Trans i18nKey="alert-groups.no-results">No results.</Trans>
+        </p>
+      )}
     </>
   );
 };

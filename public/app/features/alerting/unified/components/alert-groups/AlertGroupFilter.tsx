@@ -6,6 +6,7 @@ import { Button, useStyles2 } from '@grafana/ui';
 import { useQueryParams } from 'app/core/hooks/useQueryParams';
 import { AlertmanagerGroup, AlertState } from 'app/plugins/datasource/alertmanager/types';
 
+import { Trans } from '../../../../../core/internationalization';
 import { getFiltersFromUrlParams } from '../../utils/misc';
 
 import { AlertStateFilter } from './AlertStateFilter';
@@ -54,7 +55,7 @@ export const AlertGroupFilter = ({ groups }: Props) => {
         />
         {showClearButton && (
           <Button className={styles.clearButton} variant={'secondary'} icon="times" onClick={clearFilters}>
-            Clear filters
+            <Trans i18nKey="alert-groups.clear-filters">Clear filters</Trans>
           </Button>
         )}
       </div>

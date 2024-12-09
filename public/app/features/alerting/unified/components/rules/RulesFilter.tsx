@@ -5,8 +5,10 @@ import { useForm } from 'react-hook-form';
 import { DataSourceInstanceSettings, GrafanaTheme2, SelectableValue } from '@grafana/data';
 import { Button, Field, Icon, Input, Label, RadioButtonGroup, Stack, Tooltip, useStyles2 } from '@grafana/ui';
 import { DashboardPicker } from 'app/core/components/Select/DashboardPicker';
+import { contextSrv } from 'app/core/core';
 import { PromAlertingRuleState, PromRuleType } from 'app/types/unified-alerting-dto';
 
+import { Trans, t } from '../../../../../core/internationalization';
 import {
   logInfo,
   LogMessages,
@@ -26,36 +28,36 @@ import { MultipleDataSourcePicker } from './MultipleDataSourcePicker';
 const ViewOptions: SelectableValue[] = [
   {
     icon: 'folder',
-    label: 'Grouped',
+    label: t('alert-rules.grouped', 'Grouped'),
     value: 'grouped',
   },
   {
     icon: 'list-ul',
-    label: 'List',
+    label: t('alert-rules.list', 'List'),
     value: 'list',
   },
   {
     icon: 'heart-rate',
-    label: 'State',
+    label: t('alert-rules.state', 'State'),
     value: 'state',
   },
 ];
 
 const RuleTypeOptions: SelectableValue[] = [
   {
-    label: 'Alert ',
+    label: t('alert-rules.alert', 'Alert '),
     value: PromRuleType.Alerting,
   },
   {
-    label: 'Recording ',
+    label: t('alert-rules.recording', 'Recording '),
     value: PromRuleType.Recording,
   },
 ];
 
 const RuleHealthOptions: SelectableValue[] = [
-  { label: 'Ok', value: RuleHealth.Ok },
-  { label: 'No Data', value: RuleHealth.NoData },
-  { label: 'Error', value: RuleHealth.Error },
+  { label: t('alert-rules.ok', 'Ok'), value: RuleHealth.Ok },
+  { label: t('alert-rules.no-data', 'Keine Daten'), value: RuleHealth.NoData },
+  { label: t('alert-rules.error', 'Fehler'), value: RuleHealth.Error },
 ];
 
 interface RulesFilerProps {
@@ -144,47 +146,52 @@ const RulesFilter = ({ onFilterCleared = () => undefined }: RulesFilerProps) => 
     <div className={styles.container}>
       <Stack direction="column" gap={1}>
         <Stack direction="row" gap={1} wrap="wrap">
-          <Field
-            className={styles.dsPickerContainer}
-            label={
-              <Label htmlFor="data-source-picker">
-                <Stack gap={0.5} alignItems="center">
-                  <span>Search by data sources</span>
-                  <Tooltip
-                    content={
-                      <div>
-                        <p>
-                          Data sources containing configured alert rules are Mimir or Loki data sources where alert
-                          rules are stored and evaluated in the data source itself.
-                        </p>
-                        <p>
-                          In these data sources, you can select Manage alerts via Alerting UI to be able to manage these
-                          alert rules in the Grafana UI as well as in the data source where they were configured.
-                        </p>
-                      </div>
-                    }
-                  >
-                    <Icon
-                      id="data-source-picker-inline-help"
-                      name="info-circle"
-                      size="sm"
-                      title="Search by data sources help"
-                    />
-                  </Tooltip>
-                </Stack>
-              </Label>
-            }
-          >
-            <MultipleDataSourcePicker
-              key={dataSourceKey}
-              alerting
-              noDefault
-              placeholder="All data sources"
-              current={filterState.dataSourceNames}
-              onChange={handleDataSourceChange}
-              onClear={clearDataSource}
-            />
-          </Field>
+          {contextSrv.hasRole('Admin') && (
+            <Field
+              className={styles.dsPickerContainer}
+              label={
+                <Label htmlFor="data-source-picker">
+                  <Stack gap={0.5} alignItems="center">
+                    <span>
+                      <Trans i18nKey="alert-rules.search-by-data-source">Search by data sources</Trans>
+                    </span>
+                    <Tooltip
+                      content={
+                        <div>
+                          <p>
+                            Data sources containing configured alert rules are Mimir or Loki data sources where alert
+                            rules are stored and evaluated in the data source itself.
+                          </p>
+                          <p>
+                            In these data sources, you can select Manage alerts via Alerting UI to be able to manage
+                            these alert rules in the Grafana UI as well as in the data source where they were
+                            configured.
+                          </p>
+                        </div>
+                      }
+                    >
+                      <Icon
+                        id="data-source-picker-inline-help"
+                        name="info-circle"
+                        size="sm"
+                        title="Search by data sources help"
+                      />
+                    </Tooltip>
+                  </Stack>
+                </Label>
+              }
+            >
+              <MultipleDataSourcePicker
+                key={dataSourceKey}
+                alerting
+                noDefault
+                placeholder={t('alert-rules.all-data-sources', 'All data sources')}
+                current={filterState.dataSourceNames}
+                onChange={handleDataSourceChange}
+                onClear={clearDataSource}
+              />
+            </Field>
+          )}
 
           <Field
             className={styles.dashboardPickerContainer}
@@ -203,7 +210,9 @@ const RulesFilter = ({ onFilterCleared = () => undefined }: RulesFilerProps) => 
           </Field>
 
           <div>
-            <Label>State</Label>
+            <Label>
+              <Trans i18nKey="alert-rules.state">State</Trans>
+            </Label>
             <RadioButtonGroup
               options={RuleStateOptions}
               value={filterState.ruleState}
@@ -211,11 +220,15 @@ const RulesFilter = ({ onFilterCleared = () => undefined }: RulesFilerProps) => 
             />
           </div>
           <div>
-            <Label>Rule type</Label>
+            <Label>
+              <Trans i18nKey="alert-rules.rule-type">Rule type</Trans>
+            </Label>
             <RadioButtonGroup options={RuleTypeOptions} value={filterState.ruleType} onChange={handleRuleTypeChange} />
           </div>
           <div>
-            <Label>Health</Label>
+            <Label>
+              <Trans i18nKey="alert-rules.health">Health</Trans>
+            </Label>
             <RadioButtonGroup
               options={RuleHealthOptions}
               value={filterState.ruleHealth}
@@ -250,7 +263,9 @@ const RulesFilter = ({ onFilterCleared = () => undefined }: RulesFilerProps) => 
                 label={
                   <Label htmlFor="rulesSearchInput">
                     <Stack gap={0.5} alignItems="center">
-                      <span>Search</span>
+                      <span>
+                        <Trans i18nKey="alert-rules.search">Search</Trans>
+                      </span>
                       <HoverCard content={<SearchQueryHelp />}>
                         <Icon name="info-circle" size="sm" tabIndex={0} title="Search help" />
                       </HoverCard>
@@ -267,14 +282,16 @@ const RulesFilter = ({ onFilterCleared = () => undefined }: RulesFilerProps) => 
                     searchQueryRef.current = e;
                   }}
                   {...rest}
-                  placeholder="Search"
+                  placeholder={t('alert-rules.search', 'Search')}
                   data-testid="search-query-input"
                 />
               </Field>
               <input type="submit" hidden />
             </form>
             <div>
-              <Label>View as</Label>
+              <Label>
+                <Trans i18nKey="alert-rules.view-as">View as</Trans>
+              </Label>
               <RadioButtonGroup
                 options={ViewOptions}
                 value={queryParams.get('view') ?? ViewOptions[0].value}
@@ -285,7 +302,7 @@ const RulesFilter = ({ onFilterCleared = () => undefined }: RulesFilerProps) => 
           {hasActiveFilters && (
             <div>
               <Button fullWidth={false} icon="times" variant="secondary" onClick={handleClearFiltersClick}>
-                Clear filters
+                <Trans i18nKey="alert-rules.clear-filters">Clear filters</Trans>
               </Button>
             </div>
           )}
@@ -320,19 +337,27 @@ function SearchQueryHelp() {
 
   return (
     <div>
-      <div>Search syntax allows to query alert rules by the parameters defined below.</div>
+      <div>
+        <Trans i18nKey="alert-rules.search-syntax-allows-to-query-alert-rules-by-the-parameters-defined-below">
+          Search syntax allows to query alert rules by the parameters defined below.
+        </Trans>
+      </div>
       <hr />
       <div className={styles.grid}>
-        <div>Filter type</div>
-        <div>Expression</div>
-        <HelpRow title="Datasources" expr="datasource:mimir datasource:prometheus" />
-        <HelpRow title="Folder/Namespace" expr="namespace:global" />
-        <HelpRow title="Group" expr="group:cpu-usage" />
-        <HelpRow title="Rule" expr='rule:"cpu 80%"' />
-        <HelpRow title="Labels" expr="label:team=A label:cluster=a1" />
-        <HelpRow title="State" expr="state:firing|normal|pending" />
-        <HelpRow title="Type" expr="type:alerting|recording" />
-        <HelpRow title="Health" expr="health:ok|nodata|error" />
+        <div>
+          <Trans i18nKey="alert-rules.filter-type">Filter type</Trans>
+        </div>
+        <div>
+          <Trans i18nKey="alert-rules.expression">Expression</Trans>
+        </div>
+        <HelpRow title={t('alert-rules.datasources', 'Datasources')} expr="datasource:mimir datasource:prometheus" />
+        <HelpRow title={t('alert-rules.folder', 'Folder/Namespace')} expr="namespace:global" />
+        <HelpRow title={t('alert-rules.grouped', 'Group')} expr="group:cpu-usage" />
+        <HelpRow title={t('alert-rules.rule', 'Rule')} expr='rule:"cpu 80%"' />
+        <HelpRow title={t('alert-rules.labels', 'Labels')} expr="label:team=A label:cluster=a1" />
+        <HelpRow title={t('alert-rules.state', 'State')} expr="state:firing|normal|pending" />
+        <HelpRow title={t('alert-rules.rule-type', 'Type')} expr="type:alerting|recording" />
+        <HelpRow title={t('alert-rules.health', 'Health')} expr="health:ok|nodata|error" />
         <HelpRow title="Dashboard UID" expr="dashboard:eadde4c7-54e6-4964-85c0-484ab852fd04" />
       </div>
     </div>
