@@ -125,7 +125,7 @@
     <mj-raw>
       {{ if $numberOfFiringInstance }}
     </mj-raw>
-    <strong>{{ $numberOfFiringInstance }} firing</strong> alert {{ $numberOfFiringInstance| plural "instance" "instances" }}
+    <strong>{{ $numberOfFiringInstance }}</strong> {{ if eq $numberOfFiringInstance 1 }}ausgelöster Alarm{{ else }}ausgelöste Alarme{{ end }}
     <mj-raw>
       {{ end }}
     </mj-raw>
@@ -137,7 +137,7 @@
     <mj-raw>
       {{ if $numberOfResolvedAlerts }}
     </mj-raw>
-    <strong>{{ $numberOfResolvedAlerts }} resolved</strong> alert {{ $numberOfResolvedAlerts| plural "instance" "instances" }}
+    <strong>{{ $numberOfResolvedAlerts }}</strong> {{ if eq $numberOfResolvedAlerts 1 }}gelöste Instanz{{ else }}gelöste Instanzen{{ end }}
     <mj-raw>
       {{ end }}
     </mj-raw>
@@ -159,7 +159,7 @@
                           <tbody>
                             <tr>
                               <td style="width:200px;">
-                                <img height="auto" src="https://grafana.com/static/assets/img/logo_new_transparent_light_400x100.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="200">
+                                <img height="auto" src="https://cloud.elmatic-xenon.de/static/images/logos/xenon_alt.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="200">
                               </td>
                             </tr>
                           </tbody>
@@ -197,7 +197,7 @@
                     <tr>
                       <td align="left" class="txt" style="font-size:0px;padding:0;word-break:break-word;">
                         <div style="font-family: Inter, Helvetica, Arial; font-size: 13px; line-height: 150%; text-align: left; color: #000000;">
-                          <h2> 📁 Grouped by&nbsp; </h2>
+                          <h2> 📁 Gruppiert nach&nbsp; </h2>
                           <mj-raw>
                             {{ range .GroupLabels.SortedPairs }}
                           </mj-raw>
@@ -279,7 +279,7 @@
                     <tr>
                       <td align="left" class="txt" style="font-size:0px;padding:0;word-break:break-word;">
                         <div style="font-family: Inter, Helvetica, Arial; font-size: 13px; line-height: 150%; text-align: left; color: #000000;">
-                          <h3>🔥 {{ .Alerts.Firing | len }} firing instances</h3>
+                          <h3>🔥 {{ .Alerts.Firing | len }} {{ if eq (.Alerts.Firing | len) 1 }} ausgelöster Alarm{{ else }} ausgelöste Alarme{{ end }}</h3>
                         </div>
                       </td>
                     </tr>
@@ -316,7 +316,7 @@
                                     <tbody>
                                       <tr>
                                         <td align="center" bgcolor="#fae0e3" role="presentation" style="border:1px solid #ed8894;border-radius:3px;cursor:auto;mso-padding-alt:5px 12px;background:#fae0e3;" valign="middle">
-                                          <a href="{{ .GeneratorURL }}" rel="noopener" style="display: inline-block; background: #fae0e3; color: #931625; font-family: Inter, Helvetica, Arial; font-size: 13px; font-weight: normal; line-height: 120%; margin: 0; text-decoration: none; text-transform: none; padding: 5px 12px; mso-padding-alt: 0px; border-radius: 3px;" target="_blank"> Firing </a>
+                                          <a href="{{ .GeneratorURL }}" rel="noopener" style="display: inline-block; background: #fae0e3; color: #931625; font-family: Inter, Helvetica, Arial; font-size: 13px; font-weight: normal; line-height: 120%; margin: 0; text-decoration: none; text-transform: none; padding: 5px 12px; mso-padding-alt: 0px; border-radius: 3px;" target="_blank"> Aktiv </a>
                                         </td>
                                       </tr>
                                     </tbody>
@@ -350,7 +350,7 @@
                                     <tbody>
                                       <tr>
                                         <td align="center" bgcolor="#3D71D9" role="presentation" style="border:none;border-radius:3px;cursor:auto;mso-padding-alt:5px 12px;background:#3D71D9;" valign="middle">
-                                          <a href="{{ .GeneratorURL }}" rel="noopener" style="display: inline-block; background: #3D71D9; color: #ffffff; font-family: Inter, Helvetica, Arial; font-size: 13px; font-weight: normal; line-height: 120%; margin: 0; text-decoration: none; text-transform: none; padding: 5px 12px; mso-padding-alt: 0px; border-radius: 3px;" target="_blank"> View alert </a>
+                                          <a href="{{ .GeneratorURL }}" rel="noopener" style="display: inline-block; background: #3D71D9; color: #ffffff; font-family: Inter, Helvetica, Arial; font-size: 13px; font-weight: normal; line-height: 120%; margin: 0; text-decoration: none; text-transform: none; padding: 5px 12px; mso-padding-alt: 0px; border-radius: 3px;" target="_blank"> Alarm anzeigen </a>
                                         </td>
                                       </tr>
                                     </tbody>
@@ -453,7 +453,7 @@
                               {{ if .Annotations.summary }}
                               <tr>
                                 <td align="left" class="txt" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                                  <div style="font-family: Inter, Helvetica, Arial; font-size: 13px; line-height: 150%; text-align: left; color: #000000;"><strong>Summary</strong></div>
+                                  <div style="font-family: Inter, Helvetica, Arial; font-size: 13px; line-height: 150%; text-align: left; color: #000000;"><strong>Zusammenfassung</strong></div>
                                 </td>
                               </tr>
                               <tr>
@@ -500,7 +500,7 @@
                             <tbody>
                               <tr>
                                 <td align="left" class="txt" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                                  <div style="font-family: Inter, Helvetica, Arial; font-size: 13px; line-height: 150%; text-align: left; color: #000000;"><strong>Values</strong></div>
+                                  <div style="font-family: Inter, Helvetica, Arial; font-size: 13px; line-height: 150%; text-align: left; color: #000000;"><strong>Werte</strong></div>
                                 </td>
                               </tr>
                             </tbody>
@@ -629,7 +629,7 @@
                                     <tbody>
                                       <tr>
                                         <td align="center" bgcolor="#3D71D9" role="presentation" style="border:none;border-radius:3px;cursor:auto;mso-padding-alt:5px 12px;background:#3D71D9;" valign="middle">
-                                          <a href="{{ .SilenceURL }}" rel="noopener" style="display: inline-block; background: #3D71D9; color: #ffffff; font-family: Inter, Helvetica, Arial; font-size: 13px; font-weight: normal; line-height: 120%; margin: 0; text-decoration: none; text-transform: none; padding: 5px 12px; mso-padding-alt: 0px; border-radius: 3px;" target="_blank"> Silence </a>
+                                          <a href="{{ .SilenceURL }}" rel="noopener" style="display: inline-block; background: #3D71D9; color: #ffffff; font-family: Inter, Helvetica, Arial; font-size: 13px; font-weight: normal; line-height: 120%; margin: 0; text-decoration: none; text-transform: none; padding: 5px 12px; mso-padding-alt: 0px; border-radius: 3px;" target="_blank"> Stummschalten </a>
                                         </td>
                                       </tr>
                                     </tbody>
@@ -651,7 +651,7 @@
                                     <tbody>
                                       <tr>
                                         <td align="center" bgcolor="#3D71D9" role="presentation" style="border:none;border-radius:3px;cursor:auto;mso-padding-alt:5px 12px;background:#3D71D9;" valign="middle">
-                                          <a href="{{ .Annotations.runbook_url }}" rel="noopener" style="display: inline-block; background: #3D71D9; color: #ffffff; font-family: Inter, Helvetica, Arial; font-size: 13px; font-weight: normal; line-height: 120%; margin: 0; text-decoration: none; text-transform: none; padding: 5px 12px; mso-padding-alt: 0px; border-radius: 3px;" target="_blank"> View runbook </a>
+                                          <a href="{{ .Annotations.runbook_url }}" rel="noopener" style="display: inline-block; background: #3D71D9; color: #ffffff; font-family: Inter, Helvetica, Arial; font-size: 13px; font-weight: normal; line-height: 120%; margin: 0; text-decoration: none; text-transform: none; padding: 5px 12px; mso-padding-alt: 0px; border-radius: 3px;" target="_blank"> Runbook anzeigen </a>
                                         </td>
                                       </tr>
                                     </tbody>
@@ -673,7 +673,7 @@
                                     <tbody>
                                       <tr>
                                         <td align="center" bgcolor="#3D71D9" role="presentation" style="border:none;border-radius:3px;cursor:auto;mso-padding-alt:5px 12px;background:#3D71D9;" valign="middle">
-                                          <a href="{{ .DashboardURL }}" rel="noopener" style="display: inline-block; background: #3D71D9; color: #ffffff; font-family: Inter, Helvetica, Arial; font-size: 13px; font-weight: normal; line-height: 120%; margin: 0; text-decoration: none; text-transform: none; padding: 5px 12px; mso-padding-alt: 0px; border-radius: 3px;" target="_blank"> View dashboard </a>
+                                          <a href="{{ .DashboardURL }}" rel="noopener" style="display: inline-block; background: #3D71D9; color: #ffffff; font-family: Inter, Helvetica, Arial; font-size: 13px; font-weight: normal; line-height: 120%; margin: 0; text-decoration: none; text-transform: none; padding: 5px 12px; mso-padding-alt: 0px; border-radius: 3px;" target="_blank"> Dashboard anzeigen </a>
                                         </td>
                                       </tr>
                                     </tbody>
@@ -695,7 +695,7 @@
                                     <tbody>
                                       <tr>
                                         <td align="center" bgcolor="#3D71D9" role="presentation" style="border:none;border-radius:3px;cursor:auto;mso-padding-alt:5px 12px;background:#3D71D9;" valign="middle">
-                                          <a href="{{ .PanelURL }}" rel="noopener" style="display: inline-block; background: #3D71D9; color: #ffffff; font-family: Inter, Helvetica, Arial; font-size: 13px; font-weight: normal; line-height: 120%; margin: 0; text-decoration: none; text-transform: none; padding: 5px 12px; mso-padding-alt: 0px; border-radius: 3px;" target="_blank"> View panel </a>
+                                          <a href="{{ .PanelURL }}" rel="noopener" style="display: inline-block; background: #3D71D9; color: #ffffff; font-family: Inter, Helvetica, Arial; font-size: 13px; font-weight: normal; line-height: 120%; margin: 0; text-decoration: none; text-transform: none; padding: 5px 12px; mso-padding-alt: 0px; border-radius: 3px;" target="_blank">Panel anzeigen </a>
                                         </td>
                                       </tr>
                                     </tbody>
@@ -725,7 +725,7 @@
                             <tbody>
                               <tr>
                                 <td align="left" class="txt" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                                  <div style="font-family: Inter, Helvetica, Arial; font-size: 13px; line-height: 150%; text-align: left; color: #91929e;">Observed <strong>{{ ago .StartsAt }}</strong> before this notification was delivered, at <strong>{{ .StartsAt }}</strong></div>
+                                  <div style="font-family: Inter, Helvetica, Arial; font-size: 13px; line-height: 150%; text-align: left; color: #91929e;">Beobachtet für <strong>{{ ago .StartsAt }}</strong> bevor diese Benachrichtigung zugestellt wurde, am <strong>{{ .StartsAt | date "02.01.2006 15:04" }}</strong></div>
                                 </td>
                               </tr>
                             </tbody>
@@ -770,7 +770,7 @@
                     <tr>
                       <td align="left" class="txt" style="font-size:0px;padding:0;word-break:break-word;">
                         <div style="font-family: Inter, Helvetica, Arial; font-size: 13px; line-height: 150%; text-align: left; color: #000000;">
-                          <h3>✅ {{ .Alerts.Resolved | len }} resolved instances</h3>
+                          <h3>✅ {{ .Alerts.Resolved | len }} {{ if eq .Alerts.Resolved | len 1 }} gelöste Instanz{{ else }} gelöste Instanzen{{ end }}</h3>
                         </div>
                       </td>
                     </tr>
@@ -807,7 +807,7 @@
                                     <tbody>
                                       <tr>
                                         <td align="center" bgcolor="#e5f2e4" role="presentation" style="border:1px solid #94cb8c;border-radius:3px;cursor:auto;mso-padding-alt:5px 12px;background:#e5f2e4;" valign="middle">
-                                          <p rel="noopener" style="display:inline-block;background:#e5f2e4;color:#32602b;font-family:Inter, Helvetica, Arial;font-size:13px;font-weight:normal;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:5px 12px;mso-padding-alt:0px;border-radius:3px;"> Resolved </p>
+                                          <p rel="noopener" style="display:inline-block;background:#e5f2e4;color:#32602b;font-family:Inter, Helvetica, Arial;font-size:13px;font-weight:normal;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:5px 12px;mso-padding-alt:0px;border-radius:3px;"> Gelöst </p>
                                         </td>
                                       </tr>
                                     </tbody>
@@ -841,7 +841,7 @@
                                     <tbody>
                                       <tr>
                                         <td align="center" bgcolor="#3D71D9" role="presentation" style="border:none;border-radius:3px;cursor:auto;mso-padding-alt:5px 12px;background:#3D71D9;" valign="middle">
-                                          <a href="{{ .GeneratorURL }}" rel="noopener" style="display: inline-block; background: #3D71D9; color: #ffffff; font-family: Inter, Helvetica, Arial; font-size: 13px; font-weight: normal; line-height: 120%; margin: 0; text-decoration: none; text-transform: none; padding: 5px 12px; mso-padding-alt: 0px; border-radius: 3px;" target="_blank"> View alert </a>
+                                          <a href="{{ .GeneratorURL }}" rel="noopener" style="display: inline-block; background: #3D71D9; color: #ffffff; font-family: Inter, Helvetica, Arial; font-size: 13px; font-weight: normal; line-height: 120%; margin: 0; text-decoration: none; text-transform: none; padding: 5px 12px; mso-padding-alt: 0px; border-radius: 3px;" target="_blank"> Alarm anzeigen </a>
                                         </td>
                                       </tr>
                                     </tbody>
@@ -944,7 +944,7 @@
                               {{ if .Annotations.summary }}
                               <tr>
                                 <td align="left" class="txt" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                                  <div style="font-family: Inter, Helvetica, Arial; font-size: 13px; line-height: 150%; text-align: left; color: #000000;"><strong>Summary</strong></div>
+                                  <div style="font-family: Inter, Helvetica, Arial; font-size: 13px; line-height: 150%; text-align: left; color: #000000;"><strong>Zusammenfassung</strong></div>
                                 </td>
                               </tr>
                               <tr>
@@ -955,7 +955,7 @@
                               {{ end }}{{ if .Annotations.description }}
                               <tr>
                                 <td align="left" class="txt" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                                  <div style="font-family: Inter, Helvetica, Arial; font-size: 13px; line-height: 150%; text-align: left; color: #000000;"><strong>Description</strong></div>
+                                  <div style="font-family: Inter, Helvetica, Arial; font-size: 13px; line-height: 150%; text-align: left; color: #000000;"><strong>Beschreibung</strong></div>
                                 </td>
                               </tr>
                               <tr>
@@ -991,7 +991,7 @@
                             <tbody>
                               <tr>
                                 <td align="left" class="txt" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                                  <div style="font-family: Inter, Helvetica, Arial; font-size: 13px; line-height: 150%; text-align: left; color: #000000;"><strong>Values</strong></div>
+                                  <div style="font-family: Inter, Helvetica, Arial; font-size: 13px; line-height: 150%; text-align: left; color: #000000;"><strong>Werte</strong></div>
                                 </td>
                               </tr>
                             </tbody>
@@ -1073,7 +1073,7 @@
                               {{ end }}{{ if (without .Annotations.SortedPairs.Names "description" "summary") }}
                               <tr>
                                 <td align="left" class="txt" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                                  <div style="font-family: Inter, Helvetica, Arial; font-size: 13px; line-height: 150%; text-align: left; color: #000000;"><strong>Annotations</strong></div>
+                                  <div style="font-family: Inter, Helvetica, Arial; font-size: 13px; line-height: 150%; text-align: left; color: #000000;"><strong>Annotationen</strong></div>
                                 </td>
                               </tr>
                               <tr>
@@ -1120,7 +1120,7 @@
                                     <tbody>
                                       <tr>
                                         <td align="center" bgcolor="#3D71D9" role="presentation" style="border:none;border-radius:3px;cursor:auto;mso-padding-alt:5px 12px;background:#3D71D9;" valign="middle">
-                                          <a href="{{ .SilenceURL }}" rel="noopener" style="display: inline-block; background: #3D71D9; color: #ffffff; font-family: Inter, Helvetica, Arial; font-size: 13px; font-weight: normal; line-height: 120%; margin: 0; text-decoration: none; text-transform: none; padding: 5px 12px; mso-padding-alt: 0px; border-radius: 3px;" target="_blank"> Silence </a>
+                                          <a href="{{ .SilenceURL }}" rel="noopener" style="display: inline-block; background: #3D71D9; color: #ffffff; font-family: Inter, Helvetica, Arial; font-size: 13px; font-weight: normal; line-height: 120%; margin: 0; text-decoration: none; text-transform: none; padding: 5px 12px; mso-padding-alt: 0px; border-radius: 3px;" target="_blank"> Stummschalten </a>
                                         </td>
                                       </tr>
                                     </tbody>
@@ -1142,7 +1142,7 @@
                                     <tbody>
                                       <tr>
                                         <td align="center" bgcolor="#3D71D9" role="presentation" style="border:none;border-radius:3px;cursor:auto;mso-padding-alt:5px 12px;background:#3D71D9;" valign="middle">
-                                          <a href="{{ .Annotations.runbook_url }}" rel="noopener" style="display: inline-block; background: #3D71D9; color: #ffffff; font-family: Inter, Helvetica, Arial; font-size: 13px; font-weight: normal; line-height: 120%; margin: 0; text-decoration: none; text-transform: none; padding: 5px 12px; mso-padding-alt: 0px; border-radius: 3px;" target="_blank"> View runbook </a>
+                                          <a href="{{ .Annotations.runbook_url }}" rel="noopener" style="display: inline-block; background: #3D71D9; color: #ffffff; font-family: Inter, Helvetica, Arial; font-size: 13px; font-weight: normal; line-height: 120%; margin: 0; text-decoration: none; text-transform: none; padding: 5px 12px; mso-padding-alt: 0px; border-radius: 3px;" target="_blank"> Runbook anzeigen </a>
                                         </td>
                                       </tr>
                                     </tbody>
@@ -1164,7 +1164,7 @@
                                     <tbody>
                                       <tr>
                                         <td align="center" bgcolor="#3D71D9" role="presentation" style="border:none;border-radius:3px;cursor:auto;mso-padding-alt:5px 12px;background:#3D71D9;" valign="middle">
-                                          <a href="{{ .DashboardURL }}" rel="noopener" style="display: inline-block; background: #3D71D9; color: #ffffff; font-family: Inter, Helvetica, Arial; font-size: 13px; font-weight: normal; line-height: 120%; margin: 0; text-decoration: none; text-transform: none; padding: 5px 12px; mso-padding-alt: 0px; border-radius: 3px;" target="_blank"> View dashboard </a>
+                                          <a href="{{ .DashboardURL }}" rel="noopener" style="display: inline-block; background: #3D71D9; color: #ffffff; font-family: Inter, Helvetica, Arial; font-size: 13px; font-weight: normal; line-height: 120%; margin: 0; text-decoration: none; text-transform: none; padding: 5px 12px; mso-padding-alt: 0px; border-radius: 3px;" target="_blank"> Dashboard anzeigen </a>
                                         </td>
                                       </tr>
                                     </tbody>
@@ -1186,7 +1186,7 @@
                                     <tbody>
                                       <tr>
                                         <td align="center" bgcolor="#3D71D9" role="presentation" style="border:none;border-radius:3px;cursor:auto;mso-padding-alt:5px 12px;background:#3D71D9;" valign="middle">
-                                          <a href="{{ .PanelURL }}" rel="noopener" style="display: inline-block; background: #3D71D9; color: #ffffff; font-family: Inter, Helvetica, Arial; font-size: 13px; font-weight: normal; line-height: 120%; margin: 0; text-decoration: none; text-transform: none; padding: 5px 12px; mso-padding-alt: 0px; border-radius: 3px;" target="_blank"> View panel </a>
+                                          <a href="{{ .PanelURL }}" rel="noopener" style="display: inline-block; background: #3D71D9; color: #ffffff; font-family: Inter, Helvetica, Arial; font-size: 13px; font-weight: normal; line-height: 120%; margin: 0; text-decoration: none; text-transform: none; padding: 5px 12px; mso-padding-alt: 0px; border-radius: 3px;" target="_blank"> Panel anzeigen </a>
                                         </td>
                                       </tr>
                                     </tbody>
@@ -1216,7 +1216,7 @@
                             <tbody>
                               <tr>
                                 <td align="left" class="txt" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                                  <div style="font-family: Inter, Helvetica, Arial; font-size: 13px; line-height: 150%; text-align: left; color: #91929e;">Observed <strong>{{ ago .StartsAt }}</strong> before this notification was delivered, at <strong>{{ .StartsAt }}</strong></div>
+                                  <div style="font-family: Inter, Helvetica, Arial; font-size: 13px; line-height: 150%; text-align: left; color: #91929e;">Beobachtet für <strong>{{ ago .StartsAt }}</strong> bevor diese Benachrichtigung zugestellt wurde, am <strong>{{ .StartsAt | date "02.01.2006 15:04" }}</strong></div>
                                 </td>
                               </tr>
                             </tbody>
@@ -1260,7 +1260,7 @@
                   <tbody>
                     <tr>
                       <td align="center" class="txt" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family: Inter, Helvetica, Arial; font-size: 13px; line-height: 150%; text-align: center; color: #000000;">&copy; {{ now | date "2006" }} Grafana Labs. Sent by <a href="{{ .AppUrl }}" style="color: #6E9FFF;">Grafana v{{ .BuildVersion }}</a>.</div>
+                        <div style="font-family: Inter, Helvetica, Arial; font-size: 13px; line-height: 150%; text-align: center; color: #000000;">&copy; {{ now | date "2006" }} Xenon</div>
                       </td>
                     </tr>
                   </tbody>
